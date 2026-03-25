@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Library | ContentHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed": "#321300",
+                        "inverse-primary": "#cabeff",
+                        "outline": "#797586",
+                        "surface-container": "#e9edff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#faf8ff",
+                        "on-surface-variant": "#484554",
+                        "secondary-fixed": "#e6deff",
+                        "on-primary-fixed-variant": "#4723be",
+                        "secondary-fixed-dim": "#cabeff",
+                        "tertiary": "#713300",
+                        "tertiary-fixed": "#ffdbc8",
+                        "secondary": "#605693",
+                        "outline-variant": "#c9c4d7",
+                        "on-tertiary-fixed-variant": "#743400",
+                        "on-secondary-fixed": "#1c104c",
+                        "on-background": "#151b29",
+                        "tertiary-fixed-dim": "#ffb68b",
+                        "surface-tint": "#6042d6",
+                        "on-tertiary-container": "#ffc9ab",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d4d9ed",
+                        "on-primary-fixed": "#1c0062",
+                        "tertiary-container": "#954500",
+                        "on-error-container": "#93000a",
+                        "background": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#e6deff",
+                        "inverse-on-surface": "#edf0ff",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#504682",
+                        "on-surface": "#151b29",
+                        "on-secondary-fixed-variant": "#483e7a",
+                        "surface-container-low": "#f1f3ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dde2f6",
+                        "secondary-container": "#c4b8fd",
+                        "primary": "#451ebb",
+                        "inverse-surface": "#2a303f",
+                        "surface-variant": "#dde2f6",
+                        "surface-container-high": "#e2e8fc",
+                        "primary-container": "#5d3fd3",
+                        "on-primary-container": "#d8ceff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#cabeff",
+                        "on-error": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf8ff;
+        }
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl shadow-sm font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex justify-between items-center h-16 px-6 md:px-12 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-slate-900">ContentHub</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">Explore</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">Creators</a>
+<a class="text-violet-700 font-semibold border-b-2 border-violet-600 pb-1" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-surface-container-low px-4 py-2 rounded-lg gap-3">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-body" placeholder="Search library..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-600 hover:bg-slate-100/50 rounded-lg active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-100/50 rounded-lg active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="User profile" data-alt="close-up portrait of a professional man with a friendly expression in a brightly lit modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7jlbjFAfsO6LoGhyaTJvky1PYs9XZB5EpR5fBiF6DdMf7WYxpjvZ-REHTQp3g1BWEsL0-wDZ6cC5FjhvGf9IwM4aiZhjs9cZP-qZKPNxMK3XOaW4586_hjPWzVH2FudTyDjojrj3Tp58f4-jb-y_r5w-RpQDc1Da4fJsPVdVwqt6wv8SqJ_TsblIHfWxZc_Des5TgALl9UepqQZ7m0cvQkFISf_WgyQ8rRb2oxWHFHgCiJFYAPZMYasp5JHNcSZbS0sVe2rwBgNg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="h-screen w-64 fixed left-0 top-0 hidden lg:flex flex-col bg-slate-50 py-8 px-4 gap-2 font-['Plus_Jakarta_Sans'] text-sm font-medium pt-24">
+<div class="px-4 mb-6">
+<h2 class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-4">Quick Links</h2>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 bg-violet-50 text-violet-700 border-r-4 border-violet-600 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="book_5">book_5</span>
+<span>Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="rss_feed">rss_feed</span>
+<span>Feed</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span>Wishlist</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span>Notifications</span>
+</a>
+<div class="mt-auto border-t border-outline-variant/10 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 pb-24 px-6 md:px-12 min-h-screen">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-on-background mb-2">My Library</h1>
+<p class="font-body text-on-surface-variant max-w-lg">Manage and access your curated collection of digital assets, exclusive articles, and masterclass videos.</p>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-3 rounded-lg font-semibold flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Browse More</span>
+</button>
+</div>
+<!-- Filters & Search Area -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+<div class="flex bg-surface-container-low p-1 rounded-xl w-full md:w-auto overflow-x-auto no-scrollbar">
+<button class="px-5 py-2 rounded-lg text-sm font-semibold bg-surface-container-lowest text-primary shadow-sm whitespace-nowrap">All Items</button>
+<button class="px-5 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container whitespace-nowrap transition-colors">Articles</button>
+<button class="px-5 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container whitespace-nowrap transition-colors">Videos</button>
+<button class="px-5 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container whitespace-nowrap transition-colors">Files</button>
+</div>
+<div class="relative w-full md:w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl pl-10 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all font-body text-on-background shadow-sm" placeholder="Search by title..." type="text"/>
+</div>
+</div>
+<!-- Content Grid (Asymmetric Bento-inspired layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Video Card (Featured) -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 md:col-span-2 xl:col-span-1">
+<div class="relative aspect-video overflow-hidden">
+<img alt="Video cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cinematic shot of a minimalist workspace with a high-end laptop, notebook, and warm ambient desk lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj5zZD41d3w1ouO8NVBRrhOEwrOgYfICiMwvwa5mUMR4KjHivOQ4Ray7tM-tAAZjNyzQG5ZbjuTcvXANFfBJ_N7pjrR5WtiwD_tWB3ZElMMynjdiAFVdkRegeaDYPictDBlv-76TU8VLdIuUYnGtQ1lAD1UR6PKk7VQ44UdpbW0Xk0FluYuYk70rE1kZhWwnVFN6aOKDzIOn6nXa_XbiBw7BBx1R6bB_Rv3E9Lchmt6mqyB_IEC84Z3y-q5e1A_nhsCWHvPKOUVGE"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+<div class="w-14 h-14 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute top-4 left-4 bg-primary/90 text-on-primary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Video</div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-3 mb-3">
+<img alt="Creator" class="w-6 h-6 rounded-full" data-alt="professional portrait of a creative director in a stylish studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu2JNHoGHqJeWELT_a7XI8dFiLi3JXKXEinH8q_OGoJDK3GLkV8kBc9C0Thed1D0jv1cbK0o3bdlkk7X4AJmDlxBJXVRhQWfnnhoLYbSztGxxRo4rVk2LGdTpQQ4-HYjiycygJnav-E9Wg-fk0MmVebifOcF7sGi2S3JMUvU39Ny05i0ZDmZQqDe07Sp0yfa3T_6xsADut9RR7ZnRKiQ9mLdkM728Hbg7kfaYhjeDWrsMVMv32RP0rT89HiZye7GGiuny2rUKaorA"/>
+<span class="text-xs font-medium text-on-surface-variant">Sarah Jenkins</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2 group-hover:text-primary transition-colors">Architectural Masterclass: Light &amp; Space</h3>
+<p class="text-sm text-on-surface-variant font-body mb-6 line-clamp-2">An 8-part series exploring the intersection of modern materials and natural illumination.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-label text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 1h 45m
+                            </span>
+<button class="text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                                Watch Now <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Article Card -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Article cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="aesthetic top-down view of an open digital tablet showing typography designs and a cup of coffee on a clean marble surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo-WMfK28uAH8qnVzcPJSTXoaeQDhqEx-oR5aE3YrT8jSU2In7jPUSLKhZOFUq2j5tswMrfzbCVYJFhdaMsm9_YjfQ2w5Vu1CZlJpEtki7N9Yec4J3NCs3xQNndMLghdEUYfOTwjupDJ9MafPD2D6gK_Snuf1XPZLH55YVU_tdFoAeiDPYwnvhElfmgZ1fu0b6BQXzCiIT_J2Rfvv6t9Xvazcujptolby4DDU4tl6_wlZIwARvxCohSNqkMizjV1RNermLMxC5LhY"/>
+<div class="absolute top-4 left-4 bg-secondary/90 text-on-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Article</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline text-lg font-bold mb-2 group-hover:text-primary transition-colors">The Future of Digital Curation</h3>
+<p class="text-sm text-on-surface-variant font-body mb-6 line-clamp-2">How AI and human taste are merging to redefine the creative economy.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-label text-outline">READ TIME: 12 MIN</span>
+<button class="text-secondary font-semibold text-sm hover:underline">View Online</button>
+</div>
+</div>
+</div>
+<!-- File/Asset Card -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="File cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="abstract close-up of vibrant purple and blue paper textures layered in a geometric fashion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8PoWYdKKiNG39-iY7r-9huzu4nMz1TX8XyjisoONJ8sTcyzLIF75rlijcUy-qZ3WWV-QHkokqm-LtISTj8AxdHj4f8daM8gPxpDpOJcs4xwDVIBzeO5QhfRheJmtMiC1PsnkkhOjqEVZGWUIWQm7EHv6cCg-BwPJhWMi5YpuYV85MGwDdWk4RfOtBDIpI50mIp8SFqzn_Wf8S1riLEuX8n9iRrBAESRnvyePoUBPj1nbOKAMLNxegWGFRSa0nOeLvOh6VA3JdiZ8"/>
+<div class="absolute top-4 left-4 bg-tertiary/90 text-on-tertiary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Bundle</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline text-lg font-bold mb-2 group-hover:text-primary transition-colors">Texture Pack: Vol. 1 (Slate)</h3>
+<p class="text-sm text-on-surface-variant font-body mb-6">45 high-resolution displacement maps for modern 3D rendering and web design.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-label text-outline uppercase tracking-tight">4.2 GB • ZIP FILE</span>
+<button class="p-2 bg-surface-container-low text-on-background rounded-lg hover:bg-primary-container hover:text-on-primary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Another Article -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="p-6 flex flex-col h-full">
+<div class="mb-4">
+<div class="inline-block bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Article</div>
+<h3 class="font-headline text-xl font-bold mb-3">Color Theory for Minimalist Interfaces</h3>
+</div>
+<p class="text-sm text-on-surface-variant font-body mb-8">Mastering the balance between neutral bases and high-impact accent tones.</p>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/10">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 border-2 border-surface"></div>
+<div class="w-6 h-6 rounded-full bg-slate-300 border-2 border-surface"></div>
+</div>
+<button class="text-primary font-semibold text-sm flex items-center gap-1">
+                                Continue Reading <span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Another Video -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="relative aspect-video overflow-hidden">
+<img alt="Video cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="wide shot of a bright modern office with team members collaborating in the background and soft focus plant in foreground" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcp3QtoSHvw5yKJeFXyIiYtqvbxfUU2sjxuA_2yldKtdBt2geba5duRXEqUgRLy_cR0nCxnPgiB7hEFIhw_uum8oJBW5q2Ff6aKarSVGEMflOWNjFCkmz1qs3SlqQjSUlozrXQV6Bu9pJH-nZKFxkX7z9ytjOIujaR1OsxJd9dKaqBEXjGXst2NG3UvaKa4nQ0SAmJR_mGLTf4huFmVEnY910uvKuNecocD_CDKP-MYjIinDPxKNrf70HXmw0RyDk6Uktz4vDRA28"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 bg-primary/90 text-on-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline text-lg font-bold mb-2">Design Systems at Scale</h3>
+<p class="text-sm text-on-surface-variant font-body mb-4">How to maintain consistency across global product teams.</p>
+<div class="flex items-center gap-4 text-xs font-label text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">visibility</span> 1.2k views</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 89 likes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State / Load More (Subtle) -->
+<div class="mt-20 text-center">
+<p class="text-sm text-outline font-body mb-6">Showing 6 of 24 purchased items</p>
+<button class="px-8 py-3 rounded-xl border border-outline-variant text-on-background font-semibold hover:bg-surface-container-low transition-colors active:scale-95">
+                    Load More Items
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-safe lg:hidden bg-white/80 backdrop-blur-lg border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] font-['Inter'] text-[10px] font-bold uppercase tracking-widest">
+<a class="flex flex-col items-center justify-center text-slate-400 py-2" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+<span>Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-violet-100 text-violet-800 rounded-xl px-3 py-1.5 py-2 scale-110" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="book_5">book_5</span>
+<span>Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 py-2" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="auto_awesome">auto_awesome</span>
+<span>Studio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 py-2" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="shopping_bag">shopping_bag</span>
+<span>Cart</span>
+</a>
+</nav>
+</body></html>

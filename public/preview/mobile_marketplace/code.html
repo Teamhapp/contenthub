@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#5d3fd3",
+              "on-tertiary-container": "#ffc9ab",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#faf8ff",
+              "on-secondary": "#ffffff",
+              "surface-container-high": "#e2e8fc",
+              "surface-container": "#e9edff",
+              "primary-fixed-dim": "#cabeff",
+              "error-container": "#ffdad6",
+              "on-surface": "#151b29",
+              "on-secondary-fixed-variant": "#483e7a",
+              "surface-tint": "#6042d6",
+              "background": "#faf8ff",
+              "tertiary-fixed-dim": "#ffb68b",
+              "surface-container-low": "#f1f3ff",
+              "inverse-primary": "#cabeff",
+              "surface-dim": "#d4d9ed",
+              "surface-container-highest": "#dde2f6",
+              "on-primary-container": "#d8ceff",
+              "on-tertiary-fixed-variant": "#743400",
+              "on-primary-fixed-variant": "#4723be",
+              "outline": "#797586",
+              "on-background": "#151b29",
+              "tertiary-container": "#954500",
+              "primary-fixed": "#e6deff",
+              "on-secondary-fixed": "#1c104c",
+              "secondary-fixed-dim": "#cabeff",
+              "secondary-fixed": "#e6deff",
+              "primary": "#451ebb",
+              "on-error-container": "#93000a",
+              "tertiary-fixed": "#ffdbc8",
+              "on-tertiary": "#ffffff",
+              "surface": "#faf8ff",
+              "surface-variant": "#dde2f6",
+              "secondary-container": "#c4b8fd",
+              "on-primary-fixed": "#1c0062",
+              "on-surface-variant": "#484554",
+              "on-error": "#ffffff",
+              "inverse-on-surface": "#edf0ff",
+              "error": "#ba1a1a",
+              "tertiary": "#713300",
+              "on-tertiary-fixed": "#321300",
+              "inverse-surface": "#2a303f",
+              "secondary": "#605693",
+              "outline-variant": "#c9c4d7",
+              "on-secondary-container": "#504682",
+              "on-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 backdrop-blur-md shadow-sm flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-violet-600" data-icon="search">search</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-xl font-extrabold bg-gradient-to-br from-violet-600 to-violet-800 bg-clip-text text-transparent">ContentHub</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-violet-50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-slate-500" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6">
+<!-- Search & Filter Area -->
+<div class="flex items-center gap-3 mb-8">
+<div class="flex-1 bg-surface-container-low rounded-xl px-4 py-3 flex items-center gap-3 group focus-within:ring-2 ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 p-0 text-body-md w-full placeholder:text-outline" placeholder="Search creators, assets..." type="text"/>
+</div>
+<button class="bg-surface-container-low p-3 rounded-xl hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+</button>
+</div>
+<!-- Categories (Horizontal Scroll) -->
+<section class="mb-10 -mx-6">
+<div class="flex overflow-x-auto no-scrollbar gap-3 px-6">
+<button class="whitespace-nowrap bg-primary text-on-primary px-6 py-2.5 rounded-full font-medium text-sm shadow-md shadow-primary/20">All</button>
+<button class="whitespace-nowrap bg-surface-container-lowest text-on-surface-variant px-6 py-2.5 rounded-full font-medium text-sm hover:bg-surface-container-high transition-colors">Articles</button>
+<button class="whitespace-nowrap bg-surface-container-lowest text-on-surface-variant px-6 py-2.5 rounded-full font-medium text-sm hover:bg-surface-container-high transition-colors">Videos</button>
+<button class="whitespace-nowrap bg-surface-container-lowest text-on-surface-variant px-6 py-2.5 rounded-full font-medium text-sm hover:bg-surface-container-high transition-colors">Files</button>
+<button class="whitespace-nowrap bg-surface-container-lowest text-on-surface-variant px-6 py-2.5 rounded-full font-medium text-sm hover:bg-surface-container-high transition-colors">Presets</button>
+</div>
+</section>
+<!-- Editorial Grid Header -->
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">Trending Creations</h2>
+<span class="font-label text-xs uppercase tracking-widest text-outline">248 items</span>
+</div>
+<!-- Content Grid (Vertical Bento-ish) -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-[0_20px_40px_rgba(21,27,41,0.04)] hover:shadow-lg transition-all">
+<div class="aspect-square rounded-lg overflow-hidden mb-3 relative group">
+<img alt="" class="w-full h-full object-cover" data-alt="abstract flowing 3D shapes in vibrant violet and deep slate with soft studio lighting and clean composition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnovUMRM8sBbQbUj6Iy8cPabe6qa_HW5s0O--Bbn3A5sc12a9XsHpD9VaWGQyUBO9uuw9HwJFGWEjebtWxafU3hRi6Xkiq3oOy7fzggGtaLH8ZZoGNmvhf4SvwfdKLNtoH9zM3B2raiuRBIpc3qyK-ieQGbfGl_kN6STcdydGMsiOnpbgM-flgPmoU90YOA6TTH3McEPAIKdoYiHFB2Sv8l_lOpSocs_t13leVqYWj7nvZUfA9Oqy6yPNFZDnhwdE6sp9UrsYHtuQ"/>
+<div class="absolute top-2 right-2">
+<span class="bg-white/80 backdrop-blur-md px-2 py-1 rounded-md text-[10px] font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.9
+                        </span>
+</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline text-sm font-bold leading-tight text-on-surface">Cyberpunk Preset Pack</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body font-semibold text-primary">$24.00</span>
+<button class="bg-primary text-on-primary w-8 h-8 rounded-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-[0_20px_40px_rgba(21,27,41,0.04)] hover:shadow-lg transition-all">
+<div class="aspect-square rounded-lg overflow-hidden mb-3 relative group">
+<img alt="" class="w-full h-full object-cover" data-alt="top-down high-tech electronic components with glowing circuit patterns and retro hardware aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNljmQHmLiaqy-uJGexLc9dy1baNvwMe0OaQRBAUQw_1YneC06rI2cD4wLkuft_kiAfRrNAoWF0s-fDKG8P0vMnfIfGzkuTuIGIFCJJR8MAGIAHllggel_kRtG8KLJ2P9SU1a6agRQzqOi2dX7M7TovxbGo7urHogxGQ0y4B9JShwieTxLe2sQOknOR2VgwP4VfdrR_yh2hmzaNNU9wIHkslTTX2-uUR6UEUnEWCaWo2uX6WocihNgXhweqfMfFHuHI5qg1re4864"/>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline text-sm font-bold leading-tight text-on-surface">Tech Review Template</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body font-semibold text-primary">$12.50</span>
+<button class="bg-primary text-on-primary w-8 h-8 rounded-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-[0_20px_40px_rgba(21,27,41,0.04)] hover:shadow-lg transition-all">
+<div class="aspect-square rounded-lg overflow-hidden mb-3 relative group">
+<img alt="" class="w-full h-full object-cover" data-alt="vibrant color gradient background with smooth transitions from magenta to deep blue with fine grain texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLY0PMA9QQOITZApJO0Peol79xnnjawOrIMDCJsqzT5Rw-YnSNSIrNJ18hq5Dn1Xyn2XBEaRpBg8sR-J3lyXRaSvvWr-JZ6jbpg9uq5jeF5U5-s2N0K_bFhpqpEDzPLq0rzUNQ5YDq1GsHdt-eDmk0VLtYJzMzEDqMIo8Wky6hX20bp-KtHkPX1Y3527sZ747vJ50GcAy243PK5TvQlfOW7Zr5SsasEhY5bYGjc1n-qIzo5wsAq8Djf2MAERx8tKp9KrY0yRc-PpE"/>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline text-sm font-bold leading-tight text-on-surface">Gradient Mesh Guide</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body font-semibold text-primary">$18.00</span>
+<button class="bg-primary text-on-primary w-8 h-8 rounded-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-[0_20px_40px_rgba(21,27,41,0.04)] hover:shadow-lg transition-all">
+<div class="aspect-square rounded-lg overflow-hidden mb-3 relative group">
+<img alt="" class="w-full h-full object-cover" data-alt="abstract smooth glass ripples and liquid metal reflections in soft lavender and charcoal tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl4NPBLAds6JJHU8BNrsu6RTwRIgaq92SroMxDLsXxjDErjyN_Db1ngUwbS80AS14ziXfAO4iZYlXY3NyW29ZQ26GKv8PQ0eIKXBek5myci9ULFEe60fWH3tl1Wf7VR-xrhvpBETtWVED2HGu1V-J2B_iolrS2rLMBoVAvV8M1GyCPSV4uiC3DzULuRDM8hRJ6YsaGqu4ClpGoC1-YUrmevLV2sJ6ukFQ3dZufRVRCO6MrBJAT9wiKjNoqxolKY1jzEA_1EshU6XQ"/>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline text-sm font-bold leading-tight text-on-surface">Minimalist Texture Pack</h3>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body font-semibold text-primary">$35.00</span>
+<button class="bg-primary text-on-primary w-8 h-8 rounded-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Filter Sheet (Simulated Interaction State) -->
+<!-- Note: Typically toggled by JS, here showing structural intent -->
+<div class="fixed inset-0 bg-on-surface/20 backdrop-blur-sm z-[60] opacity-0 pointer-events-none transition-opacity">
+<div class="absolute bottom-0 w-full bg-surface-container-lowest rounded-t-[32px] p-8 shadow-2xl translate-y-full transition-transform">
+<div class="w-12 h-1 bg-surface-container-highest rounded-full mx-auto mb-8"></div>
+<h3 class="font-headline text-xl font-bold mb-6">Filter Results</h3>
+<div class="space-y-8">
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-outline mb-4 block">Price Range</span>
+<div class="h-1 bg-surface-container-high relative rounded-full">
+<div class="absolute left-1/4 right-1/4 h-1 bg-primary rounded-full"></div>
+<div class="absolute left-1/4 -top-2 w-5 h-5 bg-white border-2 border-primary rounded-full shadow-md"></div>
+<div class="absolute right-1/4 -top-2 w-5 h-5 bg-white border-2 border-primary rounded-full shadow-md"></div>
+</div>
+</div>
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-outline mb-4 block">File Type</span>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-lg text-sm font-medium">.zip</span>
+<span class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-lg text-sm font-medium">.pdf</span>
+<span class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-lg text-sm font-medium">.mp4</span>
+<span class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-lg text-sm font-medium">.png</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold mt-10 shadow-lg shadow-primary/20">Apply Filters</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-xl rounded-t-[24px] shadow-[0_-10px_40px_rgba(21,27,41,0.06)] z-50">
+<div class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-violet-500 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide uppercase">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-violet-100 text-violet-700 rounded-2xl px-5 py-2 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide uppercase">Browse</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-violet-500 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="subscriptions">subscriptions</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide uppercase">Library</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-violet-500 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide uppercase">Profile</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creator Studio | Content Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c9c4d7;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed": "#321300",
+                        "inverse-primary": "#cabeff",
+                        "outline": "#797586",
+                        "surface-container": "#e9edff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#faf8ff",
+                        "on-surface-variant": "#484554",
+                        "secondary-fixed": "#e6deff",
+                        "on-primary-fixed-variant": "#4723be",
+                        "secondary-fixed-dim": "#cabeff",
+                        "tertiary": "#713300",
+                        "tertiary-fixed": "#ffdbc8",
+                        "secondary": "#605693",
+                        "outline-variant": "#c9c4d7",
+                        "on-tertiary-fixed-variant": "#743400",
+                        "on-secondary-fixed": "#1c104c",
+                        "on-background": "#151b29",
+                        "tertiary-fixed-dim": "#ffb68b",
+                        "surface-tint": "#6042d6",
+                        "on-tertiary-container": "#ffc9ab",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d4d9ed",
+                        "on-primary-fixed": "#1c0062",
+                        "tertiary-container": "#954500",
+                        "on-error-container": "#93000a",
+                        "background": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#e6deff",
+                        "inverse-on-surface": "#edf0ff",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#504682",
+                        "on-surface": "#151b29",
+                        "on-secondary-fixed-variant": "#483e7a",
+                        "surface-container-low": "#f1f3ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dde2f6",
+                        "secondary-container": "#c4b8fd",
+                        "primary": "#451ebb",
+                        "inverse-surface": "#2a303f",
+                        "surface-variant": "#dde2f6",
+                        "surface-container-high": "#e2e8fc",
+                        "primary-container": "#5d3fd3",
+                        "on-primary-container": "#d8ceff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#cabeff",
+                        "on-error": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl shadow-sm font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex justify-between items-center h-16 px-6 md:px-12 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-slate-900">ContentHub</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">Explore</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">Creators</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2">
+<button class="p-2 text-slate-600 hover:bg-slate-100/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-100/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2 rounded-lg font-semibold active:scale-95 duration-200 ease-in-out">
+                    Create
+                </button>
+<img alt="User profile" class="w-10 h-10 rounded-full object-cover" data-alt="Close up portrait of a creative professional man with stylish glasses in a sunlit studio environment, soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8dmUmw455oGq0dx8_nsdCxYds4ho2yvglJwHbWzt74Gv42H1Ez-YspjTNLXUBgpdzFpfd8dc-PmdNzWNfZ_mLX0Wo08EcLSeoYuRo8YaG7k2PIC5Sp9TTiS3nczwljN140FcPitgmKJqk4MIoLuRohrQxlv5wCODAitNlq1w2JvxAWaIDwEs9LOwmXKHtDoJgiFe-FF6-Hr5tfBsjMnHN1dQnVxNQJ96UNDlAYZtJrKm44pBk1ARJ-h58q8CRz8z52Hk1uSAYzus"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation Bar -->
+<aside class="h-screen w-64 fixed left-0 top-0 hidden lg:flex flex-col bg-slate-50 py-8 px-4 gap-2 font-['Plus_Jakarta_Sans'] text-sm font-medium z-40 pt-20">
+<div class="mb-6 px-2">
+<h2 class="text-lg font-extrabold text-slate-900">Creator Studio</h2>
+<p class="text-xs text-slate-500 font-normal">The Atelier Edition</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span>My Content</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 p-3 bg-violet-50 text-violet-700 border-r-4 border-violet-600 rounded-lg" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span>Editor</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-slate-200/50 pt-4 flex flex-col gap-4">
+<button class="w-full py-3 bg-violet-600 text-white rounded-lg font-bold active:opacity-80 transition-opacity">
+                Post New Work
+            </button>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-100 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 pt-16 pb-20 lg:pb-8">
+<div class="max-w-5xl mx-auto px-6 py-10">
+<!-- Header Section -->
+<div class="mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="text-label-md font-label uppercase tracking-widest text-secondary font-bold">Content Editor</span>
+<span class="h-px w-8 bg-outline-variant opacity-20"></span>
+<span class="text-label-md font-label uppercase tracking-widest text-outline">v2.4 Atelier</span>
+</div>
+<h1 class="font-headline text-4xl font-bold text-on-surface tracking-tight leading-tight">Create New Digital Asset</h1>
+<p class="mt-4 text-body-md text-on-surface-variant max-w-2xl">Refine your creative output. Upload high-fidelity assets and define your presence in the Editorial Gallery.</p>
+</div>
+<!-- Form Layout -->
+<form class="space-y-10">
+<!-- Basic Info Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<h3 class="text-title-lg font-headline font-bold text-on-surface mb-8">Primary Details</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="text-label-md font-bold uppercase tracking-wider text-on-surface-variant">Title</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary transition-all" placeholder="e.g. Minimalist Abstract Vol. 1" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-md font-bold uppercase tracking-wider text-on-surface-variant">Category</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary appearance-none transition-all">
+<option>Digital Illustration</option>
+<option>3D Assets</option>
+<option>Photography</option>
+<option>Motion Graphics</option>
+<option>Editorial UI Kits</option>
+</select>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-label-md font-bold uppercase tracking-wider text-on-surface-variant">Description</label>
+<div class="bg-surface-container-low rounded-lg overflow-hidden">
+<div class="flex items-center gap-2 p-2 border-b border-outline-variant/10">
+<button class="p-2 hover:bg-surface-container-high rounded" type="button"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+<button class="p-2 hover:bg-surface-container-high rounded" type="button"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+<button class="p-2 hover:bg-surface-container-high rounded" type="button"><span class="material-symbols-outlined text-sm">link</span></button>
+<span class="w-px h-4 bg-outline-variant/20 mx-1"></span>
+<button class="p-2 hover:bg-surface-container-high rounded" type="button"><span class="material-symbols-outlined text-sm">format_list_bulleted</span></button>
+</div>
+<textarea class="w-full bg-transparent border-none p-4 focus:ring-0 resize-none min-h-[160px]" placeholder="Describe the creative intent and technical specifications..." rows="6"></textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- Media Upload Bento Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Thumbnail Upload -->
+<div class="lg:col-span-1 bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col">
+<h3 class="text-title-lg font-headline font-bold text-on-surface mb-6">Thumbnail</h3>
+<div class="flex-1 border-2 border-dashed border-outline-variant/30 rounded-lg flex flex-col items-center justify-center p-8 text-center hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-4 group-hover:text-primary transition-colors">image</span>
+<p class="text-body-md font-semibold text-on-surface-variant">Drop your preview</p>
+<p class="text-xs text-outline mt-1">Recommended 1200x900px</p>
+<button class="mt-4 text-primary font-bold text-sm" type="button">Browse Files</button>
+</div>
+</div>
+<!-- Main Asset Upload -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-title-lg font-headline font-bold text-on-surface">Main Digital Asset</h3>
+<span class="bg-tertiary-container text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">High Res Required</span>
+</div>
+<div class="flex-1 border-2 border-dashed border-outline-variant/30 rounded-xl flex flex-col items-center justify-center p-12 text-center hover:bg-surface-container-low transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#451ebb 1px, transparent 1px); background-size: 20px 20px;"></div>
+<span class="material-symbols-outlined text-5xl text-primary/40 mb-4 group-hover:scale-110 transition-transform">cloud_upload</span>
+<p class="text-title-lg font-bold text-on-surface">Drag and drop source files</p>
+<p class="text-body-md text-outline mt-2 max-w-xs">Supports ZIP, MP4, PSD, or OBJ files up to 500MB</p>
+</div>
+</div>
+</section>
+<!-- Commercial & Logic Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<h3 class="text-title-lg font-headline font-bold text-on-surface mb-8">Commercial Settings</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Pricing -->
+<div class="space-y-4">
+<label class="text-label-md font-bold uppercase tracking-wider text-on-surface-variant">Pricing (USD)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-outline">$</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 pl-10 focus:ring-2 focus:ring-primary font-bold text-xl" placeholder="0.00" type="number"/>
+</div>
+<p class="text-xs text-outline">Platform fee (5%) will be deducted automatically from each sale.</p>
+</div>
+<!-- Tags -->
+<div class="space-y-4">
+<label class="text-label-md font-bold uppercase tracking-wider text-on-surface-variant">Creative Tags</label>
+<div class="bg-surface-container-low p-2 rounded-lg flex flex-wrap gap-2 min-h-[56px]">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-lg text-sm flex items-center gap-1">
+                                    #Abstract <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-lg text-sm flex items-center gap-1">
+                                    #Modern <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm flex-1 min-w-[100px]" placeholder="Add tag..." type="text"/>
+</div>
+<p class="text-xs text-outline italic">Use comma or enter to separate tags.</p>
+</div>
+</div>
+</section>
+<!-- Submission Controls -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
+<div class="flex items-center gap-8 bg-surface-container-high/50 p-4 px-6 rounded-full border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-bold text-on-surface">Status</span>
+<div class="flex bg-surface-container-low p-1 rounded-full gap-1">
+<button class="px-4 py-1.5 rounded-full text-xs font-bold uppercase transition-all bg-white shadow-sm text-primary" type="button">Draft</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-bold uppercase transition-all text-outline hover:text-on-surface" type="button">Review</button>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs font-medium">Last saved: 2 mins ago</span>
+</div>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-8 py-4 border border-outline-variant/20 rounded-lg font-bold text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button">
+                            Discard
+                        </button>
+<button class="flex-1 md:flex-none px-12 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-lg font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" type="submit">
+                            Publish to Gallery
+                        </button>
+</div>
+</div>
+</form>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-safe lg:hidden bg-white/80 backdrop-blur-lg border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] font-['Inter'] text-[10px] font-bold uppercase tracking-widest">
+<a class="flex flex-col items-center justify-center text-slate-400 py-3" href="#">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span>Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 py-3" href="#">
+<span class="material-symbols-outlined mb-1">book_5</span>
+<span>Library</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-violet-100 text-violet-800 rounded-xl px-3 py-1.5" href="#">
+<span class="material-symbols-outlined mb-1">auto_awesome</span>
+<span>Studio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 py-3" href="#">
+<span class="material-symbols-outlined mb-1">shopping_bag</span>
+<span>Cart</span>
+</a>
+</nav>
+</body></html>

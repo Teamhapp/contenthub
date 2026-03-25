@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atelier Admin | Content Moderation</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#faf8ff",
+              "primary": "#451ebb",
+              "tertiary": "#713300",
+              "surface-container-highest": "#dde2f6",
+              "on-primary-fixed-variant": "#4723be",
+              "secondary-fixed-dim": "#cabeff",
+              "surface-container": "#e9edff",
+              "surface": "#faf8ff",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#cabeff",
+              "on-error": "#ffffff",
+              "outline": "#797586",
+              "on-tertiary-fixed-variant": "#743400",
+              "on-primary-container": "#d8ceff",
+              "secondary-container": "#c4b8fd",
+              "inverse-on-surface": "#edf0ff",
+              "on-surface-variant": "#484554",
+              "on-background": "#151b29",
+              "surface-container-high": "#e2e8fc",
+              "on-secondary-fixed-variant": "#483e7a",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "inverse-primary": "#cabeff",
+              "primary-fixed": "#e6deff",
+              "on-surface": "#151b29",
+              "primary-container": "#5d3fd3",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#1c104c",
+              "outline-variant": "#c9c4d7",
+              "surface-tint": "#6042d6",
+              "surface-dim": "#d4d9ed",
+              "secondary": "#605693",
+              "on-secondary-container": "#504682",
+              "on-tertiary-fixed": "#321300",
+              "tertiary-fixed": "#ffdbc8",
+              "surface-variant": "#dde2f6",
+              "surface-container-low": "#f1f3ff",
+              "on-tertiary-container": "#ffc9ab",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#e6deff",
+              "inverse-surface": "#2a303f",
+              "on-primary": "#ffffff",
+              "error": "#ba1a1a",
+              "surface-bright": "#faf8ff",
+              "on-primary-fixed": "#1c0062",
+              "tertiary-container": "#954500",
+              "tertiary-fixed-dim": "#ffb68b"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+      }
+      .glass-nav {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-background min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full flex flex-col h-screen w-64 border-r border-slate-200/20 bg-slate-50/80 backdrop-blur-xl z-50 font-['Plus_Jakarta_Sans'] antialiased">
+<div class="p-8">
+<h1 class="text-xl font-bold tracking-tight text-slate-900">Atelier Admin</h1>
+<p class="text-xs text-on-surface-variant/70 mt-1 uppercase tracking-widest font-bold">Platform Controller</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<!-- Content is Active -->
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 hover:bg-slate-100/50 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 hover:bg-slate-100/50 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-violet-700 font-semibold border-r-4 border-violet-600 bg-violet-50/50" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-medium">Content</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 hover:bg-slate-100/50 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 hover:bg-slate-100/50 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:scale-[0.98] transition-transform active:scale-95 duration-150">
+<span>Review Queue</span>
+</button>
+<div class="mt-6 flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of professional male admin user with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGo-GD8b_zZ2ibv3TsWtq-d11AsqlxwYqg2qVEnUhpeNigfXUxqfDtDHAbbYEHEVxZkxqbYGp97H-L1IgM1448W8Bjmz_5dnG3lnji59aBMq21nxCAnHa-QemFt285JvoSQWWeDHtLxQ1XrFenmQSTTZkgkYZr3eG2pPQtjcx3F-AYGRsL0fL8jSDUkdqJT-Y4JZIbRxyIxFOCiiqVG8o2YZmGR70H_hgKeyBsyBCr0EVOYPKlYmRNMX6tFfuiJRS4tbDjBhQbHr8"/>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Admin User Profile</p>
+<p class="text-[10px] text-on-surface-variant">System Root</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="w-full h-16 sticky top-0 z-40 bg-white/70 backdrop-blur-md flex justify-between items-center px-8 w-full border-b border-slate-200/10 shadow-sm">
+<div class="flex items-center gap-6">
+<span class="text-lg font-extrabold text-slate-900">Content Moderation</span>
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="text-sm font-medium font-['Inter'] text-slate-500 hover:text-violet-500 transition-colors" href="#">Analytics</a>
+<a class="text-sm font-medium font-['Inter'] text-slate-500 hover:text-violet-500 transition-colors" href="#">Logs</a>
+<a class="text-sm font-medium font-['Inter'] text-violet-600 border-b-2 border-violet-600 h-16 flex items-center" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<input class="bg-surface-container-low border-none rounded-full px-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search entries..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2 text-slate-400 text-sm" data-icon="search">search</span>
+</div>
+<div class="flex items-center gap-2 text-slate-500">
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-10 space-y-10">
+<!-- Editorial Header -->
+<div class="max-w-6xl">
+<h2 class="font-headline text-5xl font-bold tracking-tight text-on-surface">Moderation Queue</h2>
+<p class="text-on-surface-variant mt-4 text-lg max-w-2xl leading-relaxed">
+                    Review and curate digital assets across the Atelier ecosystem. Ensure every piece of content meets our standards of high-end creative excellence.
+                </p>
+</div>
+<!-- Filter Controls -->
+<section class="flex flex-wrap items-center gap-6 p-2">
+<div class="flex gap-2">
+<button class="px-5 py-2 rounded-full bg-primary text-white text-sm font-semibold shadow-md shadow-primary/10">All Pending</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium hover:bg-surface-container transition-colors">Articles</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium hover:bg-surface-container transition-colors">Videos</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-medium hover:bg-surface-container transition-colors">Digital Art</button>
+</div>
+<div class="h-6 w-px bg-outline-variant/30"></div>
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60">Sort By</span>
+<select class="bg-transparent border-none text-sm font-bold text-on-surface focus:ring-0 cursor-pointer">
+<option>Date Submitted</option>
+<option>Priority Level</option>
+<option>Creator Rating</option>
+</select>
+</div>
+</section>
+<!-- Content List Table-less Layout (Cards) -->
+<div class="grid grid-cols-1 gap-4 max-w-6xl">
+<!-- Queue Item 1 -->
+<div class="group relative bg-surface-container-lowest p-5 rounded-xl flex items-center gap-6 transition-all duration-300 hover:shadow-2xl hover:shadow-on-surface/5">
+<div class="w-32 h-20 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="abstract digital painting with flowing fluid shapes in shades of deep indigo and electric violet with high contrast lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqDe503Kwgl94iA2cYaxtEgsQlvXz8namOs1h8MPCbQIPJanY2GNT2FXPMuqWDJyGXX3gxkBRbZpfSzSU7Y4sTKGqj5W_Eposj0nNm6L40CGcZgMIsNamsrWS8mN74MzbECH3Vd3-mia6uGNBQMlVx34kylSucj0Ax6A-_GGqSBct-DyBYmfRUxbX2rClgTzeEX-IW8u0eVtYWVoJtdBcjqYkcVneGOMoLKru6VOudITVx5l1_dfhurU0UME8Vrca3S6hGb7rKVaY"/>
+</div>
+<div class="flex-1 grid grid-cols-4 items-center">
+<div class="col-span-2">
+<h3 class="font-headline text-lg font-bold text-on-surface">The Future of Neo-Brutalism</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="bg-primary-fixed text-on-primary-fixed-variant text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-tight">Article</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span> Julian Vossen
+                                </span>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest">Submitted</p>
+<p class="text-sm font-medium text-on-surface">Oct 24, 2023</p>
+</div>
+<div class="flex justify-end">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">Pending</span>
+</div>
+</div>
+<div class="flex gap-2 ml-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-200" title="Approve">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-error/10 text-error hover:bg-error hover:text-white transition-all duration-200" title="Reject">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+</div>
+</div>
+<!-- Queue Item 2 -->
+<div class="group relative bg-surface-container-lowest p-5 rounded-xl flex items-center gap-6 transition-all duration-300 hover:shadow-2xl hover:shadow-on-surface/5">
+<div class="w-32 h-20 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="cinematic close up of vintage mechanical keyboard with neon pink and blue lighting hitting the metallic surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIDN2Bd4SQiE6Eflz4CmfduQwO6AH_KtiHkbRRWDgq3nk6nS8JcTRrPF_GJIdyxynXQ-pjHlcqtwH0XIeAIii5uKEe51k43qDrNMc34m0CDoBj3fjdSbiTDW6AeondYc6Wszn7IO_1X0Vzx_ZsO2q5EceZOI8BRlCMEirsb8MTtbfLIVi7x9Iq-eYPb1Y0XQi-UtTrl1IPKpXJEpljeKm1KhCm66Ohu3W-5ezyxkhXHUWx44Yp-yhWuB2ZG3FpZPhg9OJq7z8cgK4"/>
+</div>
+<div class="flex-1 grid grid-cols-4 items-center">
+<div class="col-span-2">
+<h3 class="font-headline text-lg font-bold text-on-surface">Analog Dreams: Short Film</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-tight">Video</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span> Elena Thorne
+                                </span>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest">Submitted</p>
+<p class="text-sm font-medium text-on-surface">Oct 23, 2023</p>
+</div>
+<div class="flex justify-end">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">Pending</span>
+</div>
+</div>
+<div class="flex gap-2 ml-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-error/10 text-error hover:bg-error hover:text-white transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+</div>
+</div>
+<!-- Queue Item 3 -->
+<div class="group relative bg-surface-container-lowest p-5 rounded-xl flex items-center gap-6 transition-all duration-300 hover:shadow-2xl hover:shadow-on-surface/5">
+<div class="w-32 h-20 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="minimalist 3D architectural render of a brutalist concrete pavilion surrounded by still water under a clear grey sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAoP4YF3fNnZaXkp_OG0uRiql1AGZDeaVRZ_AHHLBYVdBVevEZ4qpvQoRBFS6BgSK-VZLCM_3BrtRuFMxze6jTfsclNn1i8xlpF0AvOYXTEYBKdPSMp_b0RZFT9Iarhg-82tQYWr0Js_U1GRfCFzKHII1IN6Bv0CMUW6iCAzu631we9UntJq798E-SuPiveOyss1Ia85Xa-J1zZcZiGbQid38YdRf2xjON16g3ahSGmKrn0dKqTpgv0S5rHVpdmw7Tz_Zsw2ZMu70"/>
+</div>
+<div class="flex-1 grid grid-cols-4 items-center">
+<div class="col-span-2">
+<h3 class="font-headline text-lg font-bold text-on-surface">Architectural Silence</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-tight">Art Piece</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span> Marcus Webb
+                                </span>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest">Submitted</p>
+<p class="text-sm font-medium text-on-surface">Oct 22, 2023</p>
+</div>
+<div class="flex justify-end">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">Pending</span>
+</div>
+</div>
+<div class="flex gap-2 ml-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-error/10 text-error hover:bg-error hover:text-white transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+</div>
+</div>
+<!-- Queue Item 4 -->
+<div class="group relative bg-surface-container-lowest p-5 rounded-xl flex items-center gap-6 transition-all duration-300 hover:shadow-2xl hover:shadow-on-surface/5">
+<div class="w-32 h-20 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="professional workspace setup with high-end designer tools, a sleek tablet, and clean minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWiDNtCOQpalQbrYvCsS4beKfXj3koaFVxRTbV0WWI5d4mmrowPumIuYB6J2-aWxfdGA8Z0pPl5U0TnwKTp7pc9i6tLj1rWvhtJZ0RbcmGfQrOB-hvv3srvn5Ydyp89J-7jsj5N9uycNVpbYr-Qpzb1g_ny2--FoDpNTer6lmUp6Ldb_87bccXbhxzfh-e6alya_lbyH8qq_aMBTogIcF9Mw4Dhdgzj0YVeMtK5D0pSSoLZw1xE_fAL_qKIXXiSDDvW64hOzt9vqU"/>
+</div>
+<div class="flex-1 grid grid-cols-4 items-center">
+<div class="col-span-2">
+<h3 class="font-headline text-lg font-bold text-on-surface">Mastering the Digital Atelier</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="bg-primary-fixed text-on-primary-fixed-variant text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-tight">E-Book</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="person">person</span> Sarah Li
+                                </span>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest">Submitted</p>
+<p class="text-sm font-medium text-on-surface">Oct 21, 2023</p>
+</div>
+<div class="flex justify-end">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">Pending</span>
+</div>
+</div>
+<div class="flex gap-2 ml-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-error/10 text-error hover:bg-error hover:text-white transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty Pagination / Footer -->
+<div class="max-w-6xl flex justify-between items-center py-8 border-t border-outline-variant/10">
+<p class="text-sm text-on-surface-variant">Showing 4 of 124 pending items</p>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-outline-variant/20 text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-2 rounded-lg border border-outline-variant/20 text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Rejection Reason Modal (Simulated Visibility via Overlay) -->
+<!-- In a real app, this would be hidden until triggered -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-[60] flex items-center justify-center p-6 hidden">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-2xl p-8 space-y-6">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-2xl font-bold text-on-surface">Rejection Reason</h3>
+<p class="text-on-surface-variant text-sm mt-1">Please specify why this content is being rejected.</p>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Policy Violation</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-error/20">
+<option>Inappropriate Content</option>
+<option>Copyright Infringement</option>
+<option>Low Quality Asset</option>
+<option>Incorrect Category</option>
+<option>Spam / Irrelevant</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Additional Notes</label>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm h-32 focus:ring-2 focus:ring-error/20 outline-none resize-none" placeholder="Provide specific feedback for the creator..."></textarea>
+</div>
+</div>
+<div class="flex gap-3 justify-end">
+<button class="px-6 py-2.5 rounded-lg font-bold text-on-surface hover:bg-surface-container transition-colors">Cancel</button>
+<button class="px-6 py-2.5 bg-error text-white rounded-lg font-bold hover:bg-on-error-container transition-colors">Confirm Rejection</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

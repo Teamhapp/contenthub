@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-container-highest": "#dde2f6",
+                "surface-dim": "#d4d9ed",
+                "on-secondary": "#ffffff",
+                "tertiary-fixed-dim": "#ffb68b",
+                "secondary-fixed-dim": "#cabeff",
+                "inverse-primary": "#cabeff",
+                "on-tertiary-fixed": "#321300",
+                "on-surface": "#151b29",
+                "surface-container": "#e9edff",
+                "primary-fixed": "#e6deff",
+                "tertiary-fixed": "#ffdbc8",
+                "background": "#faf8ff",
+                "on-surface-variant": "#484554",
+                "on-tertiary-fixed-variant": "#743400",
+                "primary-fixed-dim": "#cabeff",
+                "tertiary": "#713300",
+                "secondary-container": "#c4b8fd",
+                "surface": "#faf8ff",
+                "on-error-container": "#93000a",
+                "inverse-surface": "#2a303f",
+                "on-secondary-fixed": "#1c104c",
+                "outline": "#797586",
+                "outline-variant": "#c9c4d7",
+                "on-primary-fixed": "#1c0062",
+                "surface-bright": "#faf8ff",
+                "primary-container": "#5d3fd3",
+                "on-secondary-container": "#504682",
+                "primary": "#451ebb",
+                "secondary": "#605693",
+                "on-secondary-fixed-variant": "#483e7a",
+                "on-tertiary": "#ffffff",
+                "tertiary-container": "#954500",
+                "surface-tint": "#6042d6",
+                "on-primary-container": "#d8ceff",
+                "surface-container-low": "#f1f3ff",
+                "inverse-on-surface": "#edf0ff",
+                "on-background": "#151b29",
+                "surface-container-high": "#e2e8fc",
+                "error": "#ba1a1a",
+                "on-primary-fixed-variant": "#4723be",
+                "on-error": "#ffffff",
+                "error-container": "#ffdad6",
+                "on-primary": "#ffffff",
+                "secondary-fixed": "#e6deff",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-container": "#ffc9ab",
+                "surface-variant": "#dde2f6"
+              },
+              fontFamily: {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #451ebb 0%, #5d3fd3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #451ebb 0%, #5d3fd3 100%);
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px rgba(21, 27, 41, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-sm font-['Plus_Jakarta_Sans']">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
+<div class="text-xl font-bold tracking-tight text-slate-900">The Atelier</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-violet-600 font-semibold border-b-2 border-violet-600 transition-all duration-300" href="#">Explore</a>
+<a class="text-slate-600 hover:text-slate-900 transition-all duration-300" href="#">Creators</a>
+<a class="text-slate-600 hover:text-slate-900 transition-all duration-300" href="#">Marketplace</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-lg gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search assets..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-slate-600 hover:bg-slate-200/50 p-2 rounded-full transition-all">shopping_cart</button>
+<button class="text-slate-600 font-medium px-4 py-2 hover:bg-slate-200/50 rounded-lg transition-all">Sign In</button>
+<button class="btn-gradient text-white font-semibold px-6 py-2 rounded-lg shadow-sm hover:opacity-90 transition-all">Open Shop</button>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-8 py-20 lg:py-32 max-w-[1440px] mx-auto overflow-hidden">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="z-10">
+<span class="inline-block px-4 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label text-xs tracking-widest mb-6">CURATED CREATIVE ECONOMY</span>
+<h1 class="font-headline text-5xl lg:text-7xl font-extrabold tracking-tight text-on-surface mb-8 leading-[1.1]">
+                        Where <span class="text-gradient">Creativity</span> Finds Its Value
+                    </h1>
+<p class="text-lg lg:text-xl text-on-surface-variant mb-10 max-w-xl leading-relaxed">
+                        The Digital Atelier is a high-end marketplace designed for premium assets, insightful content, and the visionaries who build them.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="btn-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center gap-2 editorial-shadow">
+                            Browse Content
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-8 py-4 rounded-lg font-semibold text-lg text-on-surface border border-outline-variant/30 hover:bg-surface-container-low transition-all">
+                            Start Selling
+                        </button>
+</div>
+</div>
+<div class="relative">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-4">
+<div class="h-64 rounded-xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Close-up of high-quality digital 3D sculpture with intricate iridescent textures and dramatic studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_FoNGyLnySWfHHHyHOfEVDBpt-hKXVl-kWNclcLYJQySgsfHfzGrlFapf-egF8qOkmCRgb1tsLRe1duuuPSs8CTSP6k6VwfWqHzv2Nc4-YTpXOntoXIpHR4v-FwJKSOdW9uWYYabTxVSpYBEH-J9MaH1ut8jSHVK6nHj9tRwE5fA8lpSyrG7DHDd_Y6QhCGUZTYvGSNbN2b0u1IYiFhXJ4nvs0T6G8316zKhMx7shMw94pCOr2lf5dWvxziqniZBTdbwvAYn0uGw"/>
+</div>
+<div class="h-48 rounded-xl overflow-hidden shadow-2xl relative">
+<img class="w-full h-full object-cover" data-alt="A minimalist designer workspace with a sleek laptop, tablet, and a single artisanal ceramic vase in soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQsytKIy_SP-qmV7fqwRR43mypjTN4PqgEzqWfGkHNb6LIHA5mUnhHPXirkolxb7sNsgypDozQMywXF3dc_lLUqk-ht9Nei_4S9QCw0pa-4c_dw4CK7IlnNUZimCO1WD1w5N9egqKNSEa820015YCfiXklnZF6JREGruI5J25Q94hpx1YnGuCx1g8NUzQQHn9kMQnv7pNGc4djZymXcnJ9BRveKHxVTLAQMljKpz2WYz_aVA2yhpfiTcy9BYGwx5BflzjYEip-C3A"/>
+<div class="absolute bottom-3 left-3 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-primary">FEATURED CREATOR</div>
+</div>
+</div>
+<div class="space-y-4 pt-12">
+<div class="h-48 rounded-xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Abstract fluid motion design with waves of deep violet and shimmering gold particles on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRo1MAcIVdDGSNgk71HKyv3Z2IQO4qMeDJGgvYzF0UUKP8vnbmEhr5T2ZJp6e2B5krpjyhbr2CMcjlKlTmCjyu6tBcN_jAWt6rgZdLm0XYq9iFUhz2oWq_-hLJloEshwCG8sXO0mDHL2tK7lipgNOoSgi00R4WZW95qpfW9Fe5tUzPbtBy5ulLTKwYFpJcQAgVAlt2X7__mURjR1pEA7-tIXkGWnUYUSu2QZwTtYcJLRPCRo3ygfcompjvBUz3b-Nk3C6F7NyDNKk"/>
+</div>
+<div class="h-64 rounded-xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Modern architecture interior with expansive glass walls, soft shadows, and clean lines at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK-3lvkef9opsn_KX8CSShBC_ORJcfLPK5F6KiPdPzDSlWW1javms5nc_14iwDIQWLSaYTYqT-kPla2oynuR2EwNaFu7ONJr_xmv5GjlDBxtQGbegLSOGS2IF8U0MPcrGMfiGacjrtEfpspGPdYyHG335Sijxwo238e3eHmcS4umg1rVTFaDUhrnd57BGPVqUhoP_Qj7UhNQGXT-ePTMebOKvqcXue8FD9C6Nvss19qn4BwONwT9r7IZlr1bfPMCoAAwAMPmdZEvQ"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Bar -->
+<section class="bg-surface-container-low py-12 px-8">
+<div class="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center">
+<div class="font-headline text-3xl font-bold text-on-surface mb-1">10K+</div>
+<div class="font-label text-xs text-on-surface-variant tracking-widest uppercase">Verified Creators</div>
+</div>
+<div class="text-center">
+<div class="font-headline text-3xl font-bold text-on-surface mb-1">$5M+</div>
+<div class="font-label text-xs text-on-surface-variant tracking-widest uppercase">Paid Out</div>
+</div>
+<div class="text-center">
+<div class="font-headline text-3xl font-bold text-on-surface mb-1">250K+</div>
+<div class="font-label text-xs text-on-surface-variant tracking-widest uppercase">Premium Assets</div>
+</div>
+<div class="text-center">
+<div class="font-headline text-3xl font-bold text-on-surface mb-1">4.9/5</div>
+<div class="font-label text-xs text-on-surface-variant tracking-widest uppercase">Creator Trust Score</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="px-8 py-24 max-w-[1440px] mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-4">The Curated Path</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">A seamless experience designed for both the connoisseur and the creator.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-12">
+<!-- Step 1 -->
+<div class="relative group">
+<div class="bg-surface-container-lowest p-8 rounded-xl editorial-shadow transition-transform duration-300 group-hover:-translate-y-2">
+<div class="w-16 h-16 bg-primary-fixed rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">token</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Discover &amp; Mint</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Browse through a gallery of hand-picked digital assets, from exclusive articles to architectural blueprints.</p>
+<div class="h-1 bg-surface-container-highest w-full rounded-full">
+<div class="h-full bg-primary w-1/3 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative group">
+<div class="bg-surface-container-lowest p-8 rounded-xl editorial-shadow transition-transform duration-300 group-hover:-translate-y-2">
+<div class="w-16 h-16 bg-tertiary-fixed rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-3xl">verified_user</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Secure Exchange</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Every transaction is protected by our Atelier Trust Layer, ensuring creators get paid and buyers get quality.</p>
+<div class="h-1 bg-surface-container-highest w-full rounded-full">
+<div class="h-full bg-tertiary w-2/3 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative group">
+<div class="bg-surface-container-lowest p-8 rounded-xl editorial-shadow transition-transform duration-300 group-hover:-translate-y-2">
+<div class="w-16 h-16 bg-secondary-fixed rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl">auto_graph</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-4">Scale Your Studio</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Unlock analytics, community engagement tools, and premium placement to grow your creative brand.</p>
+<div class="h-1 bg-surface-container-highest w-full rounded-full">
+<div class="h-full bg-secondary w-full rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Previews (Asymmetric Bento-ish Grid) -->
+<section class="px-8 py-24 bg-surface-container-lowest">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-2">Exhibition Floor</h2>
+<p class="text-on-surface-variant">Trending assets from the world's most innovative creators.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 rounded-full border border-outline-variant/30 font-medium text-sm hover:bg-surface-container-low transition-all">Articles</button>
+<button class="px-6 py-2 rounded-full bg-on-surface text-white font-medium text-sm">Videos</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant/30 font-medium text-sm hover:bg-surface-container-low transition-all">Files</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Featured Video (Large) -->
+<div class="md:col-span-8 group">
+<div class="relative h-[500px] rounded-xl overflow-hidden editorial-shadow">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Cinematic wide shot of a futuristic neon city street in the rain with soft bokeh lights and deep purple shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkRUa2bCaVTcbHcBDF-mlzd6Xf8lRhCax3BBJCI1edv_6ckko_oR0ZEBa5q1Tb_TTglSu7_oPNsqu4BWh5qnSdM-VmzhY9Pbs2o8OAUPowmghVel5J4sx_-Az0ybVhU8WMDgNwABomopc2tF_R9GGQRhWaw3UM7pGemcpVrudj3u126Ea1_NCg7tt42Pu-k8FTtXTNnPsaRFbnhzBO3WpJaDMHqThNUY2QavfOAreYD171oRc42oKbaTTEGhUIMVL4mSNttWXpCN4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-8 flex flex-col justify-end">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-full uppercase tracking-widest">Trending Video</span>
+<span class="text-white/70 text-xs">2.4M Views</span>
+</div>
+<h3 class="text-3xl font-headline font-bold text-white mb-2">The Future of Generative Motion</h3>
+<p class="text-white/80 max-w-lg mb-6">A deep dive into how AI is reshaping the cinematic landscape for independent filmmakers.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young creative professional with short hair, wearing stylish glasses, in soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3vh7m_cub6bXOQBlQWFZ7E8FkHT-cnfq6b-36MUj2TyOVM4tJ26--kz_8xmPNS0o3vklH7pynB0v6OEN_fDgd7q2gNHPAAiwpNZ6CIXiUFcPyc_lmh3Q7mZrQT7tfy2en_EeK0KVIyHnnIFEKLmzUYJYlQvqoDJLLJuQdervq_zZaIniELa8NZd5Cc6lVAQJ5gIpIbjxI5QCdDxtvPS5ZfOycVKdOUQ1mYPpT0V802gxSzCuDOEQGo1VzbzMdeNAEMRDBnSawlYQ"/>
+</div>
+<span class="text-white font-medium">Elena Vance</span>
+</div>
+<button class="bg-white/20 backdrop-blur-md text-white px-6 py-2 rounded-lg font-bold hover:bg-white hover:text-primary transition-all">Watch Now</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Article Card -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="flex-1 bg-surface-container-low p-6 rounded-xl group cursor-pointer hover:bg-white transition-all editorial-shadow">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="text-xs font-label text-on-surface-variant tracking-tighter">8 MIN READ</span>
+</div>
+<h4 class="font-headline text-xl font-bold mb-3 group-hover:text-primary transition-colors">Digital Scarcity in 2024</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3">Exploring why physical-digital hybrids are becoming the new gold standard for collectors.</p>
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary">$12.00</span>
+<span class="text-xs text-on-surface-variant line-through">$25.00</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-low p-6 rounded-xl group cursor-pointer hover:bg-white transition-all editorial-shadow">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-secondary">folder_zip</span>
+<span class="text-xs font-label text-on-surface-variant tracking-tighter">1.2 GB</span>
+</div>
+<h4 class="font-headline text-xl font-bold mb-3 group-hover:text-secondary transition-colors">Brutalist UI Kit v2.0</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3">A massive collection of raw, unpolished components for high-impact web design.</p>
+<div class="flex items-center gap-2">
+<span class="font-bold text-secondary">$49.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="px-8 py-24">
+<div class="max-w-[1200px] mx-auto bg-primary text-white rounded-[2rem] overflow-hidden relative">
+<div class="absolute inset-0 opacity-10">
+<img class="w-full h-full object-cover" data-alt="Dense pattern of geometric shapes and digital grids overlapping in a dark violet monochromatic style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWCAQFNLfXLi9Qe4JgAjg4xk1MvyntfUXSJHlv73aLCarb1KASIccN1XzKBTw3o-xmZMo8OCcj4Ta6HdtPLkoAjvk4rDIotMknpF2NNYOG3NcPSSi4ZVAiS30GODcSwV9fwzrl3tklGPuWv05wR6WKMzfffgGLNUtk6yGnQh8xmGO55OhGLpbbUCTWmWdxkmJDFdkxTG5Lvh6qC_MSgi5GG3ITBI-4IAJXO0ANRo_kCu4vHRvAMnTAGQ2NMzC6wVuspAgX7cJYIXo"/>
+</div>
+<div class="relative z-10 p-12 lg:p-24 flex flex-col items-center text-center">
+<h2 class="font-headline text-4xl lg:text-6xl font-extrabold mb-8 max-w-3xl leading-tight">Ready to Elevate Your Creative Output?</h2>
+<p class="text-primary-fixed/80 text-lg lg:text-xl mb-12 max-w-xl">Join a global network of elite creators and collectors who value quality over noise.</p>
+<div class="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+<button class="bg-white text-primary px-10 py-5 rounded-xl font-bold text-lg hover:bg-primary-fixed transition-all editorial-shadow">Create Your Account</button>
+<button class="bg-transparent border border-white/30 text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white/10 transition-all">Explore the Marketplace</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-200/10 font-['Plus_Jakarta_Sans']">
+<div class="w-full py-16 px-8 max-w-[1920px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 mb-12">
+<div>
+<div class="text-2xl font-black text-slate-900 mb-4">The Atelier</div>
+<p class="text-slate-500 text-sm max-w-xs">The world's premier destination for high-fidelity digital assets and creator culture.</p>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-900">Platform</span>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Explore</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Creators</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Marketplace</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-900">Resources</span>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">API</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Contact</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Help Center</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-900">Legal</span>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Terms</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Privacy</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors text-sm" href="#">Cookies</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-900">Stay Updated</span>
+<div class="flex gap-2">
+<input class="bg-white border-none focus:ring-1 focus:ring-primary rounded-lg text-sm w-32" placeholder="Email" type="email"/>
+<button class="bg-on-surface text-white p-2 rounded-lg material-symbols-outlined">arrow_forward</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-slate-200 text-xs uppercase tracking-widest text-slate-400">
+<span>© 2024 The Digital Atelier. All rights reserved.</span>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-violet-600 transition-colors" href="#">Twitter</a>
+<a class="hover:text-violet-600 transition-colors" href="#">Instagram</a>
+<a class="hover:text-violet-600 transition-colors" href="#">LinkedIn</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

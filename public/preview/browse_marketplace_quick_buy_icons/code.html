@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-highest": "#dde2f6",
+                        "surface-dim": "#d4d9ed",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb68b",
+                        "secondary-fixed-dim": "#cabeff",
+                        "inverse-primary": "#cabeff",
+                        "on-tertiary-fixed": "#321300",
+                        "on-surface": "#151b29",
+                        "surface-container": "#e9edff",
+                        "primary-fixed": "#e6deff",
+                        "tertiary-fixed": "#ffdbc8",
+                        "background": "#faf8ff",
+                        "on-surface-variant": "#484554",
+                        "on-tertiary-fixed-variant": "#743400",
+                        "primary-fixed-dim": "#cabeff",
+                        "tertiary": "#713300",
+                        "secondary-container": "#c4b8fd",
+                        "surface": "#faf8ff",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2a303f",
+                        "on-secondary-fixed": "#1c104c",
+                        "outline": "#797586",
+                        "outline-variant": "#c9c4d7",
+                        "on-primary-fixed": "#1c0062",
+                        "surface-bright": "#faf8ff",
+                        "primary-container": "#5d3fd3",
+                        "on-secondary-container": "#504682",
+                        "primary": "#451ebb",
+                        "secondary": "#605693",
+                        "on-secondary-fixed-variant": "#483e7a",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#954500",
+                        "surface-tint": "#6042d6",
+                        "on-primary-container": "#d8ceff",
+                        "surface-container-low": "#f1f3ff",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-background": "#151b29",
+                        "surface-container-high": "#e2e8fc",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#4723be",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#e6deff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#ffc9ab",
+                        "surface-variant": "#dde2f6"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+  .quick-buy-btn:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-8px);
+  }
+</style></head>
+<body class="bg-background text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-950/70 backdrop-blur-xl shadow-sm font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">The Atelier</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 transition-all duration-300 ease-in-out" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 transition-all duration-300 ease-in-out" href="#">Creators</a>
+<a class="text-violet-600 dark:text-violet-400 font-semibold border-b-2 border-violet-600 transition-all duration-300 ease-in-out" href="#">Marketplace</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search marketplace..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-200/50 rounded-full transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">shopping_cart</span>
+</button>
+<button class="p-2 hover:bg-slate-200/50 rounded-full transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<button class="text-sm font-medium px-4 py-2 text-slate-600 hover:text-slate-900">Sign In</button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transition-all active:scale-95">Open Shop</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-8 max-w-[1920px] mx-auto flex gap-8">
+<!-- Filter Sidebar -->
+<aside class="hidden lg:flex flex-col w-72 shrink-0 gap-8">
+<section class="flex flex-col gap-6">
+<div>
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-4 font-label">Category</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 w-5 h-5" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Art &amp; Illustration</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary/20 w-5 h-5" type="checkbox"/>
+<span class="text-sm text-on-surface transition-colors font-medium">Technology</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 w-5 h-5" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Finance</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 w-5 h-5" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Lifestyle</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-4 font-label">Content Type</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-semibold">Article</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-medium hover:bg-surface-dim transition-colors">Video</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-medium hover:bg-surface-dim transition-colors">File</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-medium hover:bg-surface-dim transition-colors">Template</button>
+</div>
+</div>
+<div>
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-4 font-label">Price Range</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-surface-container-low p-2 rounded-lg">
+<span class="text-[10px] text-outline block">Min</span>
+<input class="bg-transparent border-none p-0 text-sm font-medium focus:ring-0 w-full" type="text" value="$0"/>
+</div>
+<div class="w-2 h-px bg-outline-variant"></div>
+<div class="flex-1 bg-surface-container-low p-2 rounded-lg">
+<span class="text-[10px] text-outline block">Max</span>
+<input class="bg-transparent border-none p-0 text-sm font-medium focus:ring-0 w-full" type="text" value="$500"/>
+</div>
+</div>
+<div class="relative h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="absolute left-0 top-0 h-full bg-primary w-2/3"></div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-4 font-label">Rating</h3>
+<div class="flex flex-col gap-2">
+<button class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-on-surface transition-colors group">
+<div class="flex text-amber-500">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<span>&amp; Up</span>
+</button>
+</div>
+</div>
+</section>
+</aside>
+<!-- Discovery Content Area -->
+<div class="flex-1 flex flex-col gap-8">
+<!-- Header & Toolbar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="text-xs font-bold uppercase tracking-widest text-primary font-label">Discovery</span>
+<h1 class="text-4xl font-extrabold tracking-tight mt-1">Creator Marketplace</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border-none shadow-sm rounded-lg pl-4 pr-10 py-2.5 text-sm font-medium text-on-surface-variant focus:ring-2 focus:ring-primary/20 cursor-pointer">
+<option>Newest First</option>
+<option selected="">Most Popular</option>
+<option>Highest Rated</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<div class="flex bg-surface-container-low p-1 rounded-lg">
+<button class="p-1.5 rounded-md bg-white shadow-sm text-primary">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-1.5 rounded-md text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Abstract 3D Art" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="vibrant abstract 3d geometric shapes in shades of violet and deep blue with soft studio lighting and smooth textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUFgR8VOceyaEv5_EkH58M5c6_AqdjdNyrv0j5Q3EThwIQGIt_zUd_f3fHB6cqakDdSWVqjsSDnRa7ZwOroevx2LHSGPHcoQrAhKNfZrmaZM0zKS9ytJJckg0QKcbiIzL1XYKop-IMM4E69gRXCurqFnuQelMecKvGTceLcrF5Ryor7cD4o0Hw3uWH078FYcgnZ1y8SRRsUZ-wm6mHYlIviIhuLpuqixRk80t5yDSQv_lDt8QejmitElnh0fj8ngT47254T6CTLg0"/>
+<div class="absolute top-3 left-3 bg-white/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-primary">3D Asset</div>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-2">
+<img alt="Creator" class="w-6 h-6 rounded-full" data-alt="professional headshot of a young male designer with a friendly expression in a minimal studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKc_hFF9PwsL3JKmaLDOXk4qxpPWG7KSF250kkomfk5njYbuLcF6srHWuicpbNKONgG5DNQ9gV_0Ek8BBiv212mgdZCYaRtHbYE4x_qF3GC9n4c1qe8OOnuY2r1IIzFe8tbr9z4BGNdPTzVSf8C3SNHSFsLDBODhP_uxwgo-zymPBNn00dttfx7Fzd08JIU7LycvJSaLtZgTkRqhqH4h9tjzbKLyjSg7hWtzTHIbITTf0zk_r4J5i8B3qmu1BXEFyDXkUUsMYjFxI"/>
+<span class="text-xs font-medium text-outline">Studio Archi</span>
+</div>
+<h3 class="font-bold text-lg text-on-surface line-clamp-1 mb-1">Ethereal Shapes Pack v2</h3>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9</span>
+<span class="text-[10px] text-outline">(128 reviews)</span>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/10 flex items-center">
+<span class="text-xl font-extrabold text-on-surface">$45.00</span>
+<div class="relative quick-buy-btn">
+<button class="p-2 bg-amber-50 rounded-lg text-amber-600 hover:bg-amber-500 hover:text-white transition-all mr-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+<div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-[10px] rounded whitespace-nowrap opacity-0 visibility-hidden transition-all duration-200 pointer-events-none z-10">
+    Buy now with 1-click
+    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"></div>
+</div>
+</div><button class="p-2 bg-surface-container-high rounded-lg text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Tech Setup" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="high-tech workspace with multiple monitors displaying lines of code in a dark room with purple neon accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAluskNNYzhtdToswaaO53Xy-aAyrgDVlyJshJRb1SpKdOFwGl2KR8z6Jcz3ZmA0aktJE3S8lrITTqO29s5cGqnf0pBfDO-mIeTRKyoeYyoPMcOrx0EaHdb75Yn6hrZEO6Ia5fXtk2CAsn50UNWSfjf9hw6LYN9XVDSQfN4jwmpRqQF3YIIfDHtXNouS49aAOvnD5uBZpix06bM-kRXNJ1jse0E1sP9CSX7RGQv65VGJCPuK4OSTl2F7UL-Hm-S0uwKESlYT_PfgMI"/>
+<div class="absolute top-3 left-3 bg-white/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-primary">Code Template</div>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-2">
+<img alt="Creator" class="w-6 h-6 rounded-full" data-alt="cheerful woman with glasses in a professional brightly lit office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHBBuH7kvnylyvmJ5cAZKk3IEaAebf8BUbnZ3Yjqimr5ClmIa1te0AUBf_vgFF66aNgwAZ5od-VpTyTcq3kPX2cHIHEVm7CqSv-af7RfSk9wRp_trLmzhLXGaN1gFAVf5PD8fqOTharKmqkt7VzdpZEVYMKVx9R7YoUOTzJYS8G1-mpE1-rongqw36bi6vJRer4Vcj861SLGfdyhybKsNI9vqXVDGhwOOwuN29Pm0MNDi3NZZgizq52tN15XY_M_a4QU__pZgyRXo"/>
+<span class="text-xs font-medium text-outline">CodeWithSarah</span>
+</div>
+<h3 class="font-bold text-lg text-on-surface line-clamp-1 mb-1">React Dashboard Pro Kit</h3>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.8</span>
+<span class="text-[10px] text-outline">(342 reviews)</span>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/10 flex items-center">
+<span class="text-xl font-extrabold text-on-surface">$89.00</span>
+<div class="relative quick-buy-btn">
+<button class="p-2 bg-amber-50 rounded-lg text-amber-600 hover:bg-amber-500 hover:text-white transition-all mr-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+<div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-[10px] rounded whitespace-nowrap opacity-0 visibility-hidden transition-all duration-200 pointer-events-none z-10">
+    Buy now with 1-click
+    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"></div>
+</div>
+</div><button class="p-2 bg-surface-container-high rounded-lg text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Finance Chart" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="clean financial charts and data visualizations on a white tablet screen with a cup of coffee nearby on a marble desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsRyqADowdNTnFOwhzOxEglSC6uPFsT4POzgH3WaP8BV3D3k-_pHjg-caYHKQ7ySwZswMM3H-xd4dxrPjEEY6UjwMT2abkLdJWvhR_Wwt1Hl21MJ5pl_orIv3cRViwJeRnG8UCBCZcX8h_mF1u4vdI9B8ZqCkqSMLXN_T8MmRSoINNJtcOmgtGUfr_aNPfm6T6LUi3DT44OfnV_TOs_YJNOQo5o_Uk6HTvQS82JXYnnBBBNM9cDVX_3men9Ls3RosUsidjYZr9sKc"/>
+<div class="absolute top-3 left-3 bg-white/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-primary">PDF Guide</div>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-2">
+<img alt="Creator" class="w-6 h-6 rounded-full" data-alt="man in a sharp business suit with a confident expression against a neutral grey wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHNcrbTkbp7jgTxJikyvdGOnEPOmXHrx-WT9CyoZjxYkI4fvTL2mjOArl3kNIeI3_LSZXcG2msT3OG0MVMvAhUljzeECUh3A4eFmmk91juymX77Lz_1AxdeUmRLq5C9Qg4ORx2QwTXEGgOvGSvm9m9JbC75HTNeKDoLi27ErssroVmxjr6Y534QllQsM15VpqMmqRqw420Xf5ze42yTX6LAQNwajVIgH-DNkig_Y_lPwhei4FkzdxhpUEUiKt0j2AguZnthTq9lTU"/>
+<span class="text-xs font-medium text-outline">MarketInsider</span>
+</div>
+<h3 class="font-bold text-lg text-on-surface line-clamp-1 mb-1">2024 Investment Roadmap</h3>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">5.0</span>
+<span class="text-[10px] text-outline">(56 reviews)</span>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/10 flex items-center">
+<span class="text-xl font-extrabold text-on-surface">$12.50</span>
+<div class="relative quick-buy-btn">
+<button class="p-2 bg-amber-50 rounded-lg text-amber-600 hover:bg-amber-500 hover:text-white transition-all mr-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+<div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-[10px] rounded whitespace-nowrap opacity-0 visibility-hidden transition-all duration-200 pointer-events-none z-10">
+    Buy now with 1-click
+    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"></div>
+</div>
+</div><button class="p-2 bg-surface-container-high rounded-lg text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 (Free) -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col border border-primary/5">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Mobile App" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="macro shot of a modern smartphone screen showing a minimalist colorful application UI design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl0th4yZ6XyTmm9OZGcGk937erZpu-J-6U6caQzP15jKiQoexl7CSfnAglzjfx9zD7Z78yA9C3IaQ_QtNfEY8Y4k0UrpWJypFM_AaWLISWtDP5mgSsoKwb7_uyCoZCNfWPGWetDValbyeqKCCxUT1SjjEjdHpn8f-zJFeNpK0K_ayGoSTPG_4j5Y9aXqPAghJ1kYdBEk36pT40dmvKLAEzuN3tA6kOzrFJZKDzo9oDKqVAKIwLLAHIspILld_9cHD-oRCV4e7henU"/>
+<div class="absolute top-3 left-3 bg-primary text-white px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Free Asset</div>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-2">
+<img alt="Creator" class="w-6 h-6 rounded-full" data-alt="professional woman artist with an apron in a sunlit art studio with paintings in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT-dk2GPG1jqIwXyBUeSlutx0vjko1F3N7wU9cJm1bagZAniVB4OuXZe8amqvIQW5DrLY6ZknUHpboe4lCuxBiiaqGNmLiCHIF9qZ-HbHUQDt4xtprL-EZ3D_nrnfOmby8V-fDV17yp6n7o8y1W1OvBEKYri6bSVn28sltXkBNktiRHGds_eL8B52dXjzm0vzeqW_PRkB-NzjhdyjA1Mev64K705me__It7d9mKKGExNEc-1xQbrJZ3PWfz2VjH_p4L7u2ik4aIbU"/>
+<span class="text-xs font-medium text-outline">DesignLabs</span>
+</div>
+<h3 class="font-bold text-lg text-on-surface line-clamp-1 mb-1">Minimal Icon Set (100+)</h3>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.7</span>
+<span class="text-[10px] text-outline">(1.2k reviews)</span>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/10 flex items-center">
+<span class="text-xl font-extrabold text-primary">FREE</span>
+<div class="relative quick-buy-btn">
+<button class="p-2 bg-amber-50 rounded-lg text-amber-600 hover:bg-amber-500 hover:text-white transition-all mr-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+<div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-[10px] rounded whitespace-nowrap opacity-0 visibility-hidden transition-all duration-200 pointer-events-none z-10">
+    Buy now with 1-click
+    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"></div>
+</div>
+</div><button class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:shadow-lg hover:shadow-primary/20 transition-all">
+                                DOWNLOAD
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State (Hidden by default, shown for demonstration if grid was empty) -->
+<div class="hidden flex flex-col items-center justify-center py-24 text-center">
+<div class="w-24 h-24 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-5xl text-outline-variant">search_off</span>
+</div>
+<h2 class="text-2xl font-bold mb-2">No creators found</h2>
+<p class="text-on-surface-variant max-w-sm mb-8">We couldn't find any results matching your current filters. Try adjusting your search or clearing some tags.</p>
+<button class="bg-primary text-white px-8 py-3 rounded-lg font-bold shadow-md hover:bg-primary-container transition-all">Clear All Filters</button>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex items-center justify-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors font-medium">3</button>
+<span class="px-2 text-outline">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors font-medium">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 bg-slate-50 dark:bg-slate-950 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest">
+<div class="flex flex-col md:flex-row justify-between items-center border-t border-slate-200/10 pt-12 max-w-[1920px] mx-auto">
+<div class="flex flex-col gap-2 items-center md:items-start mb-8 md:mb-0">
+<span class="text-slate-900 dark:text-slate-50 font-black text-base">THE DIGITAL ATELIER</span>
+<p class="text-slate-400 normal-case tracking-normal">© 2024 The Digital Atelier. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-slate-400 hover:text-violet-600 transition-colors" href="#">Terms</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors" href="#">Privacy</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors" href="#">Cookies</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors" href="#">Contact</a>
+<a class="text-slate-400 hover:text-violet-600 transition-colors" href="#">API</a>
+</div>
+<div class="mt-8 md:mt-0 flex gap-4">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">public</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">alternate_email</span>
+</button>
+</div>
+</div>
+</footer>
+</body></html>

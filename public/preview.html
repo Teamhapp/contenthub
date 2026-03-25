@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Digital Atelier — Live Design Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0e0e1a;
+            --sidebar-bg: rgba(20, 20, 35, 0.95);
+            --text-main: #f0eef6;
+            --text-muted: #8b85a0;
+            --primary: #451ebb;
+            --primary-container: #5d3fd3;
+            --primary-light: #cabeff;
+            --primary-glow: rgba(69, 30, 187, 0.25);
+            --surface: #1a1a2e;
+            --surface-low: #151525;
+            --border: rgba(202, 190, 255, 0.08);
+            --border-active: rgba(93, 63, 211, 0.5);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(69, 30, 187, 0.15), transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(93, 63, 211, 0.1), transparent 50%);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+        /* ==================== SIDEBAR ==================== */
+        .sidebar {
+            width: 300px;
+            min-width: 300px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(24px);
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-header h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #cabeff, #e6deff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar-header p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .menu-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+        }
+
+        .menu-container::-webkit-scrollbar { width: 4px; }
+        .menu-container::-webkit-scrollbar-track { background: transparent; }
+        .menu-container::-webkit-scrollbar-thumb { background: rgba(202, 190, 255, 0.15); border-radius: 10px; }
+
+        .menu-group-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            padding: 16px 12px 8px;
+        }
+
+        .menu-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .menu-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            text-align: left;
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .menu-btn:hover {
+            background: rgba(202, 190, 255, 0.06);
+            color: var(--text-main);
+        }
+
+        .menu-btn.active {
+            background: var(--primary-glow);
+            color: var(--primary-light);
+            border-color: var(--border-active);
+            font-weight: 600;
+        }
+
+        .menu-btn .material-symbols-outlined {
+            opacity: 0.5;
+            font-size: 18px;
+        }
+        .menu-btn.active .material-symbols-outlined {
+            opacity: 1;
+        }
+
+        .role-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            display: inline-block;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .role-dot.public { background: #22c55e; }
+        .role-dot.customer { background: #3b82f6; }
+        .role-dot.creator { background: #d946ef; }
+        .role-dot.admin { background: #f59e0b; }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .legend-item {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 0.65rem; color: var(--text-muted);
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .top-bar {
+            height: 56px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            background: rgba(14, 14, 26, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 5;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .top-bar-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .top-bar-route {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--surface);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        .device-toggles {
+            display: flex;
+            background: var(--surface);
+            padding: 3px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .device-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .device-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
+            color: white;
+            box-shadow: 0 2px 12px rgba(69, 30, 187, 0.4);
+        }
+
+        /* ==================== IFRAME ==================== */
+        .iframe-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            background: radial-gradient(circle at center, rgba(93, 63, 211, 0.03), transparent 70%);
+        }
+
+        .iframe-wrapper {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(202, 190, 255, 0.1),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(69, 30, 187, 0.08);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-radius 0.4s ease;
+        }
+
+        .iframe-wrapper.mobile {
+            width: 375px;
+            height: 812px;
+            border-radius: 40px;
+            border: 8px solid #1a1a2e;
+        }
+
+        .iframe-wrapper.tablet {
+            width: 768px;
+            height: 1024px;
+            border-radius: 20px;
+            border: 6px solid #1a1a2e;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            display: block;
+        }
+
+        /* ==================== MOBILE RESPONSIVE ==================== */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            color: var(--text-main);
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle { display: flex; align-items: center; }
+            .sidebar {
+                position: absolute;
+                height: 100%;
+                transform: translateX(-100%);
+                box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
+            }
+            .sidebar.open { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>The Digital Atelier</h1>
+            <p>Live Design Preview</p>
+        </div>
+        <div class="menu-container">
+            <div class="menu-group-label">Public Pages</div>
+            <ul class="menu-list" id="menu-public"></ul>
+
+            <div class="menu-group-label">Customer Dashboard</div>
+            <ul class="menu-list" id="menu-customer"></ul>
+
+            <div class="menu-group-label">Creator Studio</div>
+            <ul class="menu-list" id="menu-creator"></ul>
+
+            <div class="menu-group-label">Admin Panel</div>
+            <ul class="menu-list" id="menu-admin"></ul>
+
+            <div class="menu-group-label">Mobile Views</div>
+            <ul class="menu-list" id="menu-mobile"></ul>
+        </div>
+        <div class="sidebar-footer">
+            <div class="legend-item"><span class="role-dot public"></span> Public</div>
+            <div class="legend-item"><span class="role-dot customer"></span> Customer</div>
+            <div class="legend-item"><span class="role-dot creator"></span> Creator</div>
+            <div class="legend-item"><span class="role-dot admin"></span> Admin</div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="menu-toggle" id="menu-toggle">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="top-bar-title" id="current-title">Select a page</div>
+                <div class="top-bar-route" id="current-route"></div>
+            </div>
+            <div class="device-toggles">
+                <button class="device-btn active" data-view="desktop">
+                    <span class="material-symbols-outlined" style="font-size:16px">monitor</span> Desktop
+                </button>
+                <button class="device-btn" data-view="tablet">
+                    <span class="material-symbols-outlined" style="font-size:16px">tablet</span> Tablet
+                </button>
+                <button class="device-btn" data-view="mobile">
+                    <span class="material-symbols-outlined" style="font-size:16px">phone_iphone</span> Mobile
+                </button>
+            </div>
+        </header>
+
+        <div class="iframe-container">
+            <div class="iframe-wrapper" id="iframe-wrapper">
+                <iframe id="preview-iframe" title="Live Preview"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const pages = [
+            // Public
+            {
+                group: "public", role: "public",
+                title: "Home Page",
+                route: "/",
+                icon: "home",
+                dir: "home_page_the_atelier"
+            },
+            {
+                group: "public", role: "public",
+                title: "Browse Marketplace",
+                route: "/browse",
+                icon: "storefront",
+                dir: "browse_content_the_atelier"
+            },
+            {
+                group: "public", role: "public",
+                title: "Browse — Quick Buy",
+                route: "/browse (variant)",
+                icon: "shopping_bag",
+                dir: "browse_marketplace_quick_buy_icons"
+            },
+            {
+                group: "public", role: "public",
+                title: "Content Detail",
+                route: "/browse/[contentId]",
+                icon: "visibility",
+                dir: "content_detail_architectural_glass_textures"
+            },
+            {
+                group: "public", role: "public",
+                title: "Content — One-Click Buy",
+                route: "/browse/[contentId] (variant)",
+                icon: "bolt",
+                dir: "content_detail_one_click_purchase_enabled"
+            },
+            {
+                group: "public", role: "public",
+                title: "Purchase Success",
+                route: "/checkout/success",
+                icon: "check_circle",
+                dir: "one_click_purchase_success"
+            },
+
+            // Customer
+            {
+                group: "customer", role: "customer",
+                title: "Personalized Feed",
+                route: "/dashboard/feed",
+                icon: "rss_feed",
+                dir: "your_personalized_feed"
+            },
+            {
+                group: "customer", role: "customer",
+                title: "My Library",
+                route: "/dashboard/library",
+                icon: "folder_open",
+                dir: "customer_library"
+            },
+            {
+                group: "customer", role: "customer",
+                title: "Checkout & Payment",
+                route: "/checkout",
+                icon: "shopping_cart",
+                dir: "secure_checkout_payment"
+            },
+
+            // Creator
+            {
+                group: "creator", role: "creator",
+                title: "Studio Dashboard",
+                route: "/creator",
+                icon: "dashboard",
+                dir: "creator_studio_dashboard_the_atelier"
+            },
+            {
+                group: "creator", role: "creator",
+                title: "Content Editor",
+                route: "/creator/content/new",
+                icon: "edit_note",
+                dir: "creator_studio_new_content_editor"
+            },
+
+            // Admin
+            {
+                group: "admin", role: "admin",
+                title: "Moderation Queue",
+                route: "/admin/content",
+                icon: "shield",
+                dir: "admin_moderation_queue"
+            },
+
+            // Mobile
+            {
+                group: "mobile", role: "public",
+                title: "Mobile — Home",
+                route: "/ (mobile)",
+                icon: "phone_iphone",
+                dir: "mobile_home_page"
+            },
+            {
+                group: "mobile", role: "public",
+                title: "Mobile — Marketplace",
+                route: "/browse (mobile)",
+                icon: "phone_iphone",
+                dir: "mobile_marketplace"
+            },
+            {
+                group: "mobile", role: "public",
+                title: "Mobile — Content Detail",
+                route: "/browse/[id] (mobile)",
+                icon: "phone_iphone",
+                dir: "mobile_content_detail"
+            },
+            {
+                group: "mobile", role: "customer",
+                title: "Mobile — My Library",
+                route: "/dashboard/library (mobile)",
+                icon: "phone_iphone",
+                dir: "mobile_my_library"
+            },
+        ];
+
+        const menuGroups = {
+            public: document.getElementById('menu-public'),
+            customer: document.getElementById('menu-customer'),
+            creator: document.getElementById('menu-creator'),
+            admin: document.getElementById('menu-admin'),
+            mobile: document.getElementById('menu-mobile'),
+        };
+
+        const iframe = document.getElementById('preview-iframe');
+        const currentTitle = document.getElementById('current-title');
+        const currentRoute = document.getElementById('current-route');
+        const sidebar = document.getElementById('sidebar');
+        const iframeWrapper = document.getElementById('iframe-wrapper');
+        let currentActiveBtn = null;
+
+        pages.forEach((page, index) => {
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.className = 'menu-btn';
+            btn.innerHTML = `
+                <span class="material-symbols-outlined">${page.icon}</span>
+                ${page.title}
+                <span class="role-dot ${page.role}"></span>
+            `;
+
+            btn.addEventListener('click', () => {
+                if (currentActiveBtn) currentActiveBtn.classList.remove('active');
+                btn.classList.add('active');
+                currentActiveBtn = btn;
+
+                iframe.src = `preview/${page.dir}/code.html`;
+                currentTitle.textContent = page.title;
+                currentRoute.textContent = page.route;
+
+                // Auto-switch to mobile view for mobile pages
+                if (page.group === 'mobile') {
+                    setDeviceView('mobile');
+                }
+
+                if (window.innerWidth <= 900) {
+                    sidebar.classList.remove('open');
+                }
+            });
+
+            li.appendChild(btn);
+            menuGroups[page.group].appendChild(li);
+
+            if (index === 0) btn.click();
+        });
+
+        // Device Toggles
+        const deviceBtns = document.querySelectorAll('.device-btn');
+
+        function setDeviceView(view) {
+            deviceBtns.forEach(b => {
+                b.classList.remove('active');
+                if (b.getAttribute('data-view') === view) b.classList.add('active');
+            });
+            iframeWrapper.className = 'iframe-wrapper';
+            if (view !== 'desktop') iframeWrapper.classList.add(view);
+        }
+
+        deviceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setDeviceView(btn.getAttribute('data-view'));
+            });
+        });
+
+        // Mobile sidebar toggle
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

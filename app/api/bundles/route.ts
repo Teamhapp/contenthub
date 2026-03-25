@@ -5,10 +5,24 @@ import Content from "@/models/Content";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     await dbConnect();
-    const bundles = await Bundle.find({ status: "active" })
+    const session = await getServerSession(authOptions);
+
+    // If authenticated creator, show all their bundles (including inactive)
+    // Otherwise, show only active bundles
+    const filter: any = {};
+    const url = new URL(req.url);
+    const creatorOnly = url.searchParams.get("mine") === "true";
+
+    if (creatorOnly && session?.user?.id) {
+      filter.creator = session.user.id;
+    } else {
+      filter.status = "active";
+    }
+
+    const bundles = await Bundle.find(filter)
       .populate("creator", "name image")
       .populate("contents", "title type price thumbnailUrl")
       .sort({ createdAt: -1 });
