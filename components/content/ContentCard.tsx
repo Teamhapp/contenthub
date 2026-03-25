@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { formatPrice } from "@/lib/constants";
 import { ContentTypeIcon, IconStar, IconEye } from "@/components/ui/Icons";
+import WishlistButton from "@/components/ui/WishlistButton";
 
 interface ContentCardProps {
   content: {
@@ -52,8 +53,9 @@ export default function ContentCard({ content }: ContentCardProps) {
               {content.type}
             </span>
           </div>
-          {/* Price tag */}
-          <div className="absolute top-3 right-3">
+          {/* Price tag + Wishlist */}
+          <div className="absolute top-3 right-3 flex items-center gap-1.5">
+            <WishlistButton contentId={content._id} size="sm" />
             <span className="badge bg-white/90 backdrop-blur-sm text-surface-900 font-bold shadow-soft-sm border-0">
               {formatPrice(content.price)}
             </span>

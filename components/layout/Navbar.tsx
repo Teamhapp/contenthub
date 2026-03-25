@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import { IconCart, IconMenu, IconX, IconChevronDown, IconUser, IconSettings } from "@/components/ui/Icons";
+import NotificationBell from "@/components/ui/NotificationBell";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -68,6 +69,7 @@ export default function Navbar() {
                 <Link href="/checkout" className="relative btn-ghost p-2">
                   <IconCart className="w-5 h-5" />
                 </Link>
+                <NotificationBell />
                 <Link href="/dashboard" className="btn-ghost text-surface-600">
                   Library
                 </Link>
