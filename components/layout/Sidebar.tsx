@@ -14,13 +14,11 @@ export default function Sidebar({ links, title }: { links: SidebarLink[]; title:
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-white/80 backdrop-blur-sm border-r border-surface-200/40 min-h-[calc(100vh-4rem)] hidden lg:flex flex-col">
+    <aside className="w-64 bg-[#faf8ff]/80 backdrop-blur-sm border-r border-[#e2e8fc]/40 min-h-[calc(100vh-3.5rem)] hidden lg:flex flex-col font-['Plus_Jakarta_Sans']">
       <div className="p-6 flex-1">
-        <div className="flex items-center gap-2.5 mb-7">
-          <div className="w-7 h-7 rounded-lg hero-gradient flex items-center justify-center">
-            <span className="text-white text-[10px] font-extrabold">C</span>
-          </div>
-          <h2 className="text-sm font-display font-bold text-surface-900 tracking-tight">{title}</h2>
+        <div className="mb-6">
+          <h2 className="text-base font-bold text-[#151b29] tracking-tight">{title}</h2>
+          <p className="text-[10px] text-[#797586] mt-0.5 uppercase tracking-[0.1em] font-bold">Platform Controller</p>
         </div>
 
         <nav className="space-y-0.5">
@@ -30,13 +28,13 @@ export default function Sidebar({ links, title }: { links: SidebarLink[]; title:
               <Link
                 key={link.href}
                 href={link.href}
-                className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative ${
+                className={`group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 relative ${
                   isActive
-                    ? "bg-brand-600 text-white shadow-glow-brand"
-                    : "text-surface-500 hover:bg-surface-50 hover:text-surface-800"
+                    ? "bg-[#451ebb] text-white shadow-[0_4px_14px_0_rgba(69,30,187,0.35)]"
+                    : "text-[#484554] hover:bg-[#f1f3ff] hover:text-[#151b29]"
                 }`}
               >
-                <span className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-white" : "text-surface-400 group-hover:text-surface-600"}`}>
+                <span className={`w-5 h-5 flex-shrink-0 transition-colors flex items-center justify-center ${isActive ? "text-white" : "text-[#797586] group-hover:text-[#484554]"}`}>
                   {link.icon}
                 </span>
                 {link.label}
@@ -49,12 +47,11 @@ export default function Sidebar({ links, title }: { links: SidebarLink[]; title:
         </nav>
       </div>
 
-      {/* Bottom section */}
       <div className="p-6 pt-0">
-        <div className="divider-gradient mb-4" />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#c9c4d7]/30 to-transparent mb-4" />
         <div className="px-3 py-2">
-          <p className="text-[10px] font-medium text-surface-400 uppercase tracking-widest">ContentHub</p>
-          <p className="text-[10px] text-surface-300 mt-0.5">v1.0 Beta</p>
+          <p className="text-[10px] font-bold text-[#797586] uppercase tracking-[0.1em]">The Digital Atelier</p>
+          <p className="text-[10px] text-[#c9c4d7] mt-0.5">v1.0</p>
         </div>
       </div>
     </aside>

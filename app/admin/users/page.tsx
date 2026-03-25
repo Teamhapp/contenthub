@@ -44,12 +44,12 @@ export default function AdminUsersPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">User Management</h1>
-        <p className="text-surface-500 mt-1">Manage user accounts and permissions.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">User Management</h1>
+        <p className="text-[#797586] mt-1">Manage user accounts and permissions.</p>
       </div>
 
       <div className="relative max-w-md">
-        <IconSearch className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-surface-400" />
+        <IconSearch className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#797586]" />
         <input
           type="text"
           placeholder="Search by name or email..."
@@ -84,8 +84,8 @@ export default function AdminUsersPage() {
                         {user.name?.charAt(0)?.toUpperCase()}
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-surface-900">{user.name}</p>
-                        <p className="text-xs text-surface-400">{user.email}</p>
+                        <p className="font-medium text-sm text-[#151b29]">{user.name}</p>
+                        <p className="text-xs text-[#797586]">{user.email}</p>
                       </div>
                     </div>
                   </td>
@@ -113,7 +113,7 @@ export default function AdminUsersPage() {
                       </span>
                     )}
                   </td>
-                  <td className="text-surface-500">
+                  <td className="text-[#797586]">
                     {new Date(user.createdAt).toLocaleDateString()}
                   </td>
                   <td>
@@ -139,8 +139,8 @@ export default function AdminUsersPage() {
               onClick={() => setPage(p)}
               className={`px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all ${
                 p === page
-                  ? "bg-brand-600 text-white shadow-soft-md"
-                  : "bg-white border border-surface-200 text-surface-600 hover:bg-surface-50 hover:border-surface-300"
+                  ? "bg-[#451ebb] text-white shadow-soft-md"
+                  : "bg-white border border-[#e2e8fc] text-[#484554] hover:bg-[#faf8ff] hover:border-surface-300"
               }`}
             >
               {p}

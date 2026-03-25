@@ -57,8 +57,8 @@ export default function AdminContentPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">Content Moderation</h1>
-        <p className="text-surface-500 mt-1">Review and manage submitted content.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Content Moderation</h1>
+        <p className="text-[#797586] mt-1">Review and manage submitted content.</p>
       </div>
 
       <div className="flex gap-2 flex-wrap">
@@ -68,8 +68,8 @@ export default function AdminContentPage() {
             onClick={() => setFilter(s)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
               filter === s
-                ? "bg-brand-600 text-white shadow-soft-md"
-                : "bg-white border border-surface-200 text-surface-600 hover:bg-surface-50 hover:border-surface-300"
+                ? "bg-[#451ebb] text-white shadow-soft-md"
+                : "bg-white border border-[#e2e8fc] text-[#484554] hover:bg-[#faf8ff] hover:border-surface-300"
             }`}
           >
             {filterLabels[s]}
@@ -84,8 +84,8 @@ export default function AdminContentPage() {
           </div>
         ) : contents.length === 0 ? (
           <div className="text-center py-16">
-            <IconArticle className="w-8 h-8 text-surface-300 mx-auto mb-2" />
-            <p className="text-surface-500">No content found.</p>
+            <IconArticle className="w-8 h-8 text-[#c9c4d7] mx-auto mb-2" />
+            <p className="text-[#797586]">No content found.</p>
           </div>
         ) : (
           <table className="table-premium">
@@ -104,22 +104,22 @@ export default function AdminContentPage() {
                 <tr key={c._id}>
                   <td>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-surface-100 flex items-center justify-center flex-shrink-0">
-                        <ContentTypeIcon type={c.type} className="w-4 h-4 text-surface-500" />
+                      <div className="w-8 h-8 rounded-lg bg-[#f1f3ff] flex items-center justify-center flex-shrink-0">
+                        <ContentTypeIcon type={c.type} className="w-4 h-4 text-[#797586]" />
                       </div>
                       <div>
-                        <Link href={`/browse/${c._id}`} className="font-medium text-sm text-brand-600 hover:text-brand-700">
+                        <Link href={`/browse/${c._id}`} className="font-medium text-sm text-[#451ebb] hover:text-[#451ebb]">
                           {c.title}
                         </Link>
-                        <p className="text-xs text-surface-400 mt-0.5 line-clamp-1 max-w-[250px]">{c.description}</p>
+                        <p className="text-xs text-[#797586] mt-0.5 line-clamp-1 max-w-[250px]">{c.description}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="text-surface-600">{c.creator?.name || "Unknown"}</td>
+                  <td className="text-[#484554]">{c.creator?.name || "Unknown"}</td>
                   <td>
                     <span className="badge-blue capitalize text-xs">{c.type}</span>
                   </td>
-                  <td className="font-semibold text-surface-900">{formatPrice(c.price)}</td>
+                  <td className="font-semibold text-[#151b29]">{formatPrice(c.price)}</td>
                   <td>
                     <span className={`${statusBadge[c.status]} capitalize text-xs`}>
                       {c.status}
@@ -164,7 +164,7 @@ export default function AdminContentPage() {
       {rejectingId && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
           <div className="card max-w-md w-full mx-4 shadow-soft-2xl">
-            <h3 className="section-title text-lg mb-4">Reject Content</h3>
+            <h3 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-lg mb-4">Reject Content</h3>
             <textarea
               value={rejectReason}
               onChange={(e) => setRejectReason(e.target.value)}

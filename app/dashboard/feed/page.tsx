@@ -39,8 +39,8 @@ export default function FeedPage() {
     <div className="space-y-10 animate-fade-in">
       {/* Page Header */}
       <div>
-        <h1 className="section-title text-2xl">Your Feed</h1>
-        <p className="text-surface-500 mt-1">
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Your Feed</h1>
+        <p className="text-[#797586] mt-1">
           Content from creators you follow and personalized recommendations
         </p>
       </div>
@@ -78,25 +78,25 @@ export default function FeedPage() {
           {/* From Creators You Follow */}
           <section>
             <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-8 h-8 rounded-lg bg-brand-50 flex items-center justify-center">
-                <IconTrending className="w-4.5 h-4.5 text-brand-600" />
+              <div className="w-8 h-8 rounded-lg bg-[#e6deff] flex items-center justify-center">
+                <IconTrending className="w-4.5 h-4.5 text-[#451ebb]" />
               </div>
-              <h2 className="font-display font-bold text-lg text-surface-900">
+              <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#151b29]">
                 From Creators You Follow
               </h2>
             </div>
 
             {fromFollowing.length === 0 ? (
               <div className="card text-center py-14">
-                <div className="w-16 h-16 rounded-2xl bg-surface-100 flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-surface-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <div className="w-16 h-16 rounded-2xl bg-[#f1f3ff] flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-[#797586]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                   </svg>
                 </div>
-                <p className="text-surface-500 text-lg mb-1 font-medium">
+                <p className="text-[#797586] text-lg mb-1 font-medium">
                   Follow creators to see their content here
                 </p>
-                <p className="text-surface-400 text-sm mb-6">
+                <p className="text-[#797586] text-sm mb-6">
                   Discover amazing creators and stay up to date with their latest work.
                 </p>
                 <Link
@@ -125,7 +125,7 @@ export default function FeedPage() {
               <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center">
                 <IconSparkles className="w-4.5 h-4.5 text-purple-600" />
               </div>
-              <h2 className="font-display font-bold text-lg text-surface-900">
+              <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#151b29]">
                 Recommended For You
               </h2>
             </div>
@@ -134,12 +134,12 @@ export default function FeedPage() {
               <div className="card text-center py-14">
                 <div className="empty-state">
                   <div className="empty-state-icon">
-                    <IconSparkles className="w-8 h-8 text-surface-400" />
+                    <IconSparkles className="w-8 h-8 text-[#797586]" />
                   </div>
-                  <p className="text-surface-500 text-lg mb-1 font-medium">
+                  <p className="text-[#797586] text-lg mb-1 font-medium">
                     No recommendations yet
                   </p>
-                  <p className="text-surface-400 text-sm mb-6">
+                  <p className="text-[#797586] text-sm mb-6">
                     We&apos;re learning your preferences. Browse and interact with content to get personalized recommendations.
                   </p>
                   <Link

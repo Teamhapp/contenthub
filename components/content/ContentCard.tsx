@@ -19,92 +19,84 @@ interface ContentCardProps {
   };
 }
 
-const typeColors: Record<string, { badge: string; glow: string }> = {
-  article: { badge: "bg-blue-500/90 text-white", glow: "shadow-[0_2px_8px_rgb(59_130_246/0.3)]" },
-  video: { badge: "bg-purple-500/90 text-white", glow: "shadow-[0_2px_8px_rgb(139_92_246/0.3)]" },
-  file: { badge: "bg-emerald-500/90 text-white", glow: "shadow-[0_2px_8px_rgb(16_185_129/0.3)]" },
+const typeLabels: Record<string, { label: string; bg: string }> = {
+  article: { label: "ARTICLE", bg: "bg-[#451ebb]" },
+  video: { label: "VIDEO", bg: "bg-[#5d3fd3]" },
+  file: { label: "FILE", bg: "bg-[#605693]" },
 };
 
 export default function ContentCard({ content }: ContentCardProps) {
-  const colors = typeColors[content.type] || { badge: "bg-surface-600/90 text-white", glow: "" };
+  const typeInfo = typeLabels[content.type] || { label: content.type.toUpperCase(), bg: "bg-[#484554]" };
 
   return (
     <Link href={`/browse/${content._id}`} className="group">
-      <div className="card overflow-hidden transition-all duration-300 hover:shadow-soft-lg hover:-translate-y-1.5 hover:border-surface-200">
+      <div className="bg-white rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_20px_40px_rgba(21,27,41,0.08)] hover:-translate-y-1 border border-[#e2e8fc]/30">
         {/* Thumbnail */}
-        <div className="aspect-[16/10] bg-gradient-to-br from-surface-100 to-surface-50 relative overflow-hidden">
+        <div className="aspect-[16/10] bg-[#f1f3ff] relative overflow-hidden">
           {content.thumbnailUrl ? (
             <img
               src={content.thumbnailUrl}
               alt={content.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-50 via-white to-surface-100">
-              <div className="w-16 h-16 rounded-2xl bg-white shadow-soft-md flex items-center justify-center text-surface-300 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#e9edff] to-[#f1f3ff]">
+              <div className="w-16 h-16 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#c9c4d7]">
                 <ContentTypeIcon type={content.type} className="w-8 h-8" />
               </div>
             </div>
           )}
 
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
           {/* Type badge */}
           <div className="absolute top-3 left-3">
-            <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold backdrop-blur-md ${colors.badge} ${colors.glow}`}>
-              <ContentTypeIcon type={content.type} className="w-3 h-3" />
-              {content.type}
+            <span className={`inline-flex px-2.5 py-1 rounded text-[9px] font-bold tracking-[0.08em] text-white ${typeInfo.bg}`}>
+              {typeInfo.label}
             </span>
           </div>
 
-          {/* Wishlist + Price */}
-          <div className="absolute top-3 right-3 flex items-center gap-1.5">
+          {/* Wishlist */}
+          <div className="absolute top-3 right-3">
             <WishlistButton contentId={content._id} size="sm" />
-            <span className="price-tag text-xs">
-              {formatPrice(content.price)}
-            </span>
-          </div>
-
-          {/* Hover CTA */}
-          <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-            <span className="inline-flex items-center gap-1.5 text-sm text-white font-semibold">
-              View Details
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
-            </span>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-4">
-          <h3 className="font-display font-bold text-surface-900 group-hover:text-brand-600 transition-colors line-clamp-1 text-[15px]">
+          {/* Creator */}
+          {content.creator && (
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#451ebb] to-[#5d3fd3] flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-[9px] font-bold">{content.creator.name?.[0]?.toUpperCase()}</span>
+              </div>
+              <span className="text-xs text-[#484554] font-medium">{content.creator.name}</span>
+            </div>
+          )}
+
+          <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-[#151b29] group-hover:text-[#451ebb] transition-colors line-clamp-1 text-base">
             {content.title}
           </h3>
-          <p className="text-sm text-surface-500 mt-1.5 line-clamp-2 leading-relaxed">{content.description}</p>
 
-          {/* Meta row */}
-          <div className="flex items-center justify-between mt-4 pt-3 border-t border-surface-100/80">
-            {/* Creator */}
-            {content.creator && (
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="w-6 h-6 rounded-md bg-gradient-to-br from-brand-400 to-purple-500 flex items-center justify-center flex-shrink-0">
-                  <span className="text-white text-[9px] font-bold">{content.creator.name?.[0]?.toUpperCase()}</span>
-                </div>
-                <span className="text-xs text-surface-500 font-medium truncate">{content.creator.name}</span>
-              </div>
-            )}
-            {/* Stats */}
-            <div className="flex items-center gap-3 text-xs text-surface-400 flex-shrink-0">
-              {content.averageRating > 0 && (
-                <span className="flex items-center gap-1">
-                  <IconStar className="w-3.5 h-3.5 text-amber-400" />
-                  <span className="font-semibold text-surface-600">{content.averageRating.toFixed(1)}</span>
-                </span>
-              )}
-              <span className="flex items-center gap-1">
-                <IconEye className="w-3.5 h-3.5" />
-                {content.totalSales}
-              </span>
+          {/* Rating */}
+          {content.averageRating > 0 && (
+            <div className="flex items-center gap-1.5 mt-1.5">
+              <IconStar className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-xs font-semibold text-[#151b29]">{content.averageRating.toFixed(1)}</span>
+              <span className="text-xs text-[#797586]">({content.totalSales} reviews)</span>
+            </div>
+          )}
+
+          {/* Price row */}
+          <div className="flex items-center justify-between mt-4">
+            <span className="font-['Plus_Jakarta_Sans'] font-bold text-[#151b29] text-lg">
+              {content.price === 0 ? "FREE" : formatPrice(content.price)}
+            </span>
+            <div className="flex items-center gap-2">
+              <button className="w-8 h-8 rounded-lg bg-[#f1f3ff] flex items-center justify-center hover:bg-[#e6deff] transition-colors">
+                <span className="material-symbols-outlined text-[#451ebb] text-base">bolt</span>
+              </button>
+              <button className="w-8 h-8 rounded-lg bg-[#f1f3ff] flex items-center justify-center hover:bg-[#e6deff] transition-colors">
+                <span className="material-symbols-outlined text-[#451ebb] text-base">add_shopping_cart</span>
+              </button>
             </div>
           </div>
         </div>

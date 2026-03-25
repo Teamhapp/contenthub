@@ -62,7 +62,7 @@ function LoginForm() {
           <div className="w-16 h-16 bg-white/20 glass rounded-2xl flex items-center justify-center mx-auto mb-8">
             <IconArrowRight className="w-8 h-8 text-white" />
           </div>
-          <h2 className="font-display text-4xl font-bold text-white mb-4">
+          <h2 className="font-['Plus_Jakarta_Sans'] text-4xl font-bold text-white mb-4">
             Welcome back to ContentHub
           </h2>
           <p className="text-brand-100 text-lg leading-relaxed">
@@ -90,15 +90,15 @@ function LoginForm() {
           <div className="w-full max-w-md animate-fade-in">
             {/* Mobile logo */}
             <div className="lg:hidden text-center mb-8">
-              <h2 className="font-display text-2xl font-bold text-gradient">ContentHub</h2>
+              <h2 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-gradient">ContentHub</h2>
             </div>
 
             <div className="card shadow-soft-xl p-8">
               <div className="text-center mb-8">
-                <h1 className="font-display text-3xl font-bold text-surface-900 mb-2">
+                <h1 className="font-['Plus_Jakarta_Sans'] text-3xl font-bold text-[#151b29] mb-2">
                   Welcome Back
                 </h1>
-                <p className="text-surface-500">Sign in to your account</p>
+                <p className="text-[#797586]">Sign in to your account</p>
               </div>
 
               {error && (
@@ -112,12 +112,12 @@ function LoginForm() {
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-surface-700 mb-1.5">
+                  <label className="block text-sm font-medium text-[#484554] mb-1.5">
                     Email
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                      <IconMail className="w-5 h-5 text-surface-400" />
+                      <IconMail className="w-5 h-5 text-[#797586]" />
                     </div>
                     <input
                       type="email"
@@ -131,12 +131,12 @@ function LoginForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-surface-700 mb-1.5">
+                  <label className="block text-sm font-medium text-[#484554] mb-1.5">
                     Password
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                      <IconLock className="w-5 h-5 text-surface-400" />
+                      <IconLock className="w-5 h-5 text-[#797586]" />
                     </div>
                     <input
                       type="password"
@@ -172,11 +172,11 @@ function LoginForm() {
               </form>
 
               <div className="mt-6 text-center">
-                <p className="text-sm text-surface-500">
+                <p className="text-sm text-[#797586]">
                   Don&apos;t have an account?{" "}
                   <Link
                     href="/auth/register"
-                    className="text-brand-600 hover:text-brand-700 font-semibold transition-colors"
+                    className="text-[#451ebb] hover:text-brand-700 font-semibold transition-colors"
                   >
                     Create one
                   </Link>

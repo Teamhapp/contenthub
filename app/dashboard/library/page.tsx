@@ -39,10 +39,10 @@ export default function LibraryPage() {
 
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center">
-              <ContentTypeIcon type={viewContent.type} className="w-5 h-5 text-brand-600" />
+            <div className="w-10 h-10 rounded-lg bg-[#e6deff] flex items-center justify-center">
+              <ContentTypeIcon type={viewContent.type} className="w-5 h-5 text-[#451ebb]" />
             </div>
-            <h1 className="section-title text-2xl">{viewContent.title}</h1>
+            <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">{viewContent.title}</h1>
           </div>
 
           {viewContent.type === "article" && viewContent.body && (
@@ -61,10 +61,10 @@ export default function LibraryPage() {
 
           {viewContent.type === "file" && viewContent.fileUrl && (
             <div className="text-center py-12">
-              <div className="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center mx-auto mb-4">
-                <IconDownload className="w-8 h-8 text-brand-600" />
+              <div className="w-16 h-16 rounded-2xl bg-[#e6deff] flex items-center justify-center mx-auto mb-4">
+                <IconDownload className="w-8 h-8 text-[#451ebb]" />
               </div>
-              <p className="text-lg font-medium text-surface-700 mb-4">Your file is ready to download</p>
+              <p className="text-lg font-medium text-[#484554] mb-4">Your file is ready to download</p>
               <a
                 href={viewContent.fileUrl}
                 download
@@ -83,8 +83,8 @@ export default function LibraryPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">My Library</h1>
-        <p className="text-surface-500 mt-1">All your purchased content in one place.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">My Library</h1>
+        <p className="text-[#797586] mt-1">All your purchased content in one place.</p>
       </div>
 
       {loading ? (
@@ -101,11 +101,11 @@ export default function LibraryPage() {
         </div>
       ) : purchases.length === 0 ? (
         <div className="card text-center py-16">
-          <div className="w-16 h-16 rounded-2xl bg-surface-100 flex items-center justify-center mx-auto mb-4">
-            <IconLibrary className="w-8 h-8 text-surface-400" />
+          <div className="w-16 h-16 rounded-2xl bg-[#f1f3ff] flex items-center justify-center mx-auto mb-4">
+            <IconLibrary className="w-8 h-8 text-[#797586]" />
           </div>
-          <p className="text-surface-500 text-lg mb-1 font-medium">Your library is empty</p>
-          <p className="text-surface-400 text-sm mb-6">Purchase content to see it here.</p>
+          <p className="text-[#797586] text-lg mb-1 font-medium">Your library is empty</p>
+          <p className="text-[#797586] text-sm mb-6">Purchase content to see it here.</p>
           <Link href="/browse" className="btn-primary inline-flex items-center gap-2">
             <IconSparkles className="w-4 h-4" />
             Browse Content
@@ -117,20 +117,20 @@ export default function LibraryPage() {
             <button
               key={p._id}
               onClick={() => openContent(p.content?._id)}
-              className="card-hover text-left overflow-hidden rounded-xl border border-surface-200 group"
+              className="card-hover text-left overflow-hidden rounded-xl border border-[#e2e8fc] group"
             >
-              <div className="aspect-video bg-surface-100 flex items-center justify-center relative overflow-hidden">
+              <div className="aspect-video bg-[#f1f3ff] flex items-center justify-center relative overflow-hidden">
                 {p.content?.thumbnailUrl ? (
                   <img src={p.content.thumbnailUrl} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 ) : (
-                  <ContentTypeIcon type={p.content?.type} className="w-12 h-12 text-surface-300 group-hover:text-brand-400 transition-colors" />
+                  <ContentTypeIcon type={p.content?.type} className="w-12 h-12 text-[#c9c4d7] group-hover:text-brand-400 transition-colors" />
                 )}
               </div>
               <div className="p-4">
-                <h3 className="font-medium text-sm text-surface-900 group-hover:text-brand-600 transition-colors">{p.content?.title}</h3>
+                <h3 className="font-medium text-sm text-[#151b29] group-hover:text-[#451ebb] transition-colors">{p.content?.title}</h3>
                 <div className="flex items-center gap-2 mt-2">
                   <span className="badge-blue text-xs capitalize">{p.content?.type}</span>
-                  <span className="text-xs text-surface-400">
+                  <span className="text-xs text-[#797586]">
                     {new Date(p.createdAt).toLocaleDateString()}
                   </span>
                 </div>

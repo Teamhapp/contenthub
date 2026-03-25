@@ -3,7 +3,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ContentCard from "@/components/content/ContentCard";
-import { IconSearch, IconArrowRight } from "@/components/ui/Icons";
 
 interface Category {
   _id: string;
@@ -69,12 +68,11 @@ function BrowseContent() {
 
   const typeFilters = [
     { value: "", label: "All" },
-    { value: "article", label: "Articles" },
-    { value: "video", label: "Videos" },
-    { value: "file", label: "Files" },
+    { value: "article", label: "Article" },
+    { value: "video", label: "Video" },
+    { value: "file", label: "File" },
   ];
 
-  // Build visible page numbers for pagination
   function getPageNumbers(): (number | "ellipsis")[] {
     if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
     const pages: (number | "ellipsis")[] = [1];
@@ -88,79 +86,58 @@ function BrowseContent() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      {/* Page Header */}
-      <div className="page-header mb-10 animate-fade-in">
-        <h1 className="section-title">Browse Content</h1>
-        <p className="section-subtitle">
-          Discover premium articles, videos, and digital files
-        </p>
-        <div className="divider-gradient mt-4" />
-      </div>
-
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Sidebar Filters */}
-        <div className="lg:w-64 flex-shrink-0 space-y-6 animate-fade-in">
-          {/* Search */}
-          <div className="relative">
-            <IconSearch className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-surface-400 pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Search content..."
-              defaultValue={q}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") updateParams({ q: (e.target as HTMLInputElement).value });
-              }}
-              className="input-with-icon"
-            />
-          </div>
-
-          {/* Category filter */}
-          <div className="card card-hover p-4">
-            <h3 className="font-display font-semibold text-sm text-surface-700 mb-3 uppercase tracking-wider">
+        {/* ── Sidebar Filters ── */}
+        <div className="lg:w-56 flex-shrink-0 space-y-6">
+          {/* Category */}
+          <div>
+            <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-[0.1em] text-[#151b29] mb-3">
               Category
             </h3>
-            <div className="space-y-0.5">
+            <div className="space-y-1">
               <button
                 onClick={() => updateParams({ category: "" })}
-                className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-all ${
-                  !category
-                    ? "bg-brand-50 text-brand-700 font-medium shadow-sm"
-                    : "text-surface-500 hover:bg-surface-50 hover:text-surface-700"
+                className={`flex items-center gap-2 w-full text-left text-sm py-1.5 transition-colors ${
+                  !category ? "text-[#451ebb] font-semibold" : "text-[#484554] hover:text-[#151b29]"
                 }`}
               >
+                {!category && <span className="w-4 h-4 rounded bg-[#451ebb] flex items-center justify-center"><span className="material-symbols-outlined text-white text-xs">check</span></span>}
+                {category && <span className="w-4 h-4 rounded border border-[#c9c4d7]" />}
                 All Categories
               </button>
               {categories.map((cat) => (
                 <button
                   key={cat._id}
                   onClick={() => updateParams({ category: cat._id })}
-                  className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-all ${
-                    category === cat._id
-                      ? "bg-brand-50 text-brand-700 font-medium shadow-sm"
-                      : "text-surface-500 hover:bg-surface-50 hover:text-surface-700"
+                  className={`flex items-center gap-2 w-full text-left text-sm py-1.5 transition-colors ${
+                    category === cat._id ? "text-[#451ebb] font-semibold" : "text-[#484554] hover:text-[#151b29]"
                   }`}
                 >
+                  {category === cat._id
+                    ? <span className="w-4 h-4 rounded bg-[#451ebb] flex items-center justify-center"><span className="material-symbols-outlined text-white text-xs">check</span></span>
+                    : <span className="w-4 h-4 rounded border border-[#c9c4d7]" />
+                  }
                   {cat.name}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Type filter */}
-          <div className="card card-hover p-4">
-            <h3 className="font-display font-semibold text-sm text-surface-700 mb-3 uppercase tracking-wider">
-              Type
+          {/* Content Type */}
+          <div>
+            <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-[0.1em] text-[#151b29] mb-3">
+              Content Type
             </h3>
             <div className="flex flex-wrap gap-2">
               {typeFilters.map((t) => (
                 <button
                   key={t.value}
                   onClick={() => updateParams({ type: t.value })}
-                  className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
                     type === t.value
-                      ? "bg-brand-600 text-white shadow-glow-brand"
-                      : "bg-surface-100 text-surface-600 hover:bg-surface-200 hover:text-surface-700"
+                      ? "bg-[#451ebb] text-white border-[#451ebb]"
+                      : "bg-white text-[#484554] border-[#c9c4d7]/40 hover:border-[#451ebb]/30"
                   }`}
                 >
                   {t.label}
@@ -168,122 +145,149 @@ function BrowseContent() {
               ))}
             </div>
           </div>
+
+          {/* Price Range placeholder */}
+          <div>
+            <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-[0.1em] text-[#151b29] mb-3">
+              Price Range
+            </h3>
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <label className="text-[10px] text-[#797586] uppercase tracking-wider">Min</label>
+                <input className="w-full mt-1 px-3 py-2 bg-white border border-[#c9c4d7]/30 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#451ebb]" placeholder="$0" />
+              </div>
+              <span className="self-end pb-2.5 text-[#c9c4d7]">—</span>
+              <div className="flex-1">
+                <label className="text-[10px] text-[#797586] uppercase tracking-wider">Max</label>
+                <input className="w-full mt-1 px-3 py-2 bg-white border border-[#c9c4d7]/30 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#451ebb]" placeholder="$500" />
+              </div>
+            </div>
+            <div className="mt-3 h-1 bg-[#e2e8fc] rounded-full">
+              <div className="h-full bg-[#451ebb] rounded-full w-full" />
+            </div>
+          </div>
+
+          {/* Rating */}
+          <div>
+            <h3 className="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-[0.1em] text-[#151b29] mb-3">
+              Rating
+            </h3>
+            <div className="flex items-center gap-1">
+              {[1,2,3,4,5].map(s => (
+                <span key={s} className="text-amber-400 text-sm">&#9733;</span>
+              ))}
+              <span className="text-sm text-[#484554] ml-1">& Up</span>
+            </div>
+          </div>
         </div>
 
-        {/* Content Grid */}
+        {/* ── Main Content ── */}
         <div className="flex-1 min-w-0">
-          {/* Toolbar: result count + sort */}
-          <div className="flex items-center justify-between mb-6 animate-fade-in">
-            <p className="text-sm text-surface-500 font-medium">
-              <span className="text-surface-800 font-semibold">{total}</span>{" "}
-              {total === 1 ? "result" : "results"} found
-            </p>
-            <div className="relative">
-              <select
-                value={sort}
-                onChange={(e) => updateParams({ sort: e.target.value })}
-                className="input w-auto pr-10 py-2 text-sm appearance-none cursor-pointer"
-              >
-                <option value="newest">Newest</option>
-                <option value="popular">Most Popular</option>
-                <option value="rating">Highest Rated</option>
-                <option value="price_low">Price: Low to High</option>
-                <option value="price_high">Price: High to Low</option>
-              </select>
-              <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-surface-400">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
+          {/* Header + Sort */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+              <p className="text-[10px] font-bold text-[#451ebb] uppercase tracking-[0.12em] mb-1">Discovery</p>
+              <h1 className="font-['Plus_Jakarta_Sans'] text-4xl font-extrabold text-[#151b29] tracking-tight">
+                Creator Marketplace
+              </h1>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <select
+                  value={sort}
+                  onChange={(e) => updateParams({ sort: e.target.value })}
+                  className="appearance-none bg-white border border-[#c9c4d7]/30 rounded-lg pl-4 pr-10 py-2.5 text-sm font-medium text-[#151b29] cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#451ebb]"
+                >
+                  <option value="newest">Most Recent</option>
+                  <option value="popular">Most Popular</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="price_low">Price: Low → High</option>
+                  <option value="price_high">Price: High → Low</option>
+                </select>
+                <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#797586] text-sm pointer-events-none">expand_more</span>
+              </div>
+              {/* Grid/List toggle */}
+              <div className="flex border border-[#c9c4d7]/30 rounded-lg overflow-hidden">
+                <button className="p-2 bg-[#451ebb] text-white">
+                  <span className="material-symbols-outlined text-base">grid_view</span>
+                </button>
+                <button className="p-2 text-[#797586] hover:bg-[#f1f3ff]">
+                  <span className="material-symbols-outlined text-base">view_list</span>
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Loading Skeleton */}
+          {/* Search bar */}
+          <div className="relative mb-6">
+            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#797586] text-lg">search</span>
+            <input
+              type="text"
+              placeholder="Search marketplace..."
+              defaultValue={q}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") updateParams({ q: (e.target as HTMLInputElement).value });
+              }}
+              className="w-full pl-11 pr-4 py-3 bg-white border border-[#c9c4d7]/30 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#451ebb]/20 focus:border-[#451ebb] placeholder-[#797586]"
+            />
+          </div>
+
+          {/* Loading */}
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="card overflow-hidden animate-stagger-fade"
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  <div className="aspect-[16/10] skeleton" />
+                <div key={i} className="bg-white rounded-xl overflow-hidden border border-[#e2e8fc]/30">
+                  <div className="aspect-[16/10] bg-[#f1f3ff] animate-pulse" />
                   <div className="p-4 space-y-3">
-                    <div className="h-5 skeleton w-3/4 rounded" />
-                    <div className="h-4 skeleton w-full rounded" />
-                    <div className="h-4 skeleton w-1/3 rounded" />
+                    <div className="h-4 bg-[#f1f3ff] rounded w-3/4 animate-pulse" />
+                    <div className="h-3 bg-[#f1f3ff] rounded w-full animate-pulse" />
+                    <div className="h-5 bg-[#f1f3ff] rounded w-1/3 animate-pulse" />
                   </div>
                 </div>
               ))}
             </div>
           ) : contents.length === 0 ? (
-            /* Empty State */
-            <div className="empty-state animate-fade-in">
-              <div className="empty-state-icon">
-                <IconSearch className="w-7 h-7 text-surface-400" />
-              </div>
-              <p className="text-lg font-display font-semibold text-surface-700 mt-4">
-                No content found
-              </p>
-              <p className="text-sm text-surface-400 mt-1 max-w-xs mx-auto">
-                Try adjusting your search or filters to discover something new
-              </p>
+            <div className="text-center py-20">
+              <span className="material-symbols-outlined text-5xl text-[#c9c4d7] mb-4">search_off</span>
+              <p className="font-['Plus_Jakarta_Sans'] text-lg font-bold text-[#151b29]">No content found</p>
+              <p className="text-sm text-[#797586] mt-1">Try adjusting your search or filters</p>
               <button
                 onClick={() => router.push("/browse")}
-                className="btn-secondary mt-6 inline-flex items-center gap-2"
+                className="mt-6 px-6 py-2.5 border border-[#c9c4d7]/30 rounded-lg text-sm font-medium text-[#484554] hover:bg-[#f1f3ff] transition-colors"
               >
                 Clear all filters
               </button>
             </div>
           ) : (
             <>
-              {/* Content Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                {contents.map((c: any, i: number) => (
-                  <div
-                    key={c._id}
-                    className="animate-stagger-fade"
-                    style={{ animationDelay: `${i * 80}ms` }}
-                  >
-                    <ContentCard content={c} />
-                  </div>
+                {contents.map((c: any) => (
+                  <ContentCard key={c._id} content={c} />
                 ))}
               </div>
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-1.5 mt-10 animate-fade-in">
-                  {/* Previous */}
+                <div className="flex items-center justify-center gap-2 mt-12">
                   <button
                     onClick={() => updateParams({ page: String(Math.max(1, page - 1)) })}
                     disabled={page === 1}
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-                      page === 1
-                        ? "text-surface-300 cursor-not-allowed"
-                        : "text-surface-600 hover:bg-surface-100 hover:text-surface-800"
-                    }`}
-                    aria-label="Previous page"
+                    className="w-10 h-10 rounded-lg border border-[#c9c4d7]/30 flex items-center justify-center text-[#484554] hover:bg-[#f1f3ff] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                   >
-                    <IconArrowRight className="w-4 h-4 rotate-180" />
+                    <span className="material-symbols-outlined text-base">chevron_left</span>
                   </button>
 
-                  {/* Page Numbers */}
                   {getPageNumbers().map((p, i) =>
                     p === "ellipsis" ? (
-                      <span
-                        key={`ellipsis-${i}`}
-                        className="w-10 h-10 flex items-center justify-center text-sm text-surface-400"
-                      >
-                        ...
-                      </span>
+                      <span key={`e-${i}`} className="w-10 h-10 flex items-center justify-center text-sm text-[#797586]">...</span>
                     ) : (
                       <button
                         key={p}
                         onClick={() => updateParams({ page: String(p) })}
-                        className={`w-10 h-10 rounded-xl text-sm font-medium transition-all ${
+                        className={`w-10 h-10 rounded-lg text-sm font-medium transition-all ${
                           p === page
-                            ? "bg-brand-600 text-white shadow-glow-brand"
-                            : "bg-white border border-surface-200 text-surface-600 hover:bg-surface-50 hover:border-surface-300"
+                            ? "bg-[#451ebb] text-white shadow-[0_4px_14px_0_rgba(69,30,187,0.35)]"
+                            : "border border-[#c9c4d7]/30 text-[#484554] hover:bg-[#f1f3ff]"
                         }`}
                       >
                         {p}
@@ -291,23 +295,29 @@ function BrowseContent() {
                     )
                   )}
 
-                  {/* Next */}
                   <button
                     onClick={() => updateParams({ page: String(Math.min(totalPages, page + 1)) })}
                     disabled={page === totalPages}
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-                      page === totalPages
-                        ? "text-surface-300 cursor-not-allowed"
-                        : "text-surface-600 hover:bg-surface-100 hover:text-surface-800"
-                    }`}
-                    aria-label="Next page"
+                    className="w-10 h-10 rounded-lg border border-[#c9c4d7]/30 flex items-center justify-center text-[#484554] hover:bg-[#f1f3ff] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                   >
-                    <IconArrowRight className="w-4 h-4" />
+                    <span className="material-symbols-outlined text-base">chevron_right</span>
                   </button>
                 </div>
               )}
             </>
           )}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-16 pt-8 border-t border-[#e2e8fc] flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-[0.1em] text-[#797586]">
+        <span className="font-bold text-[#151b29]">The Digital Atelier</span>
+        <div className="flex gap-6 mt-3 md:mt-0">
+          <span>Terms</span>
+          <span>Privacy</span>
+          <span>Cookies</span>
+          <span>Contact</span>
+          <span>API</span>
         </div>
       </div>
     </div>

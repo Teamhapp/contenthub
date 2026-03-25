@@ -18,8 +18,8 @@ export default function PurchasesPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">Purchase History</h1>
-        <p className="text-surface-500 mt-1">A record of all your transactions.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Purchase History</h1>
+        <p className="text-[#797586] mt-1">A record of all your transactions.</p>
       </div>
 
       {loading ? (
@@ -33,10 +33,10 @@ export default function PurchasesPage() {
         </div>
       ) : purchases.length === 0 ? (
         <div className="card text-center py-16">
-          <div className="w-16 h-16 rounded-2xl bg-surface-100 flex items-center justify-center mx-auto mb-4">
-            <IconReceipt className="w-8 h-8 text-surface-400" />
+          <div className="w-16 h-16 rounded-2xl bg-[#f1f3ff] flex items-center justify-center mx-auto mb-4">
+            <IconReceipt className="w-8 h-8 text-[#797586]" />
           </div>
-          <p className="text-surface-500 font-medium">No purchases yet.</p>
+          <p className="text-[#797586] font-medium">No purchases yet.</p>
         </div>
       ) : (
         <div className="card p-0 overflow-hidden">
@@ -55,13 +55,13 @@ export default function PurchasesPage() {
                 <tr key={p._id}>
                   <td>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-surface-100 flex items-center justify-center flex-shrink-0">
-                        <ContentTypeIcon type={p.content?.type} className="w-4 h-4 text-surface-500" />
+                      <div className="w-8 h-8 rounded-lg bg-[#f1f3ff] flex items-center justify-center flex-shrink-0">
+                        <ContentTypeIcon type={p.content?.type} className="w-4 h-4 text-[#797586]" />
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-surface-900">{p.content?.title || "Deleted content"}</p>
+                        <p className="font-medium text-sm text-[#151b29]">{p.content?.title || "Deleted content"}</p>
                         {p.content?.creator && (
-                          <p className="text-xs text-surface-400">by {p.content.creator.name}</p>
+                          <p className="text-xs text-[#797586]">by {p.content.creator.name}</p>
                         )}
                       </div>
                     </div>
@@ -69,12 +69,12 @@ export default function PurchasesPage() {
                   <td>
                     <span className="badge-blue capitalize text-xs">{p.content?.type || "-"}</span>
                   </td>
-                  <td className="font-semibold text-surface-900">{formatPrice(p.price)}</td>
-                  <td className="text-surface-500">
+                  <td className="font-semibold text-[#151b29]">{formatPrice(p.price)}</td>
+                  <td className="text-[#797586]">
                     {new Date(p.createdAt).toLocaleDateString()}
                   </td>
                   <td>
-                    <span className="text-xs text-surface-400 font-mono bg-surface-50 px-2 py-1 rounded">
+                    <span className="text-xs text-[#797586] font-mono bg-[#faf8ff] px-2 py-1 rounded">
                       {p.transaction?.mockPaymentId || "-"}
                     </span>
                   </td>

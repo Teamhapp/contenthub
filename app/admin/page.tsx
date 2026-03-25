@@ -18,7 +18,7 @@ export default function AdminOverview() {
   if (loading) {
     return (
       <div className="space-y-8 animate-fade-in">
-        <h1 className="section-title text-2xl">Admin Dashboard</h1>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Admin Dashboard</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="stat-card">
@@ -34,17 +34,17 @@ export default function AdminOverview() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">Admin Dashboard</h1>
-        <p className="text-surface-500 mt-1">Platform overview and key metrics.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Admin Dashboard</h1>
+        <p className="text-[#797586] mt-1">Platform overview and key metrics.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="stat-card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-surface-500">Total Users</p>
-              <p className="text-3xl font-bold font-display mt-1">{data?.users?.total || 0}</p>
-              <p className="text-xs text-surface-400 mt-1">
+              <p className="text-sm text-[#797586]">Total Users</p>
+              <p className="text-3xl font-bold font-['Plus_Jakarta_Sans'] mt-1">{data?.users?.total || 0}</p>
+              <p className="text-xs text-[#797586] mt-1">
                 {data?.users?.creators || 0} creators &middot; {data?.users?.customers || 0} customers
               </p>
             </div>
@@ -57,9 +57,9 @@ export default function AdminOverview() {
         <div className="stat-card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-surface-500">Total Content</p>
-              <p className="text-3xl font-bold font-display mt-1">{data?.content?.total || 0}</p>
-              <p className="text-xs text-surface-400 mt-1">
+              <p className="text-sm text-[#797586]">Total Content</p>
+              <p className="text-3xl font-bold font-['Plus_Jakarta_Sans'] mt-1">{data?.content?.total || 0}</p>
+              <p className="text-xs text-[#797586] mt-1">
                 {data?.content?.published || 0} published &middot; {data?.content?.pending || 0} pending
               </p>
             </div>
@@ -72,11 +72,11 @@ export default function AdminOverview() {
         <div className="stat-card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-surface-500">Total Revenue</p>
-              <p className="text-3xl font-bold font-display mt-1 text-green-600">
+              <p className="text-sm text-[#797586]">Total Revenue</p>
+              <p className="text-3xl font-bold font-['Plus_Jakarta_Sans'] mt-1 text-green-600">
                 {formatPrice(data?.revenue?.totalRevenue || 0)}
               </p>
-              <p className="text-xs text-surface-400 mt-1">
+              <p className="text-xs text-[#797586] mt-1">
                 {data?.revenue?.totalTransactions || 0} transactions
               </p>
             </div>
@@ -89,8 +89,8 @@ export default function AdminOverview() {
         <div className="stat-card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-surface-500">Platform Earnings</p>
-              <p className="text-3xl font-bold font-display mt-1 text-brand-600">
+              <p className="text-sm text-[#797586]">Platform Earnings</p>
+              <p className="text-3xl font-bold font-['Plus_Jakarta_Sans'] mt-1 text-[#451ebb]">
                 {formatPrice(data?.revenue?.totalPlatformFee || 0)}
               </p>
             </div>
@@ -102,10 +102,10 @@ export default function AdminOverview() {
       </div>
 
       <div className="card p-0 overflow-hidden">
-        <div className="px-6 py-5 border-b border-surface-200">
+        <div className="px-6 py-5 border-b border-[#e2e8fc]">
           <div className="flex items-center gap-2">
-            <IconTrending className="w-5 h-5 text-brand-600" />
-            <h2 className="section-title text-lg">Top Creators</h2>
+            <IconTrending className="w-5 h-5 text-[#451ebb]" />
+            <h2 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-lg">Top Creators</h2>
           </div>
         </div>
         {data?.topCreators?.length > 0 ? (
@@ -127,13 +127,13 @@ export default function AdminOverview() {
                         {c.name?.charAt(0)?.toUpperCase()}
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-surface-900">{c.name}</p>
-                        <p className="text-xs text-surface-400">{c.email}</p>
+                        <p className="font-medium text-sm text-[#151b29]">{c.name}</p>
+                        <p className="text-xs text-[#797586]">{c.email}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="text-surface-700">{c.contentCount}</td>
-                  <td className="text-surface-700">{c.totalSales}</td>
+                  <td className="text-[#484554]">{c.contentCount}</td>
+                  <td className="text-[#484554]">{c.totalSales}</td>
                   <td>
                     <span className="font-semibold text-green-600">{formatPrice(c.totalRevenue)}</span>
                   </td>
@@ -143,8 +143,8 @@ export default function AdminOverview() {
           </table>
         ) : (
           <div className="text-center py-12">
-            <IconUsers className="w-8 h-8 text-surface-300 mx-auto mb-2" />
-            <p className="text-surface-500 text-sm">No creators yet.</p>
+            <IconUsers className="w-8 h-8 text-[#c9c4d7] mx-auto mb-2" />
+            <p className="text-[#797586] text-sm">No creators yet.</p>
           </div>
         )}
       </div>

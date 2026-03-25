@@ -127,8 +127,8 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
           <div className="empty-state-icon">
             <ContentTypeIcon type="file" className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-display font-bold text-surface-900 mt-4">Content Not Found</h1>
-          <p className="text-surface-500 mt-2">The content you are looking for does not exist or has been removed.</p>
+          <h1 className="text-2xl font-['Plus_Jakarta_Sans'] font-bold text-[#151b29] mt-4">Content Not Found</h1>
+          <p className="text-[#797586] mt-2">The content you are looking for does not exist or has been removed.</p>
           <Link href="/browse" className="btn-primary mt-6 inline-flex items-center gap-2">
             <IconArrowRight className="w-4 h-4 rotate-180" />
             Back to Browse
@@ -144,12 +144,12 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 animate-fade-in">
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-surface-400 mb-8">
-        <Link href="/" className="hover:text-surface-700 transition-colors">Home</Link>
+      <nav className="flex items-center gap-2 text-sm text-[#797586] mb-8">
+        <Link href="/" className="hover:text-[#484554] transition-colors">Home</Link>
         <span>/</span>
-        <Link href="/browse" className="hover:text-surface-700 transition-colors">Browse</Link>
+        <Link href="/browse" className="hover:text-[#484554] transition-colors">Browse</Link>
         <span>/</span>
-        <span className="text-surface-700 font-medium truncate max-w-[260px]">{content.title}</span>
+        <span className="text-[#484554] font-medium truncate max-w-[260px]">{content.title}</span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -180,14 +180,14 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
                       </span>
                     )}
                   </div>
-                  <h1 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight mt-3 drop-shadow-lg">
+                  <h1 className="text-2xl sm:text-3xl font-['Plus_Jakarta_Sans'] font-bold text-white tracking-tight mt-3 drop-shadow-lg">
                     {content.title}
                   </h1>
                 </div>
               </>
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-surface-100 to-surface-50 flex items-center justify-center">
-                <div className="w-24 h-24 rounded-3xl bg-white shadow-soft-md flex items-center justify-center text-surface-400">
+                <div className="w-24 h-24 rounded-3xl bg-white shadow-soft-md flex items-center justify-center text-[#797586]">
                   <ContentTypeIcon type={content.type} className="w-12 h-12" />
                 </div>
               </div>
@@ -206,18 +206,18 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
                   <span className="badge-gray">{content.category.name}</span>
                 )}
               </div>
-              <h1 className="text-2xl sm:text-3xl font-display font-bold text-surface-900 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-['Plus_Jakarta_Sans'] font-bold text-[#151b29] tracking-tight">
                 {content.title}
               </h1>
             </div>
           )}
 
           {/* Stats bar */}
-          <div className="flex items-center gap-5 text-sm text-surface-500">
+          <div className="flex items-center gap-5 text-sm text-[#797586]">
             {avgRating > 0 && (
               <span className="flex items-center gap-1.5">
                 <IconStar className="w-4 h-4 text-amber-400" />
-                <span className="font-semibold text-surface-800">{avgRating.toFixed(1)}</span>
+                <span className="font-semibold text-[#151b29]">{avgRating.toFixed(1)}</span>
                 <span>({content.reviewCount} review{content.reviewCount !== 1 ? "s" : ""})</span>
               </span>
             )}
@@ -231,30 +231,30 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
 
           {/* Description */}
           <div>
-            <h2 className="section-title mb-3">About this content</h2>
-            <p className="text-surface-600 leading-relaxed text-[15px]">{content.description}</p>
+            <h2 className="font-['Plus_Jakarta_Sans'] text-xl font-bold mb-3">About this content</h2>
+            <p className="text-[#484554] leading-relaxed text-[15px]">{content.description}</p>
           </div>
 
           {/* Preview */}
           {content.previewContent && (
             <div className="card p-6 bg-gradient-to-br from-brand-50/50 to-purple-50/30 border-brand-100/50">
-              <h3 className="text-xs font-bold text-brand-600 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold text-[#451ebb] uppercase tracking-wider mb-3 flex items-center gap-1.5">
                 <IconEye className="w-3.5 h-3.5" />
                 Preview
               </h3>
-              <p className="text-surface-700 whitespace-pre-wrap leading-relaxed">{content.previewContent}</p>
+              <p className="text-[#484554] whitespace-pre-wrap leading-relaxed">{content.previewContent}</p>
             </div>
           )}
 
           {/* Tags */}
           {content.tags?.length > 0 && (
             <div>
-              <h2 className="section-title mb-3">Tags</h2>
+              <h2 className="font-['Plus_Jakarta_Sans'] text-xl font-bold mb-3">Tags</h2>
               <div className="flex flex-wrap gap-2">
                 {content.tags.map((tag: string) => (
                   <span
                     key={tag}
-                    className="px-3 py-1.5 bg-surface-100 text-surface-600 rounded-lg text-xs font-medium hover:bg-brand-50 hover:text-brand-600 transition-all duration-200 cursor-default"
+                    className="px-3 py-1.5 bg-surface-100 text-[#484554] rounded-lg text-xs font-medium hover:bg-brand-50 hover:text-[#451ebb] transition-all duration-200 cursor-default"
                   >
                     #{tag}
                   </span>
@@ -267,16 +267,16 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
 
           {/* ========== Reviews Section ========== */}
           <div>
-            <h2 className="section-title mb-6">
+            <h2 className="font-['Plus_Jakarta_Sans'] text-xl font-bold mb-6">
               Reviews ({content.reviewCount})
             </h2>
 
             {/* Review Form */}
             {purchased && (
               <form onSubmit={handleSubmitReview} className="card p-6 mb-8 space-y-4 border-brand-100/40">
-                <h3 className="font-semibold text-surface-800">Write a Review</h3>
+                <h3 className="font-semibold text-[#151b29]">Write a Review</h3>
                 <div>
-                  <p className="text-xs text-surface-400 mb-2">Your rating</p>
+                  <p className="text-xs text-[#797586] mb-2">Your rating</p>
                   <div className="flex gap-1">
                     {[1, 2, 3, 4, 5].map((star) => {
                       const active = star <= (hoverRating || reviewForm.rating);
@@ -291,13 +291,13 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
                         >
                           {active
                             ? <IconStar className="w-7 h-7 text-amber-400 drop-shadow-sm" />
-                            : <IconStarOutline className="w-7 h-7 text-surface-300" />
+                            : <IconStarOutline className="w-7 h-7 text-[#c9c4d7]" />
                           }
                         </button>
                       );
                     })}
                     {(hoverRating || reviewForm.rating) > 0 && (
-                      <span className="text-sm text-surface-500 ml-2 self-center">
+                      <span className="text-sm text-[#797586] ml-2 self-center">
                         {hoverRating || reviewForm.rating}/5
                       </span>
                     )}
@@ -322,30 +322,30 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
                 <div className="empty-state-icon">
                   <IconStarOutline className="w-7 h-7" />
                 </div>
-                <p className="text-surface-500 mt-3 text-sm">No reviews yet. Be the first to share your thoughts!</p>
+                <p className="text-[#797586] mt-3 text-sm">No reviews yet. Be the first to share your thoughts!</p>
               </div>
             ) : (
               <div className="space-y-4">
                 {reviews.map((review: any) => (
                   <div key={review._id} className="card p-5 hover:shadow-soft-md transition-shadow">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="avatar w-9 h-9 rounded-full bg-gradient-to-br from-brand-400 to-purple-400 flex items-center justify-center flex-shrink-0">
+                      <div className="avatar w-9 h-9 rounded-full bg-gradient-to-br from-[#451ebb] to-[#5d3fd3] flex items-center justify-center flex-shrink-0">
                         <span className="text-white text-xs font-bold">{review.user?.name?.[0]?.toUpperCase()}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-surface-800 truncate">{review.user?.name}</p>
+                        <p className="text-sm font-semibold text-[#151b29] truncate">{review.user?.name}</p>
                         <div className="flex gap-0.5 mt-0.5">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <IconStar
                               key={star}
-                              className={`w-3.5 h-3.5 ${star <= review.rating ? "text-amber-400" : "text-surface-200"}`}
+                              className={`w-3.5 h-3.5 ${star <= review.rating ? "text-amber-400" : "text-[#dde2f6]"}`}
                             />
                           ))}
                         </div>
                       </div>
                     </div>
                     {review.comment && (
-                      <p className="text-sm text-surface-600 leading-relaxed pl-12">{review.comment}</p>
+                      <p className="text-sm text-[#484554] leading-relaxed pl-12">{review.comment}</p>
                     )}
                   </div>
                 ))}
@@ -355,9 +355,9 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
 
           {/* Related content note */}
           <div className="card p-5 bg-gradient-to-r from-surface-50 to-brand-50/30 border-surface-100">
-            <p className="text-sm text-surface-500 text-center">
+            <p className="text-sm text-[#797586] text-center">
               Looking for more?{" "}
-              <Link href="/browse" className="text-brand-600 font-semibold hover:underline">
+              <Link href="/browse" className="text-[#451ebb] font-semibold hover:underline">
                 Browse all content
                 <IconArrowRight className="w-3.5 h-3.5 inline ml-1 -mt-0.5" />
               </Link>
@@ -372,21 +372,21 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
             {/* Purchase Card */}
             <div className="card p-6 shadow-soft-lg overflow-hidden relative">
               {/* Gradient price header */}
-              <div className="relative -mx-6 -mt-6 mb-6 px-6 py-5 bg-gradient-to-r from-brand-600 via-purple-600 to-brand-600">
-                <div className="text-3xl font-display font-bold text-white tracking-tight">
+              <div className="relative -mx-6 -mt-6 mb-6 px-6 py-5 bg-gradient-to-r from-[#451ebb] to-[#5d3fd3]">
+                <div className="text-3xl font-['Plus_Jakarta_Sans'] font-bold text-white tracking-tight">
                   {formatPrice(content.price)}
                 </div>
                 {content.price > 0 && (
-                  <p className="text-brand-100 text-xs mt-1">One-time purchase</p>
+                  <p className="text-[#e6deff] text-xs mt-1">One-time purchase</p>
                 )}
               </div>
 
               {/* Rating & Views */}
-              <div className="flex items-center gap-4 text-sm text-surface-500 mb-6">
+              <div className="flex items-center gap-4 text-sm text-[#797586] mb-6">
                 {avgRating > 0 && (
                   <span className="flex items-center gap-1">
                     <IconStar className="w-4 h-4 text-amber-400" />
-                    <span className="font-medium text-surface-700">{avgRating.toFixed(1)}</span>
+                    <span className="font-medium text-[#484554]">{avgRating.toFixed(1)}</span>
                   </span>
                 )}
                 <span className="flex items-center gap-1">
@@ -427,17 +427,17 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
               {/* Trust Indicators */}
               {!purchased && (
                 <div className="mt-6 pt-5 border-t border-surface-100 space-y-3">
-                  <div className="flex items-center gap-3 text-xs text-surface-500">
+                  <div className="flex items-center gap-3 text-xs text-[#797586]">
                     <IconShield className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                     <span>Secure payment processing</span>
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-surface-500">
+                  <div className="flex items-center gap-3 text-xs text-[#797586]">
                     <svg className="w-4 h-4 text-brand-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                     </svg>
                     <span>Instant access after purchase</span>
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-surface-500">
+                  <div className="flex items-center gap-3 text-xs text-[#797586]">
                     <svg className="w-4 h-4 text-purple-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -450,15 +450,15 @@ export default function ContentDetailPage({ params }: { params: { contentId: str
             {/* Creator Profile Card */}
             {content.creator && (
               <div className="card p-6 shadow-soft-md">
-                <h3 className="text-xs font-bold text-surface-400 uppercase tracking-wider mb-4">Created by</h3>
+                <h3 className="text-xs font-bold text-[#797586] uppercase tracking-wider mb-4">Created by</h3>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="avatar w-12 h-12 rounded-full bg-gradient-to-br from-brand-500 to-purple-500 flex items-center justify-center ring-2 ring-brand-200 ring-offset-2 flex-shrink-0">
+                  <div className="avatar w-12 h-12 rounded-full bg-gradient-to-br from-[#451ebb] to-[#5d3fd3] flex items-center justify-center ring-2 ring-[#e6deff] ring-offset-2 flex-shrink-0">
                     <span className="text-white text-base font-bold">{content.creator.name?.[0]?.toUpperCase()}</span>
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-surface-900 truncate">{content.creator.name}</p>
+                    <p className="font-semibold text-[#151b29] truncate">{content.creator.name}</p>
                     {content.creator.followerCount != null && (
-                      <p className="text-xs text-surface-400 mt-0.5">
+                      <p className="text-xs text-[#797586] mt-0.5">
                         {content.creator.followerCount} follower{content.creator.followerCount !== 1 ? "s" : ""}
                       </p>
                     )}

@@ -115,8 +115,8 @@ export default function CheckoutPage() {
                 step.completed
                   ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
                   : step.active
-                    ? "bg-brand-600 text-white shadow-lg shadow-brand-600/40"
-                    : "bg-surface-100 text-surface-400 border border-surface-200"
+                    ? "bg-[#451ebb] text-white shadow-lg shadow-[#451ebb]/40"
+                    : "bg-[#f1f3ff] text-[#797586] border border-[#e2e8fc]"
               }`}>
                 {step.completed ? (
                   <IconCheck className="w-5 h-5" />
@@ -124,31 +124,31 @@ export default function CheckoutPage() {
                   i + 1
                 )}
                 {step.active && (
-                  <div className="absolute inset-0 rounded-full bg-brand-500/20 animate-pulse" />
+                  <div className="absolute inset-0 rounded-full bg-[#5d3fd3]/20 animate-pulse" />
                 )}
               </div>
               <span className={`text-xs font-semibold tracking-wide ${
-                step.active ? "text-brand-600" : step.completed ? "text-emerald-600" : "text-surface-400"
+                step.active ? "text-[#451ebb]" : step.completed ? "text-emerald-600" : "text-[#797586]"
               }`}>{step.label}</span>
             </div>
             {i < steps.length - 1 && (
               <div className={`w-16 sm:w-24 h-0.5 mx-3 mb-5 rounded-full ${
-                step.completed ? "bg-gradient-to-r from-emerald-500 to-brand-500" : "bg-surface-200"
+                step.completed ? "bg-gradient-to-r from-emerald-500 to-brand-500" : "bg-[#e2e8fc]"
               }`} />
             )}
           </div>
         ))}
       </div>
 
-      <h1 className="section-title mb-8">Shopping Cart</h1>
+      <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold mb-8">Shopping Cart</h1>
 
       {items.length === 0 ? (
         <div className="empty-state card py-20">
           <div className="empty-state-icon">
-            <IconCart className="w-10 h-10 text-surface-400" />
+            <IconCart className="w-10 h-10 text-[#797586]" />
           </div>
-          <h2 className="text-xl font-display font-bold text-surface-800 mb-2">Your cart is empty</h2>
-          <p className="text-surface-400 text-sm mb-8 max-w-xs mx-auto">
+          <h2 className="text-xl font-['Plus_Jakarta_Sans'] font-bold text-[#151b29] mb-2">Your cart is empty</h2>
+          <p className="text-[#797586] text-sm mb-8 max-w-xs mx-auto">
             Discover premium content from talented creators and add them to your cart.
           </p>
           <Link href="/browse" className="btn-primary px-8 py-3">
@@ -166,7 +166,7 @@ export default function CheckoutPage() {
                 className="card p-4 sm:p-5 flex items-center gap-4 group hover:shadow-soft-lg transition-all duration-300 animate-fade-in"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-surface-100 to-surface-50 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden border border-surface-100">
+                <div className="w-20 h-20 bg-gradient-to-br from-surface-100 to-surface-50 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden border border-[#f1f3ff]">
                   {item.content.thumbnailUrl ? (
                     <img src={item.content.thumbnailUrl} alt="" className="w-full h-full object-cover" />
                   ) : (
@@ -176,9 +176,9 @@ export default function CheckoutPage() {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-display font-semibold text-surface-900 truncate">{item.content.title}</h3>
+                  <h3 className="font-['Plus_Jakarta_Sans'] font-semibold text-[#151b29] truncate">{item.content.title}</h3>
                   {item.content.creator && (
-                    <p className="text-xs text-surface-400 mt-0.5">by {item.content.creator.name}</p>
+                    <p className="text-xs text-[#797586] mt-0.5">by {item.content.creator.name}</p>
                   )}
                   <div className="mt-1.5">
                     <span className={`badge-${item.content.type === "video" ? "info" : item.content.type === "article" ? "success" : "warning"} text-[10px] uppercase tracking-wider`}>
@@ -203,20 +203,20 @@ export default function CheckoutPage() {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="card p-6 sticky top-24 shadow-soft-lg">
-              <h2 className="font-display font-bold text-lg mb-5">Order Summary</h2>
+              <h2 className="font-['Plus_Jakarta_Sans'] font-bold text-lg mb-5">Order Summary</h2>
 
               <div className="space-y-3 text-sm">
-                <div className="flex justify-between text-surface-500">
+                <div className="flex justify-between text-[#797586]">
                   <span>Items ({items.length})</span>
                   <span>{formatPrice(total)}</span>
                 </div>
-                <div className="flex justify-between text-surface-500">
+                <div className="flex justify-between text-[#797586]">
                   <span>Subtotal</span>
                   <span>{formatPrice(total)}</span>
                 </div>
-                <div className="flex justify-between text-surface-500">
+                <div className="flex justify-between text-[#797586]">
                   <span>Tax</span>
-                  <span className="text-surface-400">$0.00</span>
+                  <span className="text-[#797586]">$0.00</span>
                 </div>
 
                 {discount && (
@@ -231,11 +231,11 @@ export default function CheckoutPage() {
 
                 <div className="divider-gradient" />
 
-                <div className="flex justify-between font-display font-bold text-xl pt-1">
+                <div className="flex justify-between font-['Plus_Jakarta_Sans'] font-bold text-xl pt-1">
                   <span>Total</span>
                   <div className="text-right">
                     {discount && (
-                      <span className="block text-sm font-normal text-surface-400 line-through mb-0.5">
+                      <span className="block text-sm font-normal text-[#797586] line-through mb-0.5">
                         {formatPrice(total)}
                       </span>
                     )}
@@ -245,8 +245,8 @@ export default function CheckoutPage() {
               </div>
 
               {/* Coupon Code */}
-              <div className="mt-5 p-4 bg-surface-50 rounded-xl border border-surface-100">
-                <label className="text-xs font-semibold text-surface-500 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
+              <div className="mt-5 p-4 bg-[#faf8ff] rounded-xl border border-[#f1f3ff]">
+                <label className="text-xs font-semibold text-[#797586] uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
                   <IconTag className="w-3.5 h-3.5" />
                   Coupon Code
                 </label>
@@ -279,9 +279,9 @@ export default function CheckoutPage() {
               </div>
 
               {/* Mock Payment */}
-              <div className="mt-5 p-4 bg-surface-50 rounded-xl border border-surface-200">
+              <div className="mt-5 p-4 bg-[#faf8ff] rounded-xl border border-[#e2e8fc]">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2 text-xs text-surface-500 font-semibold uppercase tracking-wider">
+                  <div className="flex items-center gap-2 text-xs text-[#797586] font-semibold uppercase tracking-wider">
                     <IconShield className="w-3.5 h-3.5" />
                     Payment Details
                   </div>
@@ -297,14 +297,14 @@ export default function CheckoutPage() {
                     <input type="text" defaultValue="123" className="input text-sm bg-white font-mono" readOnly />
                   </div>
                 </div>
-                <p className="text-[11px] text-surface-400 mt-2.5 text-center">Demo mode &mdash; no real charges will be made</p>
+                <p className="text-[11px] text-[#797586] mt-2.5 text-center">Demo mode &mdash; no real charges will be made</p>
               </div>
 
               {/* Checkout Button */}
               <button
                 onClick={handleCheckout}
                 disabled={processing}
-                className="w-full mt-5 btn-glow py-3.5 text-base justify-center font-display font-bold"
+                className="w-full mt-5 btn-glow py-3.5 text-base justify-center font-['Plus_Jakarta_Sans'] font-bold"
               >
                 {processing ? (
                   <>

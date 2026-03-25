@@ -43,14 +43,14 @@ export default function AdminCategoriesPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">Category Management</h1>
-        <p className="text-surface-500 mt-1">Organize content with categories.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Category Management</h1>
+        <p className="text-[#797586] mt-1">Organize content with categories.</p>
       </div>
 
       <form onSubmit={handleCreate} className="card">
         <div className="flex items-center gap-2 mb-6">
-          <IconTag className="w-5 h-5 text-brand-600" />
-          <h2 className="section-title text-lg">Add New Category</h2>
+          <IconTag className="w-5 h-5 text-[#451ebb]" />
+          <h2 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-lg">Add New Category</h2>
         </div>
         <div className="flex flex-col sm:flex-row gap-3">
           <input
@@ -86,8 +86,8 @@ export default function AdminCategoriesPage() {
           </div>
         ) : categories.length === 0 ? (
           <div className="text-center py-16">
-            <IconTag className="w-8 h-8 text-surface-300 mx-auto mb-2" />
-            <p className="text-surface-500">No categories yet.</p>
+            <IconTag className="w-8 h-8 text-[#c9c4d7] mx-auto mb-2" />
+            <p className="text-[#797586]">No categories yet.</p>
           </div>
         ) : (
           <table className="table-premium">
@@ -103,11 +103,11 @@ export default function AdminCategoriesPage() {
             <tbody>
               {categories.map((cat) => (
                 <tr key={cat._id}>
-                  <td className="font-medium text-surface-900">{cat.name}</td>
+                  <td className="font-medium text-[#151b29]">{cat.name}</td>
                   <td>
-                    <span className="text-xs text-surface-400 font-mono bg-surface-50 px-2 py-1 rounded">{cat.slug}</span>
+                    <span className="text-xs text-[#797586] font-mono bg-[#faf8ff] px-2 py-1 rounded">{cat.slug}</span>
                   </td>
-                  <td className="text-surface-500">{cat.description || "-"}</td>
+                  <td className="text-[#797586]">{cat.description || "-"}</td>
                   <td>
                     <span className="badge-blue text-xs">{cat.contentCount}</span>
                   </td>
@@ -117,7 +117,7 @@ export default function AdminCategoriesPage() {
                       className="btn-ghost p-2 rounded-lg group"
                       title="Deactivate"
                     >
-                      <IconTrash className="w-4 h-4 text-surface-400 group-hover:text-red-600 transition-colors" />
+                      <IconTrash className="w-4 h-4 text-[#797586] group-hover:text-red-600 transition-colors" />
                     </button>
                   </td>
                 </tr>

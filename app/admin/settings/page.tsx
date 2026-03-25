@@ -51,21 +51,21 @@ export default function AdminSettingsPage() {
   return (
     <div className="max-w-2xl space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">Platform Settings</h1>
-        <p className="text-surface-500 mt-1">Configure platform-wide settings.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Platform Settings</h1>
+        <p className="text-[#797586] mt-1">Configure platform-wide settings.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-8">
         <div className="flex items-center gap-2 mb-2">
-          <IconSettings className="w-5 h-5 text-brand-600" />
-          <h2 className="section-title text-lg">General Configuration</h2>
+          <IconSettings className="w-5 h-5 text-[#451ebb]" />
+          <h2 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-lg">General Configuration</h2>
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-surface-800 mb-1">
+          <label className="block text-sm font-semibold text-[#151b29] mb-1">
             Commission Rate (%)
           </label>
-          <p className="text-xs text-surface-400 mb-2">
+          <p className="text-xs text-[#797586] mb-2">
             Percentage of each sale that goes to the platform.
           </p>
           <input
@@ -79,10 +79,10 @@ export default function AdminSettingsPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-surface-800 mb-1">
+          <label className="block text-sm font-semibold text-[#151b29] mb-1">
             Minimum Content Price (cents)
           </label>
-          <p className="text-xs text-surface-400 mb-2">
+          <p className="text-xs text-[#797586] mb-2">
             Lowest price a creator can set. Currently: ${(settings.minContentPrice / 100).toFixed(2)}
           </p>
           <input
@@ -95,10 +95,10 @@ export default function AdminSettingsPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-surface-800 mb-1">
+          <label className="block text-sm font-semibold text-[#151b29] mb-1">
             Maximum Content Price (cents)
           </label>
-          <p className="text-xs text-surface-400 mb-2">
+          <p className="text-xs text-[#797586] mb-2">
             Highest price a creator can set. Currently: ${(settings.maxContentPrice / 100).toFixed(2)}
           </p>
           <input
@@ -110,7 +110,7 @@ export default function AdminSettingsPage() {
           />
         </div>
 
-        <div className="flex items-center gap-3 pt-4 border-t border-surface-200">
+        <div className="flex items-center gap-3 pt-4 border-t border-[#e2e8fc]">
           <button
             type="submit"
             disabled={saving}

@@ -44,8 +44,8 @@ export default function CreatorContentPage() {
     <div className="space-y-8 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="section-title text-2xl">My Content</h1>
-          <p className="text-surface-500 mt-1">Manage and track your content.</p>
+          <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">My Content</h1>
+          <p className="text-[#797586] mt-1">Manage and track your content.</p>
         </div>
         <Link href="/creator/content/new" className="btn-primary inline-flex items-center gap-2">
           <IconPlus className="w-4 h-4" />
@@ -63,11 +63,11 @@ export default function CreatorContentPage() {
         </div>
       ) : contents.length === 0 ? (
         <div className="card text-center py-16">
-          <div className="w-16 h-16 rounded-2xl bg-surface-100 flex items-center justify-center mx-auto mb-4">
-            <IconSparkles className="w-8 h-8 text-surface-400" />
+          <div className="w-16 h-16 rounded-2xl bg-[#f1f3ff] flex items-center justify-center mx-auto mb-4">
+            <IconSparkles className="w-8 h-8 text-[#797586]" />
           </div>
-          <p className="text-surface-500 text-lg mb-1 font-medium">No content yet</p>
-          <p className="text-surface-400 text-sm mb-6">Start creating and selling your content.</p>
+          <p className="text-[#797586] text-lg mb-1 font-medium">No content yet</p>
+          <p className="text-[#797586] text-sm mb-6">Start creating and selling your content.</p>
           <Link href="/creator/content/new" className="btn-primary inline-flex items-center gap-2">
             <IconPlus className="w-4 h-4" />
             Create your first piece
@@ -91,12 +91,12 @@ export default function CreatorContentPage() {
                 <tr key={c._id}>
                   <td>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-surface-100 flex items-center justify-center flex-shrink-0">
-                        <ContentTypeIcon type={c.type} className="w-4 h-4 text-surface-500" />
+                      <div className="w-8 h-8 rounded-lg bg-[#f1f3ff] flex items-center justify-center flex-shrink-0">
+                        <ContentTypeIcon type={c.type} className="w-4 h-4 text-[#797586]" />
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-surface-900">{c.title}</p>
-                        <p className="text-xs text-surface-400 mt-0.5">
+                        <p className="font-medium text-sm text-[#151b29]">{c.title}</p>
+                        <p className="text-xs text-[#797586] mt-0.5">
                           {new Date(c.createdAt).toLocaleDateString()}
                         </p>
                       </div>
@@ -105,7 +105,7 @@ export default function CreatorContentPage() {
                   <td>
                     <span className="badge-blue capitalize text-xs">{c.type}</span>
                   </td>
-                  <td className="font-semibold text-surface-900">{formatPrice(c.price)}</td>
+                  <td className="font-semibold text-[#151b29]">{formatPrice(c.price)}</td>
                   <td>
                     <span className={`${statusBadge[c.status]} capitalize text-xs`}>
                       {c.status}
@@ -114,7 +114,7 @@ export default function CreatorContentPage() {
                       <p className="text-xs text-red-500 mt-1 max-w-[200px]">{c.rejectionReason}</p>
                     )}
                   </td>
-                  <td className="font-medium text-surface-700">{c.totalSales}</td>
+                  <td className="font-medium text-[#484554]">{c.totalSales}</td>
                   <td>
                     <div className="flex items-center gap-1">
                       <Link
@@ -122,7 +122,7 @@ export default function CreatorContentPage() {
                         className="btn-ghost p-2 rounded-lg"
                         title="Edit"
                       >
-                        <IconEdit className="w-4 h-4 text-surface-500 hover:text-brand-600" />
+                        <IconEdit className="w-4 h-4 text-[#797586] hover:text-[#451ebb]" />
                       </Link>
                       {c.status === "draft" && (
                         <button
@@ -138,7 +138,7 @@ export default function CreatorContentPage() {
                         className="btn-ghost p-2 rounded-lg"
                         title="Delete"
                       >
-                        <IconTrash className="w-4 h-4 text-surface-400 hover:text-red-600" />
+                        <IconTrash className="w-4 h-4 text-[#797586] hover:text-red-600" />
                       </button>
                     </div>
                   </td>

@@ -19,16 +19,16 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="section-title text-2xl">Dashboard</h1>
-        <p className="text-surface-500 mt-1">Welcome back! Here is your overview.</p>
+        <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Dashboard</h1>
+        <p className="text-[#797586] mt-1">Welcome back! Here is your overview.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="stat-card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-surface-500">Items in Library</p>
-              <p className="text-3xl font-bold font-display mt-1">{purchases.length}</p>
+              <p className="text-sm text-[#797586]">Items in Library</p>
+              <p className="text-3xl font-bold font-['Plus_Jakarta_Sans'] mt-1">{purchases.length}</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shadow-soft-md">
               <IconLibrary className="w-6 h-6 text-white" />
@@ -39,8 +39,8 @@ export default function DashboardPage() {
         <div className="stat-card">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-surface-500">Total Spent</p>
-              <p className="text-3xl font-bold font-display mt-1">
+              <p className="text-sm text-[#797586]">Total Spent</p>
+              <p className="text-3xl font-bold font-['Plus_Jakarta_Sans'] mt-1">
                 {formatPrice(purchases.reduce((sum, p) => sum + p.price, 0))}
               </p>
             </div>
@@ -61,8 +61,8 @@ export default function DashboardPage() {
 
       <div className="card">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="section-title text-lg">Recent Purchases</h2>
-          <Link href="/dashboard/library" className="text-sm text-brand-600 hover:text-brand-700 font-medium inline-flex items-center gap-1">
+          <h2 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-lg">Recent Purchases</h2>
+          <Link href="/dashboard/library" className="text-sm text-[#451ebb] hover:text-[#451ebb] font-medium inline-flex items-center gap-1">
             View all
             <IconArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -71,7 +71,7 @@ export default function DashboardPage() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="rounded-xl border border-surface-200 p-4">
+              <div key={i} className="rounded-xl border border-[#e2e8fc] p-4">
                 <div className="flex items-center gap-3">
                   <div className="skeleton w-12 h-12 rounded-lg" />
                   <div className="flex-1">
@@ -84,10 +84,10 @@ export default function DashboardPage() {
           </div>
         ) : purchases.length === 0 ? (
           <div className="text-center py-16">
-            <div className="w-16 h-16 rounded-2xl bg-surface-100 flex items-center justify-center mx-auto mb-4">
-              <IconLibrary className="w-8 h-8 text-surface-400" />
+            <div className="w-16 h-16 rounded-2xl bg-[#f1f3ff] flex items-center justify-center mx-auto mb-4">
+              <IconLibrary className="w-8 h-8 text-[#797586]" />
             </div>
-            <p className="text-surface-500 mb-4 font-medium">No purchases yet</p>
+            <p className="text-[#797586] mb-4 font-medium">No purchases yet</p>
             <Link href="/browse" className="btn-primary inline-flex items-center gap-2">
               <IconSparkles className="w-4 h-4" />
               Start browsing
@@ -99,18 +99,18 @@ export default function DashboardPage() {
               <Link
                 key={p._id}
                 href={`/browse/${p.content?._id}`}
-                className="card-hover group flex items-center gap-3 p-4 rounded-xl border border-surface-200"
+                className="card-hover group flex items-center gap-3 p-4 rounded-xl border border-[#e2e8fc]"
               >
-                <div className="w-12 h-12 bg-surface-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-brand-50 transition-colors">
+                <div className="w-12 h-12 bg-[#f1f3ff] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#e6deff] transition-colors">
                   {p.content?.thumbnailUrl ? (
                     <img src={p.content.thumbnailUrl} alt="" className="w-full h-full object-cover rounded-lg" />
                   ) : (
-                    <ContentTypeIcon type={p.content?.type} className="w-6 h-6 text-surface-400 group-hover:text-brand-500 transition-colors" />
+                    <ContentTypeIcon type={p.content?.type} className="w-6 h-6 text-[#797586] group-hover:text-brand-500 transition-colors" />
                   )}
                 </div>
                 <div className="min-w-0">
-                  <p className="font-medium text-sm truncate text-surface-900">{p.content?.title}</p>
-                  <p className="text-xs text-surface-400 mt-0.5">{formatPrice(p.price)}</p>
+                  <p className="font-medium text-sm truncate text-[#151b29]">{p.content?.title}</p>
+                  <p className="text-xs text-[#797586] mt-0.5">{formatPrice(p.price)}</p>
                 </div>
               </Link>
             ))}

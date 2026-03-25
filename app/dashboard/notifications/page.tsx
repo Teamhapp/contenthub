@@ -15,7 +15,7 @@ const typeConfig: Record<string, { color: string; bg: string; icon: JSX.Element 
     ),
   },
   new_follower: {
-    color: "text-brand-600",
+    color: "text-[#451ebb]",
     bg: "bg-brand-100",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -53,8 +53,8 @@ const typeConfig: Record<string, { color: string; bg: string; icon: JSX.Element 
 };
 
 const defaultConfig = {
-  color: "text-surface-500",
-  bg: "bg-surface-100",
+  color: "text-[#797586]",
+  bg: "bg-[#f1f3ff]",
   icon: (
     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
@@ -138,14 +138,14 @@ export default function NotificationsPage() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="section-title text-2xl">Notifications</h1>
+            <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Notifications</h1>
             {!loading && unreadCount > 0 && (
               <span className="badge-brand px-2.5 py-0.5 text-xs font-bold rounded-full">
                 {unreadCount} new
               </span>
             )}
           </div>
-          <p className="text-surface-500 mt-1">Stay updated on your activity and content</p>
+          <p className="text-[#797586] mt-1">Stay updated on your activity and content</p>
         </div>
 
         {!loading && unreadCount > 0 && (
@@ -177,13 +177,13 @@ export default function NotificationsPage() {
         </div>
       ) : notifications.length === 0 ? (
         <div className="card text-center py-16">
-          <div className="w-16 h-16 rounded-2xl bg-surface-100 flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-surface-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+          <div className="w-16 h-16 rounded-2xl bg-[#f1f3ff] flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-[#797586]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
             </svg>
           </div>
-          <p className="text-surface-500 text-lg mb-1 font-medium">No notifications yet</p>
-          <p className="text-surface-400 text-sm mb-6">
+          <p className="text-[#797586] text-lg mb-1 font-medium">No notifications yet</p>
+          <p className="text-[#797586] text-sm mb-6">
             When you get sales, followers, reviews, or content updates, they&apos;ll show up here.
           </p>
           <button onClick={() => router.push("/dashboard")} className="btn-secondary inline-flex items-center gap-2">
@@ -203,8 +203,8 @@ export default function NotificationsPage() {
                 onClick={() => handleClick(notification)}
                 className={`w-full text-left card transition-all duration-200 hover:shadow-soft-md hover:-translate-y-0.5 group animate-stagger-fade ${
                   isUnread
-                    ? "bg-brand-50/30 border-brand-100 hover:bg-brand-50/50"
-                    : "hover:bg-surface-50"
+                    ? "bg-[#e6deff]/30 border-brand-100 hover:bg-[#e6deff]/50"
+                    : "hover:bg-[#faf8ff]"
                 }`}
                 style={{ animationDelay: `${i * 40}ms` }}
               >
@@ -217,17 +217,17 @@ export default function NotificationsPage() {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-display font-semibold text-sm text-surface-900 group-hover:text-brand-600 transition-colors truncate">
+                      <h3 className="font-['Plus_Jakarta_Sans'] font-semibold text-sm text-[#151b29] group-hover:text-[#451ebb] transition-colors truncate">
                         {notification.title}
                       </h3>
                       {isUnread && (
-                        <span className="w-2 h-2 rounded-full bg-brand-500 flex-shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-[#5d3fd3] flex-shrink-0" />
                       )}
                     </div>
-                    <p className="text-sm text-surface-500 mt-0.5 line-clamp-2 leading-relaxed">
+                    <p className="text-sm text-[#797586] mt-0.5 line-clamp-2 leading-relaxed">
                       {notification.message}
                     </p>
-                    <span className="text-xs text-surface-400 mt-1.5 block">
+                    <span className="text-xs text-[#797586] mt-1.5 block">
                       {timeAgo(notification.createdAt)}
                     </span>
                   </div>
@@ -235,7 +235,7 @@ export default function NotificationsPage() {
                   {/* Arrow */}
                   {notification.link && (
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1">
-                      <svg className="w-4 h-4 text-surface-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                      <svg className="w-4 h-4 text-[#797586]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                       </svg>
                     </div>

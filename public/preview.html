@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Digital Atelier — Live Design Preview</title>
+    <title>The Digital Atelier — Design Preview</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>
@@ -12,12 +12,15 @@
             --sidebar-bg: rgba(20, 20, 35, 0.95);
             --text-main: #f0eef6;
             --text-muted: #8b85a0;
+            --text-dim: #5a5470;
             --primary: #451ebb;
             --primary-container: #5d3fd3;
             --primary-light: #cabeff;
+            --primary-fixed: #e6deff;
             --primary-glow: rgba(69, 30, 187, 0.25);
             --surface: #1a1a2e;
-            --surface-low: #151525;
+            --surface-raised: #22223a;
+            --surface-card: #1e1e32;
             --border: rgba(202, 190, 255, 0.08);
             --border-active: rgba(93, 63, 211, 0.5);
         }
@@ -29,306 +32,426 @@
             background: var(--bg);
             color: var(--text-main);
             height: 100vh;
-            display: flex;
             overflow: hidden;
             background-image:
-                radial-gradient(ellipse at 20% 0%, rgba(69, 30, 187, 0.15), transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(93, 63, 211, 0.1), transparent 50%);
+                radial-gradient(ellipse at 20% 0%, rgba(69, 30, 187, 0.12), transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(93, 63, 211, 0.08), transparent 50%);
         }
 
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
-            font-size: 20px;
-            vertical-align: middle;
+            font-size: 20px; vertical-align: middle;
         }
 
-        /* ==================== SIDEBAR ==================== */
-        .sidebar {
-            width: 300px;
-            min-width: 300px;
-            background: var(--sidebar-bg);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(24px);
-            z-index: 10;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar-header {
-            padding: 28px 24px 20px;
+        /* ==================== TOP BAR ==================== */
+        .top-bar {
+            height: 56px;
             border-bottom: 1px solid var(--border);
+            display: flex; align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            background: rgba(14, 14, 26, 0.9);
+            backdrop-filter: blur(16px);
+            z-index: 50; position: relative;
         }
-
-        .sidebar-header h1 {
+        .top-bar-left { display: flex; align-items: center; gap: 16px; }
+        .top-bar-brand {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
+            font-size: 1.1rem; font-weight: 800;
             background: linear-gradient(135deg, #cabeff, #e6deff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
         }
+        .top-bar-divider { width: 1px; height: 24px; background: var(--border); }
 
-        .sidebar-header p {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-weight: 600;
-            margin-top: 4px;
+        .mode-tabs {
+            display: flex; background: var(--surface);
+            padding: 3px; border-radius: 10px;
+            border: 1px solid var(--border);
         }
-
-        .menu-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 12px;
-        }
-
-        .menu-container::-webkit-scrollbar { width: 4px; }
-        .menu-container::-webkit-scrollbar-track { background: transparent; }
-        .menu-container::-webkit-scrollbar-thumb { background: rgba(202, 190, 255, 0.15); border-radius: 10px; }
-
-        .menu-group-label {
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--text-muted);
-            padding: 16px 12px 8px;
-        }
-
-        .menu-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .menu-btn {
-            width: 100%;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-muted);
-            text-align: left;
-            padding: 10px 12px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .mode-tab {
+            background: transparent; color: var(--text-muted); border: none;
+            padding: 7px 16px; font-size: 0.8rem; font-weight: 600;
+            border-radius: 7px; cursor: pointer; transition: all 0.2s;
             font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .mode-tab:hover { color: var(--text-main); }
+        .mode-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
+            color: white; box-shadow: 0 2px 12px rgba(69, 30, 187, 0.4);
         }
 
-        .menu-btn:hover {
-            background: rgba(202, 190, 255, 0.06);
-            color: var(--text-main);
+        .top-bar-right { display: flex; align-items: center; gap: 12px; }
+        .top-bar-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 0.9rem;
+        }
+        .top-bar-route {
+            font-size: 0.7rem; color: var(--text-muted);
+            background: var(--surface); padding: 3px 10px;
+            border-radius: 4px; font-family: monospace;
         }
 
-        .menu-btn.active {
-            background: var(--primary-glow);
-            color: var(--primary-light);
+        .device-toggles {
+            display: flex; background: var(--surface);
+            padding: 3px; border-radius: 8px; border: 1px solid var(--border);
+        }
+        .device-btn {
+            background: transparent; color: var(--text-muted); border: none;
+            padding: 5px 12px; font-size: 0.75rem; font-weight: 600;
+            border-radius: 6px; cursor: pointer; transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .device-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
+            color: white; box-shadow: 0 2px 8px rgba(69, 30, 187, 0.3);
+        }
+
+        /* ==================== VIEW CONTAINERS ==================== */
+        .view { display: none; height: calc(100vh - 56px); }
+        .view.active { display: flex; }
+
+        /* ==================== GALLERY VIEW ==================== */
+        .gallery-view {
+            flex-direction: column;
+            overflow-y: auto; padding: 40px;
+        }
+        .gallery-view::-webkit-scrollbar { width: 6px; }
+        .gallery-view::-webkit-scrollbar-track { background: transparent; }
+        .gallery-view::-webkit-scrollbar-thumb { background: rgba(202,190,255,0.15); border-radius: 10px; }
+
+        .gallery-group { margin-bottom: 48px; }
+        .gallery-group-header {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 20px; padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .gallery-group-label {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem; font-weight: 700;
+        }
+        .gallery-group-count {
+            font-size: 0.7rem; color: var(--text-dim);
+            background: var(--surface); padding: 2px 10px;
+            border-radius: 99px; font-weight: 600;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background: var(--surface-card);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gallery-card:hover {
             border-color: var(--border-active);
-            font-weight: 600;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 0 1px var(--border-active);
         }
-
-        .menu-btn .material-symbols-outlined {
-            opacity: 0.5;
-            font-size: 18px;
+        .gallery-card-img {
+            width: 100%; aspect-ratio: 16/10;
+            object-fit: cover; object-position: top;
+            display: block; background: var(--surface);
         }
-        .menu-btn.active .material-symbols-outlined {
-            opacity: 1;
+        .gallery-card-body { padding: 16px; }
+        .gallery-card-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 0.9rem; margin-bottom: 6px;
         }
-
+        .gallery-card-meta {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .gallery-card-route {
+            font-size: 0.7rem; color: var(--text-dim);
+            font-family: monospace;
+        }
         .role-dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            display: inline-block;
-            margin-left: auto;
-            flex-shrink: 0;
+            width: 7px; height: 7px; border-radius: 50%;
+            display: inline-block; flex-shrink: 0;
         }
         .role-dot.public { background: #22c55e; }
         .role-dot.customer { background: #3b82f6; }
         .role-dot.creator { background: #d946ef; }
         .role-dot.admin { background: #f59e0b; }
 
-        .sidebar-footer {
-            padding: 16px 20px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 8px;
-            align-items: center;
+        .gallery-card-open {
+            font-size: 0.7rem; color: var(--primary-light);
+            margin-left: auto; font-weight: 600;
+            display: flex; align-items: center; gap: 3px;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .gallery-card:hover .gallery-card-open { opacity: 1; }
+
+        /* ==================== LIVE VIEW ==================== */
+        .live-view { flex-direction: row; }
+
+        .sidebar {
+            width: 280px; min-width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            display: flex; flex-direction: column;
+            backdrop-filter: blur(24px);
+        }
+        .sidebar-header {
+            padding: 20px 16px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-label {
+            font-size: 0.6rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--text-dim); margin-bottom: 2px;
+        }
+        .sidebar-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem; font-weight: 700;
         }
 
+        .menu-container {
+            flex: 1; overflow-y: auto; padding: 8px;
+        }
+        .menu-container::-webkit-scrollbar { width: 4px; }
+        .menu-container::-webkit-scrollbar-track { background: transparent; }
+        .menu-container::-webkit-scrollbar-thumb { background: rgba(202,190,255,0.15); border-radius: 10px; }
+
+        .menu-group-label {
+            font-size: 0.6rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--text-dim); padding: 14px 10px 6px;
+        }
+        .menu-list { list-style: none; display: flex; flex-direction: column; gap: 1px; }
+        .menu-btn {
+            width: 100%; background: transparent; border: 1px solid transparent;
+            color: var(--text-muted); text-align: left;
+            padding: 8px 10px; font-size: 0.8rem; font-weight: 500;
+            border-radius: 7px; cursor: pointer; transition: all 0.15s;
+            display: flex; align-items: center; gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+        .menu-btn:hover { background: rgba(202,190,255,0.06); color: var(--text-main); }
+        .menu-btn.active {
+            background: var(--primary-glow); color: var(--primary-light);
+            border-color: var(--border-active); font-weight: 600;
+        }
+        .menu-btn .material-symbols-outlined { opacity: 0.4; font-size: 17px; }
+        .menu-btn.active .material-symbols-outlined { opacity: 1; }
+
+        .sidebar-footer {
+            padding: 12px 16px; border-top: 1px solid var(--border);
+            display: flex; gap: 10px; flex-wrap: wrap;
+        }
         .legend-item {
             display: flex; align-items: center; gap: 4px;
-            font-size: 0.65rem; color: var(--text-muted);
+            font-size: 0.6rem; color: var(--text-dim);
         }
 
-        /* ==================== MAIN CONTENT ==================== */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .top-bar {
-            height: 56px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 24px;
-            justify-content: space-between;
-            background: rgba(14, 14, 26, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 5;
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .top-bar-title {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .top-bar-route {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            background: var(--surface);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        }
-
-        .device-toggles {
-            display: flex;
-            background: var(--surface);
-            padding: 3px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .device-btn {
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            padding: 6px 14px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .device-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--primary-container));
-            color: white;
-            box-shadow: 0 2px 12px rgba(69, 30, 187, 0.4);
-        }
-
-        /* ==================== IFRAME ==================== */
+        .iframe-area { flex: 1; display: flex; flex-direction: column; }
         .iframe-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
-            background: radial-gradient(circle at center, rgba(93, 63, 211, 0.03), transparent 70%);
+            flex: 1; display: flex; justify-content: center;
+            align-items: center; padding: 16px; overflow: hidden;
         }
-
         .iframe-wrapper {
-            width: 100%;
-            height: 100%;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow:
-                0 0 0 1px rgba(202, 190, 255, 0.1),
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 100px rgba(69, 30, 187, 0.08);
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        border-radius 0.4s ease;
+            width: 100%; height: 100%; background: white;
+            border-radius: 12px; overflow: hidden;
+            box-shadow: 0 0 0 1px rgba(202,190,255,0.1), 0 20px 60px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .iframe-wrapper.mobile {
-            width: 375px;
-            height: 812px;
-            border-radius: 40px;
-            border: 8px solid #1a1a2e;
+            width: 375px; height: 812px;
+            border-radius: 40px; border: 8px solid #1a1a2e;
         }
-
         .iframe-wrapper.tablet {
-            width: 768px;
-            height: 1024px;
-            border-radius: 20px;
-            border: 6px solid #1a1a2e;
+            width: 768px; height: 1024px;
+            border-radius: 20px; border: 6px solid #1a1a2e;
+        }
+        iframe { width: 100%; height: 100%; border: none; display: block; }
+
+        /* ==================== DESIGN SYSTEM VIEW ==================== */
+        .design-view {
+            flex-direction: column;
+            overflow-y: auto; padding: 48px 56px;
+            max-width: 1100px; margin: 0 auto; width: 100%;
+        }
+        .design-view::-webkit-scrollbar { width: 6px; }
+        .design-view::-webkit-scrollbar-track { background: transparent; }
+        .design-view::-webkit-scrollbar-thumb { background: rgba(202,190,255,0.15); border-radius: 10px; }
+
+        .ds-section { margin-bottom: 56px; }
+        .ds-section-label {
+            font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--primary-light); margin-bottom: 8px;
+        }
+        .ds-section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.75rem; font-weight: 800; margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        .ds-section-desc {
+            font-size: 0.85rem; color: var(--text-muted);
+            line-height: 1.6; max-width: 600px; margin-bottom: 28px;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: transparent;
-            display: block;
+        .ds-swatch-row {
+            display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;
+        }
+        .ds-swatch {
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .ds-swatch-color {
+            width: 72px; height: 72px; border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .ds-swatch-name { font-size: 0.7rem; font-weight: 600; color: var(--text-main); text-align: center; }
+        .ds-swatch-hex { font-size: 0.6rem; color: var(--text-dim); font-family: monospace; }
+
+        .ds-type-sample { margin-bottom: 24px; }
+        .ds-type-label {
+            font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px;
         }
 
-        /* ==================== MOBILE RESPONSIVE ==================== */
-        .menu-toggle {
-            display: none;
-            background: transparent;
-            color: var(--text-main);
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
-            padding: 4px;
+        .ds-principles-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .ds-principle-card {
+            background: var(--surface-card); border-radius: 14px;
+            padding: 24px; border: 1px solid var(--border);
+        }
+        .ds-principle-card h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem; font-weight: 700; margin: 12px 0 8px;
+        }
+        .ds-principle-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+        .ds-component-row {
+            display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+        }
+        .ds-btn-primary {
+            background: linear-gradient(135deg, #451ebb, #5d3fd3);
+            color: white; border: none; padding: 12px 28px;
+            border-radius: 8px; font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; box-shadow: 0 4px 16px rgba(69,30,187,0.35);
+        }
+        .ds-btn-secondary {
+            background: transparent; color: var(--text-main);
+            border: 1px solid rgba(202,190,255,0.15);
+            padding: 12px 28px; border-radius: 8px;
+            font-weight: 600; font-size: 0.85rem; cursor: pointer;
+        }
+        .ds-btn-ghost {
+            background: transparent; color: var(--primary-light);
+            border: none; padding: 12px 28px;
+            font-weight: 600; font-size: 0.85rem; cursor: pointer;
         }
 
-        @media (max-width: 900px) {
-            .menu-toggle { display: flex; align-items: center; }
-            .sidebar {
-                position: absolute;
-                height: 100%;
-                transform: translateX(-100%);
-                box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
-            }
-            .sidebar.open { transform: translateX(0); }
+        .ds-card-demo {
+            background: var(--surface-card); border-radius: 14px;
+            overflow: hidden; border: 1px solid var(--border);
+            width: 280px;
         }
+        .ds-card-demo-img {
+            width: 100%; height: 140px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
+        }
+        .ds-card-demo-body { padding: 16px; }
+        .ds-card-demo-body h5 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 0.9rem; margin-bottom: 4px;
+        }
+        .ds-card-demo-body p { font-size: 0.75rem; color: var(--text-muted); }
+
+        .ds-elevation-row {
+            display: flex; flex-wrap: wrap; gap: 24px; align-items: end;
+        }
+        .ds-elevation-box {
+            width: 120px; height: 80px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.65rem; font-weight: 600; color: var(--text-muted);
+        }
+
+        .ds-badge {
+            display: inline-flex; padding: 4px 12px; border-radius: 99px;
+            font-size: 0.7rem; font-weight: 600;
+        }
+
+        .ds-glass-demo {
+            background: rgba(202,190,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(202,190,255,0.12);
+            border-radius: 14px; padding: 24px;
+            max-width: 400px;
+        }
+        .ds-glass-demo h5 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; margin-bottom: 4px;
+        }
+        .ds-glass-demo p { font-size: 0.8rem; color: var(--text-muted); }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar" id="sidebar">
+<!-- ==================== TOP BAR ==================== -->
+<header class="top-bar">
+    <div class="top-bar-left">
+        <div class="top-bar-brand">The Digital Atelier</div>
+        <div class="top-bar-divider"></div>
+        <div class="mode-tabs">
+            <button class="mode-tab active" data-mode="gallery">
+                <span class="material-symbols-outlined" style="font-size:16px">grid_view</span> Gallery
+            </button>
+            <button class="mode-tab" data-mode="live">
+                <span class="material-symbols-outlined" style="font-size:16px">play_circle</span> Live Preview
+            </button>
+            <button class="mode-tab" data-mode="design">
+                <span class="material-symbols-outlined" style="font-size:16px">palette</span> Design System
+            </button>
+        </div>
+    </div>
+    <div class="top-bar-right" id="live-controls" style="display:none">
+        <div class="top-bar-title" id="current-title"></div>
+        <div class="top-bar-route" id="current-route"></div>
+        <div class="device-toggles">
+            <button class="device-btn active" data-view="desktop">
+                <span class="material-symbols-outlined" style="font-size:15px">monitor</span> Desktop
+            </button>
+            <button class="device-btn" data-view="tablet">
+                <span class="material-symbols-outlined" style="font-size:15px">tablet</span> Tablet
+            </button>
+            <button class="device-btn" data-view="mobile">
+                <span class="material-symbols-outlined" style="font-size:15px">phone_iphone</span> Mobile
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- ==================== GALLERY VIEW ==================== -->
+<div class="view gallery-view active" id="view-gallery"></div>
+
+<!-- ==================== LIVE PREVIEW VIEW ==================== -->
+<div class="view live-view" id="view-live">
+    <aside class="sidebar">
         <div class="sidebar-header">
-            <h1>The Digital Atelier</h1>
-            <p>Live Design Preview</p>
+            <div class="sidebar-label">Navigate Pages</div>
+            <div class="sidebar-title">Live Preview</div>
         </div>
         <div class="menu-container">
             <div class="menu-group-label">Public Pages</div>
             <ul class="menu-list" id="menu-public"></ul>
-
             <div class="menu-group-label">Customer Dashboard</div>
             <ul class="menu-list" id="menu-customer"></ul>
-
             <div class="menu-group-label">Creator Studio</div>
             <ul class="menu-list" id="menu-creator"></ul>
-
             <div class="menu-group-label">Admin Panel</div>
             <ul class="menu-list" id="menu-admin"></ul>
-
             <div class="menu-group-label">Mobile Views</div>
             <ul class="menu-list" id="menu-mobile"></ul>
         </div>
@@ -339,233 +462,408 @@
             <div class="legend-item"><span class="role-dot admin"></span> Admin</div>
         </div>
     </aside>
-
-    <main class="main-content">
-        <header class="top-bar">
-            <div class="top-bar-left">
-                <button class="menu-toggle" id="menu-toggle">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
-                <div class="top-bar-title" id="current-title">Select a page</div>
-                <div class="top-bar-route" id="current-route"></div>
-            </div>
-            <div class="device-toggles">
-                <button class="device-btn active" data-view="desktop">
-                    <span class="material-symbols-outlined" style="font-size:16px">monitor</span> Desktop
-                </button>
-                <button class="device-btn" data-view="tablet">
-                    <span class="material-symbols-outlined" style="font-size:16px">tablet</span> Tablet
-                </button>
-                <button class="device-btn" data-view="mobile">
-                    <span class="material-symbols-outlined" style="font-size:16px">phone_iphone</span> Mobile
-                </button>
-            </div>
-        </header>
-
+    <div class="iframe-area">
         <div class="iframe-container">
             <div class="iframe-wrapper" id="iframe-wrapper">
                 <iframe id="preview-iframe" title="Live Preview"></iframe>
             </div>
         </div>
-    </main>
+    </div>
+</div>
 
-    <script>
-        const pages = [
-            // Public
-            {
-                group: "public", role: "public",
-                title: "Home Page",
-                route: "/",
-                icon: "home",
-                dir: "home_page_the_atelier"
-            },
-            {
-                group: "public", role: "public",
-                title: "Browse Marketplace",
-                route: "/browse",
-                icon: "storefront",
-                dir: "browse_content_the_atelier"
-            },
-            {
-                group: "public", role: "public",
-                title: "Browse — Quick Buy",
-                route: "/browse (variant)",
-                icon: "shopping_bag",
-                dir: "browse_marketplace_quick_buy_icons"
-            },
-            {
-                group: "public", role: "public",
-                title: "Content Detail",
-                route: "/browse/[contentId]",
-                icon: "visibility",
-                dir: "content_detail_architectural_glass_textures"
-            },
-            {
-                group: "public", role: "public",
-                title: "Content — One-Click Buy",
-                route: "/browse/[contentId] (variant)",
-                icon: "bolt",
-                dir: "content_detail_one_click_purchase_enabled"
-            },
-            {
-                group: "public", role: "public",
-                title: "Purchase Success",
-                route: "/checkout/success",
-                icon: "check_circle",
-                dir: "one_click_purchase_success"
-            },
+<!-- ==================== DESIGN SYSTEM VIEW ==================== -->
+<div class="view design-view" id="view-design">
 
-            // Customer
-            {
-                group: "customer", role: "customer",
-                title: "Personalized Feed",
-                route: "/dashboard/feed",
-                icon: "rss_feed",
-                dir: "your_personalized_feed"
-            },
-            {
-                group: "customer", role: "customer",
-                title: "My Library",
-                route: "/dashboard/library",
-                icon: "folder_open",
-                dir: "customer_library"
-            },
-            {
-                group: "customer", role: "customer",
-                title: "Checkout & Payment",
-                route: "/checkout",
-                icon: "shopping_cart",
-                dir: "secure_checkout_payment"
-            },
+    <!-- Hero -->
+    <div class="ds-section">
+        <div class="ds-section-label">Design System</div>
+        <div class="ds-section-title">The Editorial Gallery</div>
+        <div class="ds-section-desc">
+            A premium tool feel achieved through intentional asymmetry, expansive breathing room, and tonal layering. Content separated by light and depth, not lines. An environment of "Quiet Authority."
+        </div>
+    </div>
 
-            // Creator
-            {
-                group: "creator", role: "creator",
-                title: "Studio Dashboard",
-                route: "/creator",
-                icon: "dashboard",
-                dir: "creator_studio_dashboard_the_atelier"
-            },
-            {
-                group: "creator", role: "creator",
-                title: "Content Editor",
-                route: "/creator/content/new",
-                icon: "edit_note",
-                dir: "creator_studio_new_content_editor"
-            },
+    <!-- Colors: Brand -->
+    <div class="ds-section">
+        <div class="ds-section-label">Color</div>
+        <div class="ds-section-title">Brand Palette</div>
+        <div class="ds-swatch-row">
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#451ebb"></div>
+                <div class="ds-swatch-name">Primary</div>
+                <div class="ds-swatch-hex">#451EBB</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#5d3fd3"></div>
+                <div class="ds-swatch-name">Primary Container</div>
+                <div class="ds-swatch-hex">#5D3FD3</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#cabeff"></div>
+                <div class="ds-swatch-name">Primary Fixed Dim</div>
+                <div class="ds-swatch-hex">#CABEFF</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#e6deff"></div>
+                <div class="ds-swatch-name">Primary Fixed</div>
+                <div class="ds-swatch-hex">#E6DEFF</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#605693"></div>
+                <div class="ds-swatch-name">Secondary</div>
+                <div class="ds-swatch-hex">#605693</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#713300"></div>
+                <div class="ds-swatch-name">Tertiary</div>
+                <div class="ds-swatch-hex">#713300</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#ba1a1a"></div>
+                <div class="ds-swatch-name">Error</div>
+                <div class="ds-swatch-hex">#BA1A1A</div>
+            </div>
+        </div>
+    </div>
 
-            // Admin
-            {
-                group: "admin", role: "admin",
-                title: "Moderation Queue",
-                route: "/admin/content",
-                icon: "shield",
-                dir: "admin_moderation_queue"
-            },
+    <!-- Colors: Surface -->
+    <div class="ds-section">
+        <div class="ds-section-title">Surface Hierarchy</div>
+        <div class="ds-section-desc">Treat the UI as a physical stack of semi-transparent layers. Boundaries established through background shifts and tonal transitions.</div>
+        <div class="ds-swatch-row">
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#ffffff; border: 1px solid rgba(202,190,255,0.2)"></div>
+                <div class="ds-swatch-name">Lowest</div>
+                <div class="ds-swatch-hex">#FFFFFF</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#f1f3ff"></div>
+                <div class="ds-swatch-name">Low</div>
+                <div class="ds-swatch-hex">#F1F3FF</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#e9edff"></div>
+                <div class="ds-swatch-name">Container</div>
+                <div class="ds-swatch-hex">#E9EDFF</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#e2e8fc"></div>
+                <div class="ds-swatch-name">High</div>
+                <div class="ds-swatch-hex">#E2E8FC</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#dde2f6"></div>
+                <div class="ds-swatch-name">Highest</div>
+                <div class="ds-swatch-hex">#DDE2F6</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#faf8ff"></div>
+                <div class="ds-swatch-name">Surface</div>
+                <div class="ds-swatch-hex">#FAF8FF</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#d4d9ed"></div>
+                <div class="ds-swatch-name">Dim</div>
+                <div class="ds-swatch-hex">#D4D9ED</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#151b29"></div>
+                <div class="ds-swatch-name">On Surface</div>
+                <div class="ds-swatch-hex">#151B29</div>
+            </div>
+            <div class="ds-swatch">
+                <div class="ds-swatch-color" style="background:#484554"></div>
+                <div class="ds-swatch-name">On Surface Var</div>
+                <div class="ds-swatch-hex">#484554</div>
+            </div>
+        </div>
+    </div>
 
-            // Mobile
-            {
-                group: "mobile", role: "public",
-                title: "Mobile — Home",
-                route: "/ (mobile)",
-                icon: "phone_iphone",
-                dir: "mobile_home_page"
-            },
-            {
-                group: "mobile", role: "public",
-                title: "Mobile — Marketplace",
-                route: "/browse (mobile)",
-                icon: "phone_iphone",
-                dir: "mobile_marketplace"
-            },
-            {
-                group: "mobile", role: "public",
-                title: "Mobile — Content Detail",
-                route: "/browse/[id] (mobile)",
-                icon: "phone_iphone",
-                dir: "mobile_content_detail"
-            },
-            {
-                group: "mobile", role: "customer",
-                title: "Mobile — My Library",
-                route: "/dashboard/library (mobile)",
-                icon: "phone_iphone",
-                dir: "mobile_my_library"
-            },
-        ];
+    <!-- Typography -->
+    <div class="ds-section">
+        <div class="ds-section-label">Typography</div>
+        <div class="ds-section-title">Dual-Typeface System</div>
+        <div class="ds-section-desc">Plus Jakarta Sans for editorial impact. Inter for data clarity.</div>
 
-        const menuGroups = {
-            public: document.getElementById('menu-public'),
-            customer: document.getElementById('menu-customer'),
-            creator: document.getElementById('menu-creator'),
-            admin: document.getElementById('menu-admin'),
-            mobile: document.getElementById('menu-mobile'),
-        };
+        <div class="ds-type-sample">
+            <div class="ds-type-label">Display Large &middot; Plus Jakarta Sans 800 &middot; 3.5rem</div>
+            <div style="font-family:'Plus Jakarta Sans'; font-size:3rem; font-weight:800; letter-spacing:-0.03em; line-height:1.1">
+                Where Creativity Finds Its Value
+            </div>
+        </div>
+        <div class="ds-type-sample">
+            <div class="ds-type-label">Headline Medium &middot; Plus Jakarta Sans 700 &middot; 1.75rem</div>
+            <div style="font-family:'Plus Jakarta Sans'; font-size:1.75rem; font-weight:700; letter-spacing:-0.02em">
+                Creator Marketplace
+            </div>
+        </div>
+        <div class="ds-type-sample">
+            <div class="ds-type-label">Title Large &middot; Inter 600 &middot; 1.375rem</div>
+            <div style="font-size:1.375rem; font-weight:600">
+                Architectural Glass Textures
+            </div>
+        </div>
+        <div class="ds-type-sample">
+            <div class="ds-type-label">Body Medium &middot; Inter 400 &middot; 0.875rem</div>
+            <div style="font-size:0.875rem; color:var(--text-muted); max-width:500px; line-height:1.6">
+                A curated collection of 50+ high-resolution seamless architectural glass textures optimized for professional 3D rendering and digital art.
+            </div>
+        </div>
+        <div class="ds-type-sample">
+            <div class="ds-type-label">Label Medium &middot; Inter 600 &middot; 0.75rem</div>
+            <div style="font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary-light)">
+                Curated Creative Economy
+            </div>
+        </div>
+    </div>
 
-        const iframe = document.getElementById('preview-iframe');
-        const currentTitle = document.getElementById('current-title');
-        const currentRoute = document.getElementById('current-route');
-        const sidebar = document.getElementById('sidebar');
-        const iframeWrapper = document.getElementById('iframe-wrapper');
-        let currentActiveBtn = null;
+    <!-- Principles -->
+    <div class="ds-section">
+        <div class="ds-section-label">Principles</div>
+        <div class="ds-section-title">Design Rules</div>
+        <div class="ds-principles-grid">
+            <div class="ds-principle-card">
+                <span class="material-symbols-outlined" style="color:var(--primary-light); font-size:28px">blur_on</span>
+                <h4>The No-Line Rule</h4>
+                <p>Never use 1px solid borders to define sections. Boundaries must be established through background shifts, tonal transitions, and whitespace.</p>
+            </div>
+            <div class="ds-principle-card">
+                <span class="material-symbols-outlined" style="color:var(--primary-light); font-size:28px">auto_awesome</span>
+                <h4>Glass & Gradient</h4>
+                <p>Glassmorphism for floating elements (70% opacity + 20px blur). Primary CTAs use 135deg gradient from primary to primary-container.</p>
+            </div>
+            <div class="ds-principle-card">
+                <span class="material-symbols-outlined" style="color:var(--primary-light); font-size:28px">space_dashboard</span>
+                <h4>Asymmetric Balance</h4>
+                <p>Intentional asymmetry and expansive breathing room. Whitespace is a premium commodity. Large headlines with empty space feel expensive.</p>
+            </div>
+            <div class="ds-principle-card">
+                <span class="material-symbols-outlined" style="color:var(--primary-light); font-size:28px">layers</span>
+                <h4>Tonal Layering</h4>
+                <p>Avoid shadows for static elements. Use surface hierarchy (surface-low on surface) for natural lift. Ambient shadows only on hover states.</p>
+            </div>
+            <div class="ds-principle-card">
+                <span class="material-symbols-outlined" style="color:var(--primary-light); font-size:28px">block</span>
+                <h4>No Pure Black</h4>
+                <p>Always use on-surface (#151B29) for text. Maintains sophisticated slate depth. Reserve full rounding for small tags/chips only.</p>
+            </div>
+            <div class="ds-principle-card">
+                <span class="material-symbols-outlined" style="color:var(--primary-light); font-size:28px">tune</span>
+                <h4>Ghost Borders</h4>
+                <p>If a divider is mandatory, use outline-variant (#C9C4D7) at 15% opacity. Never 100% opaque lines. Glassmorphism edges at 10% opacity.</p>
+            </div>
+        </div>
+    </div>
 
-        pages.forEach((page, index) => {
-            const li = document.createElement('li');
-            const btn = document.createElement('button');
-            btn.className = 'menu-btn';
-            btn.innerHTML = `
-                <span class="material-symbols-outlined">${page.icon}</span>
-                ${page.title}
-                <span class="role-dot ${page.role}"></span>
+    <!-- Elevation -->
+    <div class="ds-section">
+        <div class="ds-section-label">Depth</div>
+        <div class="ds-section-title">Elevation & Effects</div>
+        <div class="ds-elevation-row" style="margin-bottom:28px">
+            <div class="ds-elevation-box" style="background:var(--surface-card)">Flat</div>
+            <div class="ds-elevation-box" style="background:var(--surface-card); box-shadow:0 4px 12px rgba(0,0,0,0.2)">Soft</div>
+            <div class="ds-elevation-box" style="background:var(--surface-card); box-shadow:0 20px 40px rgba(21,27,41,0.3)">Ambient</div>
+            <div class="ds-elevation-box" style="background:var(--surface-card); box-shadow:0 20px 40px rgba(21,27,41,0.3), 0 0 0 1px var(--border-active)">Active</div>
+        </div>
+        <div class="ds-glass-demo">
+            <h5>Glassmorphism</h5>
+            <p>Surface at 70% opacity with 20px backdrop blur. Used for nav bars, popovers, floating panels.</p>
+        </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-section">
+        <div class="ds-section-label">Components</div>
+        <div class="ds-section-title">Buttons</div>
+        <div class="ds-component-row" style="margin-bottom: 36px">
+            <button class="ds-btn-primary">Primary Action</button>
+            <button class="ds-btn-secondary">Secondary</button>
+            <button class="ds-btn-ghost">Ghost Link</button>
+        </div>
+
+        <div class="ds-section-title" style="font-size:1.3rem; margin-bottom:8px">Badges</div>
+        <div class="ds-component-row" style="margin-bottom: 36px; gap: 8px">
+            <span class="ds-badge" style="background:rgba(69,30,187,0.2); color:#cabeff">Article</span>
+            <span class="ds-badge" style="background:rgba(217,70,239,0.2); color:#f0abfc">Video</span>
+            <span class="ds-badge" style="background:rgba(34,197,94,0.2); color:#86efac">Published</span>
+            <span class="ds-badge" style="background:rgba(245,158,11,0.2); color:#fcd34d">Pending</span>
+            <span class="ds-badge" style="background:rgba(239,68,68,0.2); color:#fca5a5">Rejected</span>
+            <span class="ds-badge" style="background:rgba(59,130,246,0.2); color:#93c5fd">Free Asset</span>
+        </div>
+
+        <div class="ds-section-title" style="font-size:1.3rem; margin-bottom:16px">Card</div>
+        <div class="ds-card-demo">
+            <div class="ds-card-demo-img"></div>
+            <div class="ds-card-demo-body">
+                <h5>Ethereal Shapes Pack v2</h5>
+                <p>Studio Archi &middot; 4.9 (158 reviews)</p>
+                <div style="margin-top:8px; font-family:'Plus Jakarta Sans'; font-weight:700; font-size:1.1rem">$45.00</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ==================== PAGE DATA ====================
+    const pages = [
+        // Public
+        { group:"public", role:"public", title:"Home Page", route:"/", icon:"home", dir:"home_page_the_atelier", img:"home.png" },
+        { group:"public", role:"public", title:"Browse Marketplace", route:"/browse", icon:"storefront", dir:"browse_content_the_atelier", img:"browse.png" },
+        { group:"public", role:"public", title:"Browse — Quick Buy", route:"/browse (variant)", icon:"shopping_bag", dir:"browse_marketplace_quick_buy_icons", img:"browse-quick-buy.png" },
+        { group:"public", role:"public", title:"Content Detail", route:"/browse/[contentId]", icon:"visibility", dir:"content_detail_architectural_glass_textures", img:"content-detail.png" },
+        { group:"public", role:"public", title:"Content — One-Click Buy", route:"/browse/[contentId] (variant)", icon:"bolt", dir:"content_detail_one_click_purchase_enabled", img:"one-click-buy.png" },
+        { group:"public", role:"public", title:"Purchase Success", route:"/checkout/success", icon:"check_circle", dir:"one_click_purchase_success", img:"purchase-success.png" },
+        // Customer
+        { group:"customer", role:"customer", title:"Personalized Feed", route:"/dashboard/feed", icon:"rss_feed", dir:"your_personalized_feed", img:"feed.png" },
+        { group:"customer", role:"customer", title:"My Library", route:"/dashboard/library", icon:"folder_open", dir:"customer_library", img:"library.png" },
+        { group:"customer", role:"customer", title:"Checkout & Payment", route:"/checkout", icon:"shopping_cart", dir:"secure_checkout_payment", img:"checkout.png" },
+        // Creator
+        { group:"creator", role:"creator", title:"Studio Dashboard", route:"/creator", icon:"dashboard", dir:"creator_studio_dashboard_the_atelier", img:"creator-dashboard.png" },
+        { group:"creator", role:"creator", title:"Content Editor", route:"/creator/content/new", icon:"edit_note", dir:"creator_studio_new_content_editor", img:"creator-editor.png" },
+        // Admin
+        { group:"admin", role:"admin", title:"Moderation Queue", route:"/admin/content", icon:"shield", dir:"admin_moderation_queue", img:"admin-moderation.png" },
+        // Mobile
+        { group:"mobile", role:"public", title:"Mobile — Home", route:"/ (mobile)", icon:"phone_iphone", dir:"mobile_home_page", img:"mobile-home.png" },
+        { group:"mobile", role:"public", title:"Mobile — Marketplace", route:"/browse (mobile)", icon:"phone_iphone", dir:"mobile_marketplace", img:"mobile-marketplace.png" },
+        { group:"mobile", role:"public", title:"Mobile — Detail", route:"/browse/[id] (mobile)", icon:"phone_iphone", dir:"mobile_content_detail", img:"mobile-detail.png" },
+        { group:"mobile", role:"customer", title:"Mobile — Library", route:"/library (mobile)", icon:"phone_iphone", dir:"mobile_my_library", img:"mobile-library.png" },
+    ];
+
+    const groupLabels = {
+        public: "Public Pages",
+        customer: "Customer Dashboard",
+        creator: "Creator Studio",
+        admin: "Admin Panel",
+        mobile: "Mobile Views"
+    };
+
+    // ==================== MODE SWITCHING ====================
+    const modeTabs = document.querySelectorAll('.mode-tab');
+    const views = {
+        gallery: document.getElementById('view-gallery'),
+        live: document.getElementById('view-live'),
+        design: document.getElementById('view-design'),
+    };
+    const liveControls = document.getElementById('live-controls');
+
+    function switchMode(mode) {
+        modeTabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+        Object.entries(views).forEach(([k, v]) => {
+            v.classList.toggle('active', k === mode);
+        });
+        liveControls.style.display = mode === 'live' ? 'flex' : 'none';
+    }
+
+    modeTabs.forEach(tab => {
+        tab.addEventListener('click', () => switchMode(tab.dataset.mode));
+    });
+
+    // ==================== GALLERY ====================
+    const galleryEl = document.getElementById('view-gallery');
+    const groups = {};
+    pages.forEach(p => {
+        if (!groups[p.group]) groups[p.group] = [];
+        groups[p.group].push(p);
+    });
+
+    Object.entries(groups).forEach(([groupKey, groupPages]) => {
+        const section = document.createElement('div');
+        section.className = 'gallery-group';
+        section.innerHTML = `
+            <div class="gallery-group-header">
+                <div class="gallery-group-label">${groupLabels[groupKey]}</div>
+                <div class="gallery-group-count">${groupPages.length} pages</div>
+            </div>
+        `;
+        const grid = document.createElement('div');
+        grid.className = 'gallery-grid';
+
+        groupPages.forEach(page => {
+            const card = document.createElement('div');
+            card.className = 'gallery-card';
+            card.innerHTML = `
+                <img class="gallery-card-img" src="assets-preview/${page.img}" alt="${page.title}" loading="lazy" />
+                <div class="gallery-card-body">
+                    <div class="gallery-card-title">${page.title}</div>
+                    <div class="gallery-card-meta">
+                        <span class="role-dot ${page.role}"></span>
+                        <span class="gallery-card-route">${page.route}</span>
+                        <span class="gallery-card-open">
+                            Open Live <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span>
+                        </span>
+                    </div>
+                </div>
             `;
-
-            btn.addEventListener('click', () => {
-                if (currentActiveBtn) currentActiveBtn.classList.remove('active');
-                btn.classList.add('active');
-                currentActiveBtn = btn;
-
-                iframe.src = `preview/${page.dir}/code.html`;
-                currentTitle.textContent = page.title;
-                currentRoute.textContent = page.route;
-
-                // Auto-switch to mobile view for mobile pages
-                if (page.group === 'mobile') {
-                    setDeviceView('mobile');
-                }
-
-                if (window.innerWidth <= 900) {
-                    sidebar.classList.remove('open');
-                }
+            card.addEventListener('click', () => {
+                loadLivePreview(page);
+                switchMode('live');
+                if (page.group === 'mobile') setDeviceView('mobile');
+                else setDeviceView('desktop');
             });
-
-            li.appendChild(btn);
-            menuGroups[page.group].appendChild(li);
-
-            if (index === 0) btn.click();
+            grid.appendChild(card);
         });
 
-        // Device Toggles
-        const deviceBtns = document.querySelectorAll('.device-btn');
+        section.appendChild(grid);
+        galleryEl.appendChild(section);
+    });
 
-        function setDeviceView(view) {
-            deviceBtns.forEach(b => {
-                b.classList.remove('active');
-                if (b.getAttribute('data-view') === view) b.classList.add('active');
-            });
-            iframeWrapper.className = 'iframe-wrapper';
-            if (view !== 'desktop') iframeWrapper.classList.add(view);
-        }
+    // ==================== LIVE PREVIEW ====================
+    const menuGroups = {
+        public: document.getElementById('menu-public'),
+        customer: document.getElementById('menu-customer'),
+        creator: document.getElementById('menu-creator'),
+        admin: document.getElementById('menu-admin'),
+        mobile: document.getElementById('menu-mobile'),
+    };
+    const iframe = document.getElementById('preview-iframe');
+    const currentTitle = document.getElementById('current-title');
+    const currentRoute = document.getElementById('current-route');
+    const iframeWrapper = document.getElementById('iframe-wrapper');
+    let currentActiveBtn = null;
 
-        deviceBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                setDeviceView(btn.getAttribute('data-view'));
-            });
+    function loadLivePreview(page) {
+        iframe.src = `assets-preview/${page.dir}/code.html`;
+        currentTitle.textContent = page.title;
+        currentRoute.textContent = page.route;
+        // Highlight sidebar
+        const btns = document.querySelectorAll('.menu-btn');
+        btns.forEach(b => {
+            b.classList.toggle('active', b.dataset.dir === page.dir);
         });
+    }
 
-        // Mobile sidebar toggle
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            sidebar.classList.toggle('open');
+    pages.forEach((page, index) => {
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.className = 'menu-btn';
+        btn.dataset.dir = page.dir;
+        btn.innerHTML = `
+            <span class="material-symbols-outlined">${page.icon}</span>
+            ${page.title}
+            <span class="role-dot ${page.role}" style="margin-left:auto"></span>
+        `;
+        btn.addEventListener('click', () => {
+            loadLivePreview(page);
+            if (page.group === 'mobile') setDeviceView('mobile');
         });
-    </script>
+        li.appendChild(btn);
+        menuGroups[page.group].appendChild(li);
+
+        // Auto-load first
+        if (index === 0) loadLivePreview(page);
+    });
+
+    // Device toggles
+    const deviceBtns = document.querySelectorAll('.device-btn');
+    function setDeviceView(view) {
+        deviceBtns.forEach(b => b.classList.toggle('active', b.dataset.view === view));
+        iframeWrapper.className = 'iframe-wrapper';
+        if (view !== 'desktop') iframeWrapper.classList.add(view);
+    }
+    deviceBtns.forEach(btn => {
+        btn.addEventListener('click', () => setDeviceView(btn.dataset.view));
+    });
+</script>
 </body>
 </html>

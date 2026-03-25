@@ -1,70 +1,52 @@
 import Link from "next/link";
-import { IconArticle, IconVideo, IconFile } from "@/components/ui/Icons";
 
 export default function Footer() {
   return (
-    <footer className="bg-surface-900 text-white mt-auto relative">
-      {/* Gradient divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-xl hero-gradient flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
-              <span className="text-lg font-bold font-display">ContentHub</span>
-            </div>
-            <p className="text-surface-400 text-sm leading-relaxed">
-              The premium marketplace for digital content. Buy and sell articles, videos, and files from creators worldwide.
+    <footer className="bg-[#f8f9fc] border-t border-[#e2e8fc]/50 font-['Plus_Jakarta_Sans']">
+      <div className="w-full py-16 px-6 lg:px-8 max-w-[1440px] mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 mb-12">
+          <div>
+            <div className="text-2xl font-black text-[#151b29] mb-4">The Digital Atelier</div>
+            <p className="text-[#797586] text-sm max-w-xs leading-relaxed">
+              The world&apos;s premier destination for high-fidelity digital assets and creator culture.
             </p>
           </div>
-
-          <div>
-            <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-surface-300 mb-4">Marketplace</h4>
-            <div className="space-y-3">
-              <Link href="/browse" className="flex items-center gap-2 text-sm text-surface-400 hover:text-white transition-colors">
-                Browse All
-              </Link>
-              <Link href="/browse?type=article" className="flex items-center gap-2 text-sm text-surface-400 hover:text-white transition-colors">
-                <IconArticle className="w-4 h-4" /> Articles
-              </Link>
-              <Link href="/browse?type=video" className="flex items-center gap-2 text-sm text-surface-400 hover:text-white transition-colors">
-                <IconVideo className="w-4 h-4" /> Videos
-              </Link>
-              <Link href="/browse?type=file" className="flex items-center gap-2 text-sm text-surface-400 hover:text-white transition-colors">
-                <IconFile className="w-4 h-4" /> Digital Files
-              </Link>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#151b29]">Platform</span>
+              <Link href="/browse" className="text-[#797586] hover:text-[#451ebb] transition-colors text-sm">Explore</Link>
+              <Link href="/browse" className="text-[#797586] hover:text-[#451ebb] transition-colors text-sm">Creators</Link>
+              <Link href="/browse" className="text-[#797586] hover:text-[#451ebb] transition-colors text-sm">Marketplace</Link>
             </div>
-          </div>
-
-          <div>
-            <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-surface-300 mb-4">For Creators</h4>
-            <div className="space-y-3">
-              <Link href="/auth/register" className="text-sm text-surface-400 hover:text-white transition-colors block">Start Selling</Link>
-              <Link href="/creator" className="text-sm text-surface-400 hover:text-white transition-colors block">Creator Dashboard</Link>
-              <Link href="/creator/earnings" className="text-sm text-surface-400 hover:text-white transition-colors block">Earnings</Link>
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#151b29]">Resources</span>
+              <span className="text-[#797586] text-sm">API</span>
+              <span className="text-[#797586] text-sm">Contact</span>
+              <span className="text-[#797586] text-sm">Help Center</span>
             </div>
-          </div>
-
-          <div>
-            <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-surface-300 mb-4">Support</h4>
-            <div className="space-y-3">
-              <span className="text-sm text-surface-400 block">help@contenthub.com</span>
-              <span className="text-sm text-surface-400 block">Terms of Service</span>
-              <span className="text-sm text-surface-400 block">Privacy Policy</span>
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#151b29]">Legal</span>
+              <span className="text-[#797586] text-sm">Terms</span>
+              <span className="text-[#797586] text-sm">Privacy</span>
+              <span className="text-[#797586] text-sm">Cookies</span>
+            </div>
+            <div className="flex flex-col gap-4">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#151b29]">Stay Updated</span>
+              <div className="flex gap-2">
+                <input className="bg-white border-none focus:ring-1 focus:ring-[#451ebb] rounded-lg text-sm w-32 px-3 py-2" placeholder="Email" type="email" />
+                <button className="bg-[#151b29] text-white p-2 rounded-lg">
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="mt-12 pt-8 border-t border-surface-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-surface-500">
-            &copy; {new Date().getFullYear()} ContentHub. All rights reserved.
-          </p>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-soft" />
-            <span className="text-xs text-surface-500">All systems operational</span>
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-[#e2e8fc] text-xs uppercase tracking-[0.12em] text-[#797586]">
+          <span>&copy; {new Date().getFullYear()} The Digital Atelier. All rights reserved.</span>
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <span className="hover:text-[#451ebb] transition-colors cursor-pointer">Twitter</span>
+            <span className="hover:text-[#451ebb] transition-colors cursor-pointer">Instagram</span>
+            <span className="hover:text-[#451ebb] transition-colors cursor-pointer">LinkedIn</span>
           </div>
         </div>
       </div>

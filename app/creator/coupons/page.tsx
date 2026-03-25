@@ -127,8 +127,8 @@ export default function CouponsPage() {
       {/* Header */}
       <div className="page-header-with-actions">
         <div>
-          <h1 className="section-title text-2xl">Coupon Codes</h1>
-          <p className="text-surface-500 mt-1">
+          <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-2xl">Coupon Codes</h1>
+          <p className="text-[#797586] mt-1">
             Create discount codes for your customers.
           </p>
         </div>
@@ -147,8 +147,8 @@ export default function CouponsPage() {
       {/* Create Coupon Form */}
       {showForm && (
         <div className="card animate-fade-in">
-          <div className="px-6 py-5 border-b border-surface-200">
-            <h2 className="section-title text-lg">New Coupon</h2>
+          <div className="px-6 py-5 border-b border-[#e2e8fc]">
+            <h2 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-lg">New Coupon</h2>
           </div>
           <form onSubmit={handleCreate} className="p-6 space-y-6">
             {error && (
@@ -159,7 +159,7 @@ export default function CouponsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-surface-700 mb-2">
+                <label className="block text-sm font-medium text-[#484554] mb-2">
                   Coupon Code
                 </label>
                 <input
@@ -172,7 +172,7 @@ export default function CouponsPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-surface-700 mb-2">
+                <label className="block text-sm font-medium text-[#484554] mb-2">
                   Discount Type
                 </label>
                 <select
@@ -188,7 +188,7 @@ export default function CouponsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm font-medium text-surface-700 mb-2">
+                <label className="block text-sm font-medium text-[#484554] mb-2">
                   Value {type === "percentage" ? "(%)" : "($)"}
                 </label>
                 <input
@@ -204,7 +204,7 @@ export default function CouponsPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-surface-700 mb-2">
+                <label className="block text-sm font-medium text-[#484554] mb-2">
                   Usage Limit
                 </label>
                 <input
@@ -215,10 +215,10 @@ export default function CouponsPage() {
                   className="input"
                   placeholder="0 = Unlimited"
                 />
-                <p className="text-xs text-surface-400 mt-1">0 or empty for unlimited</p>
+                <p className="text-xs text-[#797586] mt-1">0 or empty for unlimited</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-surface-700 mb-2">
+                <label className="block text-sm font-medium text-[#484554] mb-2">
                   Expiry Date
                 </label>
                 <input
@@ -227,22 +227,22 @@ export default function CouponsPage() {
                   onChange={(e) => setExpiresAt(e.target.value)}
                   className="input"
                 />
-                <p className="text-xs text-surface-400 mt-1">Leave empty for no expiry</p>
+                <p className="text-xs text-[#797586] mt-1">Leave empty for no expiry</p>
               </div>
             </div>
 
             {/* Preview */}
             {(code || value) && (
-              <div className="bg-surface-50 rounded-xl p-4">
-                <p className="text-xs text-surface-500 mb-2 font-medium uppercase tracking-wider">
+              <div className="bg-[#faf8ff] rounded-xl p-4">
+                <p className="text-xs text-[#797586] mb-2 font-medium uppercase tracking-wider">
                   Preview
                 </p>
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-lg font-bold text-brand-600 bg-brand-50 px-3 py-1 rounded-lg">
+                  <span className="font-mono text-lg font-bold text-[#451ebb] bg-[#e6deff] px-3 py-1 rounded-lg">
                     {code || "CODE"}
                   </span>
-                  <IconArrowRight className="w-4 h-4 text-surface-300" />
-                  <span className="text-surface-700 font-medium">
+                  <IconArrowRight className="w-4 h-4 text-[#c9c4d7]" />
+                  <span className="text-[#484554] font-medium">
                     {type === "percentage"
                       ? `${value || 0}% off`
                       : `$${parseFloat(value || "0").toFixed(2)} off`}
@@ -296,10 +296,10 @@ export default function CouponsPage() {
       ) : coupons.length === 0 && !showForm ? (
         <div className="empty-state">
           <div className="empty-state-icon">
-            <IconTag className="w-8 h-8 text-surface-400" />
+            <IconTag className="w-8 h-8 text-[#797586]" />
           </div>
-          <p className="text-surface-500 text-lg mb-1 font-medium">No coupons yet</p>
-          <p className="text-surface-400 text-sm mb-6">
+          <p className="text-[#797586] text-lg mb-1 font-medium">No coupons yet</p>
+          <p className="text-[#797586] text-sm mb-6">
             Create coupon codes to offer discounts and attract more customers.
           </p>
           <button
@@ -331,7 +331,7 @@ export default function CouponsPage() {
                 return (
                   <tr key={coupon._id}>
                     <td>
-                      <span className="font-mono font-bold text-sm text-surface-900 tracking-wider">
+                      <span className="font-mono font-bold text-sm text-[#151b29] tracking-wider">
                         {coupon.code}
                       </span>
                     </td>
@@ -346,16 +346,16 @@ export default function CouponsPage() {
                         {coupon.type}
                       </span>
                     </td>
-                    <td className="font-semibold text-surface-900">
+                    <td className="font-semibold text-[#151b29]">
                       {formatCouponValue(coupon)}
                     </td>
-                    <td className="text-surface-600">
+                    <td className="text-[#484554]">
                       <span className="font-medium">{coupon.usedCount}</span>
-                      <span className="text-surface-400">
+                      <span className="text-[#797586]">
                         /{coupon.usageLimit > 0 ? coupon.usageLimit : <span title="Unlimited">&infin;</span>}
                       </span>
                     </td>
-                    <td className="text-surface-500 text-sm">
+                    <td className="text-[#797586] text-sm">
                       {coupon.expiresAt ? (
                         <span className={expired ? "text-red-500" : ""}>
                           {new Date(coupon.expiresAt).toLocaleDateString()}
@@ -364,7 +364,7 @@ export default function CouponsPage() {
                           )}
                         </span>
                       ) : (
-                        <span className="text-surface-400">Never</span>
+                        <span className="text-[#797586]">Never</span>
                       )}
                     </td>
                     <td>
@@ -385,7 +385,7 @@ export default function CouponsPage() {
                             className={`w-4 h-4 ${
                               coupon.isActive
                                 ? "text-green-600"
-                                : "text-surface-400"
+                                : "text-[#797586]"
                             }`}
                           />
                         </button>
@@ -394,7 +394,7 @@ export default function CouponsPage() {
                           className="btn-ghost p-2 rounded-lg"
                           title="Delete"
                         >
-                          <IconTrash className="w-4 h-4 text-surface-400 hover:text-red-600" />
+                          <IconTrash className="w-4 h-4 text-[#797586] hover:text-red-600" />
                         </button>
                       </div>
                     </td>
