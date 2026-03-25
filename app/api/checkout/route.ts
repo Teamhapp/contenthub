@@ -6,20 +6,31 @@ import Transaction from "@/models/Transaction";
 import Cart from "@/models/Cart";
 import User from "@/models/User";
 import { getSettings } from "@/models/PlatformSettings";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { requireAuthNotBanned } from "@/lib/api-handler";
 import { generateMockPaymentId } from "@/lib/utils";
 import mongoose from "mongoose";
 
+/**
+ * Safe currency split: ensures platformFee + creatorShare === price exactly.
+ * Uses floor for platform fee so the creator always gets the benefit of rounding.
+ */
+function splitRevenue(priceInCents: number, commissionRate: number) {
+  const platformFee = Math.floor(priceInCents * commissionRate);
+  const creatorShare = priceInCents - platformFee;
+  return { platformFee, creatorShare };
+}
+
 export async function POST(req: NextRequest) {
+  await dbConnect();
   const dbSession = await mongoose.startSession();
 
   try {
-    const session = await getServerSession(authOptions);
-    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Auth + banned check
+    const authResult = await requireAuthNotBanned();
+    if (authResult instanceof NextResponse) return authResult;
+    const { session } = authResult;
 
-    await dbConnect();
-    const { contentIds } = await req.json();
+    const { contentIds, couponCode } = await req.json();
 
     let itemIds: string[] = contentIds || [];
 
@@ -58,15 +69,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Some content already purchased" }, { status: 400 });
     }
 
-    // Calculate totals
+    // Calculate totals using integer math to avoid penny-off errors
     const commissionRate = settings.commissionRate / 100;
     const items = contents.map((c) => {
-      const platformFee = Math.round(c.price * commissionRate);
+      // Convert price to cents, split, convert back
+      const priceInCents = Math.round(c.price * 100);
+      const { platformFee: feeCents, creatorShare: shareCents } = splitRevenue(priceInCents, commissionRate);
       return {
         content: c._id,
         price: c.price,
-        creatorShare: c.price - platformFee,
-        platformFee,
+        creatorShare: shareCents / 100,
+        platformFee: feeCents / 100,
       };
     });
 
@@ -98,22 +111,32 @@ export async function POST(req: NextRequest) {
 
     await Purchase.create(purchases, { session: dbSession });
 
-    // Update content stats and creator balances
-    for (const item of items) {
-      await Content.findByIdAndUpdate(
-        item.content,
-        { $inc: { totalSales: 1, totalRevenue: item.creatorShare } },
-        { session: dbSession }
-      );
+    // Batch update content stats using bulkWrite instead of individual updates in a loop
+    const contentOps = items.map((item) => ({
+      updateOne: {
+        filter: { _id: item.content },
+        update: { $inc: { totalSales: 1, totalRevenue: item.creatorShare } },
+      },
+    }));
+    await Content.bulkWrite(contentOps, { session: dbSession });
 
+    // Batch update creator balances — group by creator to minimize writes
+    const creatorBalances = new Map<string, number>();
+    for (const item of items) {
       const content = contents.find((c) => c._id.toString() === item.content.toString());
       if (content) {
-        await User.findByIdAndUpdate(
-          content.creator,
-          { $inc: { balance: item.creatorShare } },
-          { session: dbSession }
-        );
+        const creatorId = content.creator.toString();
+        creatorBalances.set(creatorId, (creatorBalances.get(creatorId) || 0) + item.creatorShare);
       }
+    }
+    const userOps = Array.from(creatorBalances.entries()).map(([creatorId, amount]) => ({
+      updateOne: {
+        filter: { _id: creatorId },
+        update: { $inc: { balance: amount } },
+      },
+    }));
+    if (userOps.length > 0) {
+      await User.bulkWrite(userOps, { session: dbSession });
     }
 
     // Clear cart
